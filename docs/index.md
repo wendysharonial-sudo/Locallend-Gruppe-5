@@ -135,7 +135,7 @@ Verleiher sehen hier eingehende Anfragen und können diese annehmen oder ablehne
 Dies bildet die zentrale Interaktion der Plattform.
 
 <p align="center">
-  <img src="scribbles/requests.jpg.jpeg" width="500">
+  <img src="scribbles/request.jpg.jpeg" width="500">
 </p>
 
 ---

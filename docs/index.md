@@ -7,9 +7,6 @@
 **Repository Access:**  
 Unser GitHub-Repository ist auf "public" gestellt und die Dokumentation ist über GitHub Pages erreichbar.
 
-**Git Repository:**  
-https://github.com/Nejy190501/Locallend_Gruppe-5
-
 ---
 
 ## Contributors & Meta-Goals

@@ -25,42 +25,59 @@ https://github.com/Nejy190501/Locallend_Gruppe-5
 
 ## 2. Value Proposition
 
-LocalLend ist eine zweiseitige Plattform (Two-Sided Platform) für das Verleihen und Ausleihen von Werkzeugen und technischen Geräten in der Nachbarschaft und auf dem Campus.
+LocalLend ist eine zweiseitige Plattform (Two-Sided Platform) für das lokale Verleihen und Ausleihen von selten genutzten Alltags- und Projektgegenständen innerhalb einer Hochschul-Community.
 
 ### Zielgruppe
 
-Unsere Zielgruppe sind Studierende und Anwohner, die entweder selten genutzte Gegenstände besitzen oder solche für kurze Zeit benötigen.
+Unsere primäre Zielgruppe sind Studierende und Personen im direkten Campus-Umfeld, die für kurzfristige Projekte, Umzüge, Präsentationen oder kleinere Reparaturen bestimmte Gegenstände benötigen, diese aber nicht selbst kaufen möchten.
+
+Der Fokus liegt bewusst auf einer lokalen Hochschul-Community. Dadurch erhöhen wir die Wahrscheinlichkeit, dass Angebot und Nachfrage tatsächlich zusammenfinden, weil die Nutzer räumlich nah beieinander sind und ähnliche Alltagssituationen haben.
+
+### Konkretisiertes Angebotsinventar
+
+Um die Plattform realistisch und fokussiert zu halten, beschränken wir das mögliche Angebotsinventar zunächst auf Gegenstände, die häufig nur kurzfristig benötigt werden:
+
+| Kategorie | Beispiele |
+|---|---|
+| Werkzeuge | Bohrmaschine, Akkuschrauber, Hammer, Schraubenzieher-Set, Wasserwaage |
+| Umzug & Haushalt | Leiter, Sackkarre, Kabeltrommel, Werkzeugkoffer |
+| Technik für Studium & Projekte | Beamer, Stativ, Adapter, HDMI-Kabel, Verlängerungskabel |
+| Kreativ- & Projektbedarf | Schneidematte, Klebepistole, Laminiergerät, Kamera-Stativ |
+
+Nicht im Fokus stehen sehr teure, gefährliche oder stark regulierte Gegenstände. Dadurch bleibt der Umfang der App überschaubar und die Nutzung für die Zielgruppe realistischer.
 
 ### Problem
 
-Viele Menschen benötigen teure Werkzeuge oder technische Geräte (z. B. Bohrmaschinen, Beamer oder Leitern) nur für kurze Zeit. Ein Kauf lohnt sich oft nicht und ist insbesondere für Studierende zu teuer.
+Viele Studierende benötigen bestimmte Gegenstände nur für kurze Zeit, zum Beispiel für einen Umzug, eine Präsentation, ein Gruppenprojekt oder eine kleine Reparatur. Ein Neukauf lohnt sich für solche Einmal- oder Seltennutzungen oft nicht.
 
-Gleichzeitig besitzen viele Menschen solche Gegenstände bereits, nutzen sie jedoch nur selten. Diese bleiben die meiste Zeit ungenutzt.
+Gleichzeitig besitzen andere Studierende oder Personen im Campus-Umfeld genau solche Gegenstände, nutzen sie aber selten. Diese Gegenstände bleiben ungenutzt, obwohl sie für andere Personen kurzfristig hilfreich wären.
 
 ### Lösung
 
-LocalLend ist eine Webanwendung, die es ermöglicht, Gegenstände lokal und unkompliziert zu verleihen und auszuleihen.
+LocalLend ermöglicht es, solche Gegenstände lokal und unkompliziert zu verleihen und auszuleihen.
 
-Verleiher können ihre Gegenstände einstellen. Leiher können verfügbare Gegenstände durchsuchen, Details einsehen und Anfragen stellen.
+Nutzer können Gegenstände einstellen, verfügbare Gegenstände durchsuchen, Detailinformationen einsehen und eine Ausleihanfrage stellen. Der Verleiher kann die Anfrage anschließend annehmen oder ablehnen.
 
 ### Zwei Seiten der Plattform
 
 | Seite | Beschreibung |
 |---|---|
-| Verleiher | Nutzer, die Gegenstände besitzen und verleihen möchten |
-| Leiher | Nutzer, die Gegenstände für kurze Zeit benötigen |
+| Anbieter / Verleiher | Nutzer, die selten genutzte Gegenstände besitzen und anderen zur Verfügung stellen |
+| Nachfrager / Leiher | Nutzer, die Gegenstände kurzfristig benötigen und diese ausleihen möchten |
+
+Wichtig ist: Ein Nutzerkonto ist nicht dauerhaft auf nur eine Rolle beschränkt. Eine Person kann sowohl Gegenstände verleihen als auch selbst Gegenstände ausleihen. Die Begriffe „Verleiher“ und „Leiher“ beschreiben daher die Rolle innerhalb eines konkreten Nutzungsvorgangs.
 
 ### Nutzen für Verleiher
 
-- Bessere Nutzung selten verwendeter Gegenstände  
-- Unterstützung anderer Personen in der Umgebung  
-- Beitrag zur Reduzierung von Verschwendung  
+- Sinnvolle Nutzung selten verwendeter Gegenstände  
+- Unterstützung anderer Personen in der lokalen Community  
+- Möglichkeit, Gegenstände kontrolliert und nachvollziehbar zu verleihen  
 
 ### Nutzen für Leiher
 
 - Kostenersparnis durch Ausleihen statt Kaufen  
-- Schneller und lokaler Zugriff auf benötigte Gegenstände  
-- Keine unnötigen Anschaffungen für einmalige Nutzung  
+- Schneller Zugriff auf Gegenstände in der Nähe  
+- Weniger unnötige Anschaffungen für einmalige Nutzung  
 
 ---
 
@@ -76,8 +93,7 @@ Ziel ist es, die Struktur und den Ablauf der Anwendung zu visualisieren, nicht e
 
 ### Scribble 1: Startseite
 
-Die Startseite stellt LocalLend vor und bietet einen Einstieg in die App.  
-Nutzer können direkt mit dem Browsen beginnen oder einen Gegenstand einstellen.
+Die Startseite stellt LocalLend vor und zeigt eine Suchfunktion sowie verfügbare Gegenstände aus der lokalen Community. Nutzer erhalten hier einen schnellen Einstieg in die Plattform.
 
 <p align="center">
   <img src="scribbles/landing.jpg.jpeg" width="500">
@@ -87,8 +103,7 @@ Nutzer können direkt mit dem Browsen beginnen oder einen Gegenstand einstellen.
 
 ### Scribble 2: Gegenstände durchsuchen
 
-Hier können Nutzer alle verfügbaren Gegenstände einsehen.  
-Jeder Eintrag enthält grundlegende Informationen sowie einen Button zur Detailansicht.
+Hier können Nutzer verfügbare Gegenstände durchsuchen. Jeder Eintrag enthält grundlegende Informationen sowie einen Button zur Detailansicht.
 
 <p align="center">
   <img src="scribbles/browse.jpg.jpeg" width="500">
@@ -98,8 +113,7 @@ Jeder Eintrag enthält grundlegende Informationen sowie einen Button zur Detaila
 
 ### Scribble 3: Detailansicht
 
-Diese Seite zeigt detaillierte Informationen zu einem Gegenstand, z. B. Beschreibung, Verfügbarkeit und Kaution.  
-Von hier aus kann eine Ausleihanfrage gestellt werden.
+Diese Seite zeigt detaillierte Informationen zu einem Gegenstand, zum Beispiel Beschreibung, Verfügbarkeit, Besitzer und Kaution. Von hier aus kann eine Ausleihanfrage gestellt werden.
 
 <p align="center">
   <img src="scribbles/detail.jpg.jpeg" width="500">
@@ -109,8 +123,7 @@ Von hier aus kann eine Ausleihanfrage gestellt werden.
 
 ### Scribble 4: Gegenstand erstellen
 
-Verleiher können hier neue Gegenstände hinzufügen.  
-Das Formular enthält Angaben wie Titel, Kategorie, Beschreibung und Preis/Kaution.
+Nutzer können hier eigene Gegenstände einstellen, die sie verleihen möchten. Das Formular enthält Angaben wie Titel, Kategorie, Beschreibung, Kaution und ein Bild.
 
 <p align="center">
   <img src="scribbles/create.jpg.jpeg" width="500">
@@ -120,8 +133,7 @@ Das Formular enthält Angaben wie Titel, Kategorie, Beschreibung und Preis/Kauti
 
 ### Scribble 5: Login / Registrierung
 
-Nutzer können sich registrieren oder anmelden.  
-Bei der Registrierung wird die Rolle (Verleiher oder Leiher) gewählt.
+Nutzer können sich registrieren oder anmelden. Ein Nutzerkonto kann sowohl zum Verleihen als auch zum Ausleihen verwendet werden. Dadurch muss sich eine Person nicht dauerhaft auf eine feste Rolle festlegen.
 
 <p align="center">
   <img src="scribbles/login.jpg.jpeg" width="500">
@@ -131,8 +143,7 @@ Bei der Registrierung wird die Rolle (Verleiher oder Leiher) gewählt.
 
 ### Scribble 6: Anfragen verwalten
 
-Verleiher sehen hier eingehende Anfragen und können diese annehmen oder ablehnen.  
-Dies bildet die zentrale Interaktion der Plattform.
+Hier sehen Nutzer eingehende Anfragen zu ihren eigenen Gegenständen und können diese annehmen oder ablehnen. Diese Ansicht bildet die zentrale Interaktion zwischen Angebot und Nachfrage ab.
 
 <p align="center">
   <img src="scribbles/request.jpg.jpeg" width="500">
@@ -142,17 +153,17 @@ Dies bildet die zentrale Interaktion der Plattform.
 
 ## Happy Path
 
-1. Ein Nutzer registriert sich und wählt die Rolle „Verleiher“.  
-2. Der Verleiher loggt sich ein und erstellt einen neuen Gegenstand.  
-3. Ein zweiter Nutzer registriert sich als „Leiher“ und loggt sich ein.  
-4. Der Leiher durchsucht die verfügbaren Gegenstände.  
-5. Der Leiher öffnet die Detailansicht eines Gegenstands.  
-6. Der Leiher stellt eine Anfrage.  
-7. Der Verleiher sieht die Anfrage in seinem Dashboard.  
-8. Der Verleiher akzeptiert die Anfrage.  
-9. Der Status des Gegenstands ändert sich von „verfügbar“ zu „ausgeliehen“.  
+1. Ein Nutzer registriert sich und erstellt ein Konto.  
+2. Derselbe Nutzer stellt einen Gegenstand ein, den er verleihen möchte.  
+3. Ein anderer Nutzer durchsucht die verfügbaren Gegenstände.  
+4. Der Nutzer öffnet die Detailansicht eines Gegenstands.  
+5. Der Nutzer stellt eine Ausleihanfrage.  
+6. Der Besitzer des Gegenstands sieht die Anfrage in seiner Anfragenübersicht.  
+7. Der Besitzer akzeptiert die Anfrage.  
+8. Der Status des Gegenstands ändert sich von „verfügbar“ zu „ausgeliehen“.  
 
-Dieser Ablauf zeigt die zentrale Interaktion zwischen beiden Seiten der Plattform.
+Dieser Ablauf zeigt die zentrale Interaktion der Plattform: Ein vorhandenes Angebot trifft auf eine konkrete Nachfrage innerhalb einer lokalen Hochschul-Community.
+
 
 ---
 

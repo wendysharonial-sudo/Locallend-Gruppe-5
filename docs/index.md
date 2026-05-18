@@ -4,9 +4,6 @@
 
 **Team Name:** Gruppe 5 – LocalLend  
 
-**Repository Access:**  
-Unser GitHub-Repository ist auf "public" gestellt und die Dokumentation ist über GitHub Pages erreichbar.
-
 ---
 
 ## Contributors & Meta-Goals

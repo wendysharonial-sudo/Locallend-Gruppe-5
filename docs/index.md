@@ -16,10 +16,10 @@ https://github.com/Nejy190501/Locallend_Gruppe-5
 
 | Contributor | Zielnote | Persönliches Ziel | Geplanter Beitrag |
 |---|---|---|---|
-| Tuba Celik | 1.7 | Verstehen, wie man mit Flask eine strukturierte Webanwendung entwickelt und Backend-Logik sauber implementiert | Entwicklung der Flask-Routen und Umsetzung der Anfragen-Logik |
+| Tuba Celik | 1.0 | Verstehen, wie man mit Flask eine strukturierte Webanwendung entwickelt und Backend-Logik sauber implementiert | Entwicklung der Flask-Routen und Umsetzung der Anfragen-Logik |
 | Jean Yves Nkwane | 1.0 | Verbesserung der Fähigkeiten in HTML, CSS und der Arbeit mit Jinja2 zur Gestaltung von Benutzeroberflächen | Gestaltung und Umsetzung der Benutzeroberfläche mit Jinja2-Templates |
-| Wendy Sharonia Lontsi Doumtsop | 1.7 | Erlernen von relationalem Datenbankdesign und der Integration von SQLite in Webanwendungen | Modellierung der Datenbankstruktur für User, Items und Requests |
-| Maryam Joumma | 1.7 | Verbesserung von Git-Workflows und strukturierter Projektorganisation in Teamprojekten | Verwaltung des Repositories, Dokumentation und GitHub Pages |
+| Wendy Sharonia Lontsi Doumtsop | 1.0 | Erlernen von relationalem Datenbankdesign und der Integration von SQLite in Webanwendungen | Modellierung der Datenbankstruktur für User, Items und Requests |
+| Maryam Joumma | 1.0 | Verbesserung von Git-Workflows und strukturierter Projektorganisation in Teamprojekten | Verwaltung des Repositories, Dokumentation und GitHub Pages |
 
 ---
 

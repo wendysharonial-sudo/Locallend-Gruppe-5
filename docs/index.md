@@ -80,7 +80,7 @@ Die Startseite stellt LocalLend vor und bietet einen Einstieg in die App.
 Nutzer können direkt mit dem Browsen beginnen oder einen Gegenstand einstellen.
 
 <p align="center">
-  <img src="scribbles/landing.jpg" width="500">
+  <img src="scribbles/landing.jpg.jpeg" width="500">
 </p>
 
 ---
@@ -91,7 +91,7 @@ Hier können Nutzer alle verfügbaren Gegenstände einsehen.
 Jeder Eintrag enthält grundlegende Informationen sowie einen Button zur Detailansicht.
 
 <p align="center">
-  <img src="scribbles/browse.jpg" width="500">
+  <img src="scribbles/browse.jpg.jpeg" width="500">
 </p>
 
 ---
@@ -102,7 +102,7 @@ Diese Seite zeigt detaillierte Informationen zu einem Gegenstand, z. B. Beschrei
 Von hier aus kann eine Ausleihanfrage gestellt werden.
 
 <p align="center">
-  <img src="scribbles/detail.jpg" width="500">
+  <img src="scribbles/detail.jpg.jpeg" width="500">
 </p>
 
 ---
@@ -113,7 +113,7 @@ Verleiher können hier neue Gegenstände hinzufügen.
 Das Formular enthält Angaben wie Titel, Kategorie, Beschreibung und Preis/Kaution.
 
 <p align="center">
-  <img src="scribbles/create.jpg" width="500">
+  <img src="scribbles/create.jpg.jpeg" width="500">
 </p>
 
 ---
@@ -124,7 +124,7 @@ Nutzer können sich registrieren oder anmelden.
 Bei der Registrierung wird die Rolle (Verleiher oder Leiher) gewählt.
 
 <p align="center">
-  <img src="scribbles/login.jpg" width="500">
+  <img src="scribbles/login.jpg.jpeg" width="500">
 </p>
 
 ---
@@ -135,7 +135,7 @@ Verleiher sehen hier eingehende Anfragen und können diese annehmen oder ablehne
 Dies bildet die zentrale Interaktion der Plattform.
 
 <p align="center">
-  <img src="scribbles/requests.jpg" width="500">
+  <img src="scribbles/requests.jpg.jpeg" width="500">
 </p>
 
 ---

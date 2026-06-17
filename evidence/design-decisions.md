@@ -2,7 +2,7 @@
 
 ## Metadata
 
-| Feld | Wert |
+| Key | Value |
 |--------|--------|
 | Status | Decided |
 | Datum | 18.06.2026 |

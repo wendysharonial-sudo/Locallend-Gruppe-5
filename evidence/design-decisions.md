@@ -45,7 +45,7 @@ Wir wählen die Option **Flexible Rollen**, da sie die Anforderungen unserer Zie
 
 ## Metadata
 
-| Feld | Wert |
+| Key | Value |
 |--------|--------|
 | Status | Decided |
 | Datum | 18.06.2026 |
@@ -95,7 +95,7 @@ Wir wählen die Option **Fokus auf Werkzeuge und technische Geräte**, da sie ei
 
 ## Metadata
 
-| Feld | Wert |
+| Key | Value |
 |--------|--------|
 | Status | Decided |
 | Datum | 18.06.2026 |
@@ -140,7 +140,7 @@ Wir wählen SQLite, da es die Anforderungen unseres Projekts vollständig erfül
 
 ## Metadata
 
-| Feld | Wert |
+| Key | Value |
 |--------|--------|
 | Status | Decided |
 | Datum | 18.06.2026 |

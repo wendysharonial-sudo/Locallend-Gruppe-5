@@ -5,36 +5,38 @@
 Viele Studierende und Anwohner benötigen Werkzeuge oder technische Geräte nur für einen kurzen Zeitraum. Beispiele sind Bohrmaschinen für eine Reperatur, Leitern für Renevierungsarbeiten oder Beamer für Präsentationen. 
 Der Kauf solcher Gegenstände lohnt sich häufig nicht, insbesondere wenn sie nur einmal oder selten genutzt werden. Gleichzeitig besitzen viele Menschen genau diese Gegenstände bereits, verwenden sie jedoch nur selten.
 Die Herausforderung besteht darin, Angebot und Nachfrage lokal zusammenzubringen und den Austausch von Gegenständen möglichst einfach und übersichtlich zu gestalten.
+
 ---
 
 ## Zielgruppe
 
 ### Studierende
 
--verfügen oft über ein begrenztes Budget
--benötigen bestimmte Gegenstände nur gelegentlich
--möchten Kosten vermeiden
+- verfügen oft über ein begrenztes Budget
+- benötigen bestimmte Gegenstände nur gelegentlich
+- möchten Kosten vermeiden
 
 ### Anwohner
 
--besitzen Werkzeuge oder technische Geräte
--nutzen diese häufig nur selten
--möchten  vorhandene Ressourcen sinvoll einsetzen
+- besitzen Werkzeuge oder technische Geräte
+- nutzen diese häufig nur selten
+- möchten  vorhandene Ressourcen sinvoll einsetzen
+
 ---
 
 ## Nutzerbedürfnisse
 
 ### Bedürfnisse der Leiher
 
--schneller Zugang zu benötigten Gegenständen
--Kostensparnis gegenüber einem Neukauf
--einfache Suche nach verfügbaren Gegenständen
+- schneller Zugang zu benötigten Gegenständen
+- Kostensparnis gegenüber einem Neukauf
+- einfache Suche nach verfügbaren Gegenständen
 
-### Bedürrfnisse der Verleiher
+### Bedürfnisse der Verleiher
 
--einfache Verwaltung ihrer Gegenstände
--Transparenz über Ausleihanfragen
--Möglichkeit, Gegenstände sinnvoll weiterzugeben
+- einfache Verwaltung ihrer Gegenstände
+- Transparenz über Ausleihanfragen
+- Möglichkeit, Gegenstände sinnvoll weiterzugeben
 
 ---
 
@@ -58,13 +60,13 @@ Diese Entscheidung erhöht die Flexibilität der Anwendung und entspricht dem ta
 
 ## Zentrale Funktionen
 
--Rgistrierung und Login
--Gegenstände erstelllen
--Gegenstände durchsuchen
--Detailansicht eines Gegenstands
--Ausleihanfragen stellen
--Anfragen annehmen oder ablehnen
-Verwaltung des Verfügbarkeitsstatus
+- Rgistrierung und Login
+- Gegenstände erstelllen
+- Gegenstände durchsuchen
+- Detailansicht eines Gegenstands
+- Ausleihanfragen stellen
+- Anfragen annehmen oder ablehnen
+- Verwaltung des Verfügbarkeitsstatus
 
 ---
 
@@ -72,15 +74,15 @@ Verwaltung des Verfügbarkeitsstatus
 
 ### Für Leiher
 
--geringere Kosten
--schneller Zugang zu benötigten Gegenständen
--Vermeidung unnötiger Anschaffungen
+- geringere Kosten
+- schneller Zugang zu benötigten Gegenständen
+- Vermeidung unnötiger Anschaffungen
 
 ### Für Verleiher
 
--bessere Nutzung vorhandener Gegenstände
--Unterstüzung der lokalen Gemeinschaft
--Förderung nachhaltiger Ressourcennutzung
+- bessere Nutzung vorhandener Gegenstände
+- Unterstüzung der lokalen Gemeinschaft
+- Förderung nachhaltiger Ressourcennutzung
 
 ---
 

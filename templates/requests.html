@@ -8,6 +8,16 @@
 
 <p>Status: {{ request.status }}</p>
 
+<a href="/requests/{{ request.id }}/accept">
+    accept
+    </a>
+</p>
+<p>
+
+<a href="/requests/{{ request.id}}/reject">
+    reject
+</a>
+</p>
 <hr>
 
 {% endfor %}

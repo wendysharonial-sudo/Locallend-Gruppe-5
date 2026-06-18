@@ -72,7 +72,6 @@ def create_item():
 
     return render_template("create_item.html")
 
-
 @app.route("/requests")
 def requests_page():
     return render_template("requests.html", requests=requests)
@@ -99,7 +98,6 @@ def reject_request(request_id):
 @app.route("/api/items")
 def api_items():
     return jsonify(items)
-
 
 if __name__ == "__main__":
     app.run(debug=True)

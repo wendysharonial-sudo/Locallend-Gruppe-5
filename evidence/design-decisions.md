@@ -127,3 +127,71 @@ We regarded two options:
 | **Lender control** | ❌ Lender has less control | ✔️ Lender decides who can borrow |
 | **Trust** | ❌ Riskier for valuable items | ✔️ Better for tools and technical devices |
 | **Request management** | ❌ No accept/reject process | ✔️ Clear accept/reject workflow |
+## 04: How should tools and devices be categorized?
+
+### Meta
+
+Status
+: Decided
+
+Updated
+: 05-Jul-2025
+
+### Problem statement
+
+Users need an easy way to find tools and technical devices.
+
+Without categories, searching becomes difficult when many items are listed.
+
+### Decision
+
+We decided to use categories.
+
+Items can be grouped into categories such as tools, technical devices and others.
+
+Decision was taken by: Maryam
+
+### Regarded options
+
++ No categories
++ Categories
++ Tags
+
+| Criterion | No categories | Categories | Tags |
+| --- | --- | --- | --- |
+| Easy to find items | ❌ | ✔️ | ✔️ |
+| Simple implementation | ✔️ | ✔️ | ❌ |
+| User friendly | ❌ | ✔️ | ✔️ |
+## 05: How should API responses be formatted?
+
+### Meta
+
+Status
+: Decided
+
+Updated
+: 05-Jul-2025
+
+### Problem statement
+
+The frontend needs a consistent way to receive data from the backend.
+
+### Decision
+
+We decided to return data as JSON objects.
+
+JSON is easy to process in web applications and works well with APIs.
+
+Decision was taken by: Maryam
+
+### Regarded options
+
++ Plain text
++ JSON
++ XML
+
+| Criterion | Plain Text | JSON | XML |
+| --- | --- | --- | --- |
+| Easy to use | ❌ | ✔️ | ❌ |
+| Common for APIs | ❌ | ✔️ | ❌ |
+| Readable | ✔️ | ✔️ | ❌ |

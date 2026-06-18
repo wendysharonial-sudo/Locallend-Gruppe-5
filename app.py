@@ -22,6 +22,10 @@ def create_item():
 def requests():
     return render_template("requests.html")
 
+@app.route("/item/<int:item_id>")
+def item_detail(item_id):
+
+    return render_template("item_detail.html", item_id=item_id)
 
 @app.route("/api/items")
 def api_items():

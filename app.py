@@ -25,5 +25,31 @@ def api_items():
     return jsonify(items)
 
 
+@app.route("/api/requests")
+def api_requests():
+    requests = [
+        {
+            "id": 1,
+            "item": "Bohrmaschine",
+            "borrower": "Max",
+            "status": "pending"
+        },
+        {
+            "id": 2,
+            "item": "Leiter",
+            "borrower": "Anna",
+            "status": "accepted"
+        },
+        {
+            "id": 3,
+            "item": "Beamer",
+            "borrower": "Sara",
+            "status": "rejected"
+        }
+    ]
+
+    return jsonify(requests)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

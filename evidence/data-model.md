@@ -176,3 +176,9 @@ Dieses Modell unterstützt den vollständigen Happy Path von LocalLend:
 4. Nutzer stellt eine Ausleihanfrage.
 5. Anfrage wird angenommen oder abgelehnt.
 ```
+
+## ER- Diagramm
+
+Das folgende Diagramm zeigt die Beziehungen zwischen den Tabellen `users`, `items` und `requests`.
+
+![ER-Diagramm](er-diagramm.png)

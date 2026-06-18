@@ -45,8 +45,7 @@ users
 
 items
   1 ─── n requests
-
-  ```
+```
   ## Tabelle: users
 
   Speichert alle registsrierten Nutzer der Plattforrm.
@@ -175,7 +174,7 @@ Dieses Modell unterstützt den vollständigen Happy Path von LocalLend:
 3. Anderer Nutzer durchsucht verfügbare Gegenstände.
 4. Nutzer stellt eine Ausleihanfrage.
 5. Anfrage wird angenommen oder abgelehnt.
-```
+
 
 ## ER- Diagramm
 

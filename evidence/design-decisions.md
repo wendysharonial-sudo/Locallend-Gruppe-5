@@ -5,7 +5,7 @@
 ### Meta
 
 Status
-: Work in progress - **Decided** - Obsolete
+: Decided
 
 Updated
 : 23-Jun-2026
@@ -47,7 +47,7 @@ We regarded two options:
 ### Meta
 
 Status
-: Work in progress - **Decided** - Obsolete
+: Decided
 
 Updated
 : 23-Jun-2026
@@ -91,7 +91,7 @@ We regarded two options:
 ### Meta
 
 Status
-: Work in progress - **Decided** - Obsolete
+: Decided
 
 Updated
 : 23-Jun-2026
@@ -127,7 +127,10 @@ We regarded two options:
 | **Lender control** | ❌ Lender has less control | ✔️ Lender decides who can borrow |
 | **Trust** | ❌ Riskier for valuable items | ✔️ Better for tools and technical devices |
 | **Request management** | ❌ No accept/reject process | ✔️ Clear accept/reject workflow |
-## 04: How should tools and devices be categorized?
+
+---
+
+## 04: Categorize tools and technical devices
 
 ### Meta
 
@@ -135,34 +138,40 @@ Status
 : Decided
 
 Updated
-: 05-Jul-2025
+: 23-Jun-2026
 
 ### Problem statement
 
 Users need an easy way to find tools and technical devices.
 
-Without categories, searching becomes difficult when many items are listed.
+Without categories, searching becomes difficult when many items are listed. This is especially relevant for LocalLend because tools and technical devices can belong to different groups, such as power tools, electronic devices or accessories.
 
 ### Decision
 
-We decided to use categories.
+We decided to use categories for listed items.
 
-Items can be grouped into categories such as tools, technical devices and others.
+Items can be grouped into categories such as tools, technical devices and others. This makes it easier for borrowers to find relevant items and gives lenders a clearer structure when adding an item.
 
-Decision was taken by: Maryam
+*Decision was taken by:* Maryam
 
 ### Regarded options
 
-+ No categories
-+ Categories
-+ Tags
+We regarded three options:
 
-| Criterion | No categories | Categories | Tags |
++ No categories.
++ Fixed categories.
++ Flexible tags.
+
+| Criterion | No categories | Fixed categories | Flexible tags |
 | --- | --- | --- | --- |
-| Easy to find items | ❌ | ✔️ | ✔️ |
-| Simple implementation | ✔️ | ✔️ | ❌ |
-| User friendly | ❌ | ✔️ | ✔️ |
-## 05: How should API responses be formatted?
+| **Easy to find items** | ❌ Harder when many items exist | ✔️ Clear structure | ✔️ Useful for detailed search |
+| **Simple implementation** | ✔️ Very simple | ✔️ Manageable | ❌ More complex |
+| **User friendliness** | ❌ Less guidance for users | ✔️ Easy to understand | ❔ Can become inconsistent |
+| **Fit for tools/devices** | ❌ Too unstructured | ✔️ Good fit | ✔️ Good, but more effort |
+
+---
+
+## 05: Format API responses as JSON objects
 
 ### Meta
 
@@ -170,28 +179,33 @@ Status
 : Decided
 
 Updated
-: 05-Jul-2025
+: 23-Jun-2026
 
 ### Problem statement
 
-The frontend needs a consistent way to receive data from the backend.
+The frontend and documentation need a consistent way to understand data returned by the backend.
+
+Because the project includes a JSON API, we had to decide how API responses should be formatted. The response format should be easy to read, easy to document and suitable for structured item and request data.
 
 ### Decision
 
-We decided to return data as JSON objects.
+We decided to return API responses as JSON objects or lists of JSON objects.
 
-JSON is easy to process in web applications and works well with APIs.
+JSON is easy to inspect, common for web APIs and works well with Flask through `jsonify`. This makes the API easier to test and explain.
 
-Decision was taken by: Maryam
+*Decision was taken by:* Maryam
 
 ### Regarded options
 
-+ Plain text
-+ JSON
-+ XML
+We regarded three options:
 
-| Criterion | Plain Text | JSON | XML |
++ Plain text.
++ JSON.
++ XML.
+
+| Criterion | Plain text | JSON | XML |
 | --- | --- | --- | --- |
-| Easy to use | ❌ | ✔️ | ❌ |
-| Common for APIs | ❌ | ✔️ | ❌ |
-| Readable | ✔️ | ✔️ | ❌ |
+| **Easy to inspect** | ✔️ Simple text | ✔️ Readable structure | ❌ More verbose |
+| **Common for APIs** | ❌ Not suitable for structured APIs | ✔️ Very common | ❔ Possible, but less common in this context |
+| **Structured data** | ❌ Hard to represent item/request fields | ✔️ Good for objects and lists | ✔️ Structured, but more complex |
+| **Fit with Flask** | ❌ Manual formatting needed | ✔️ Works well with `jsonify` | ❌ More effort |

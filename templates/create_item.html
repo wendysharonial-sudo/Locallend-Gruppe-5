@@ -1,2 +1,14 @@
 <h1>Gegenstand erstellen</h1>
-<p>Hier können Nutzer Gegenstände einstellen</p>
+
+<form method="POST">
+  <label>Titel</label><br>
+  <input type="text" name="title" required><br><br>
+
+  <label>Kategorie</label><br>
+  <input type="text" name="category" required><br><br>
+
+  <label>Beschreibung</label><br>
+  <textarea name="description" required></textarea><br><br>
+
+  <button type="submit">Gegenstand speichern</button>
+</form>

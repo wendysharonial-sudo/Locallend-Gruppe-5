@@ -1,2 +1,11 @@
-<h1>Browse Items</h1>
-<p>Hier werden verfügbare Gegenstände angezeigt</p>
+<h1>Gegenstände durchsuchen</h1>
+
+{% for item in items %}
+  <div>
+    <h2>{{ item.title }}</h2>
+    <p>Kategorie: {{ item.category }}</p>
+    <p>Status: {{ item.status }}</p>
+    <a href="/item/{{ item.id }}">Details ansehen</a>
+  </div>
+  <hr>
+{% endfor %}

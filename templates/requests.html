@@ -1,2 +1,13 @@
-<h1>Anfargen verwalten</h1>
-<p>Hier können Anfragen angenommen oder abgelehnt werden</p>
+<h1>Request Overview</h1>
+
+{% for request in requests %}
+
+<h2>{{ request.item }}</h2>
+
+<p>Borrower: {{ request.borrower }}</p>
+
+<p>Status: {{ request.status }}</p>
+
+<hr>
+
+{% endfor %}

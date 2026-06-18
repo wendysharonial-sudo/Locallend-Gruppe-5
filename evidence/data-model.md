@@ -20,7 +20,7 @@ Das Datenmodell besteht aus drei Haupttabellen:
 
 | Tabelle | Zweck |
 | --- | --- |
-| users | Speichert registrierte | 
+| users | Speichert registrierte Nutzer | 
 | items | Speichert Gegenstände, die verliehen werden können |
 | requests | Speichert Ausleihanfragen zwischen Nutzern und Gegenständen |
 
@@ -48,7 +48,7 @@ items
 ```
   ## Tabelle: users
 
-  Speichert alle registsrierten Nutzer der Plattforrm.
+  Speichert alle registrierten Nutzer der Plattforrm.
 
   | Feld | Datentyp | Beschreibung |
 |--------|--------|--------|
@@ -67,11 +67,11 @@ items
 
 Jeder Nutzer benötigt eine eindeutige ID, damit Gegenstände und Ausleihanfragen eindeutig zugeordnet werden können.
 
-Die E-Mail-Adresse wird für die Anmeldung verwendet.
+Die E-Mail-Adresse dient der Anmeldung und eindeutigen Identifikation des Nutzers.
 
 ## Tabelle: items
 
-Speichert alle Gegenstände, dei von Nutzern zum Verleihen angeboten werden.
+Speichert alle Gegenstände, die von Nutzern zum Verleihen angeboten werden.
 
 | Feld | Datentyp | Beschreibung |
 |--------|--------|--------|

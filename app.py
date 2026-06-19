@@ -49,7 +49,34 @@ def api_requests():
     ]
 
     return jsonify(requests)
+@app.route("/api/create_request")
+def create_request():
 
+    new_request = {
+        "id": 4,
+        "item": "Laptop",
+        "borrower": "Maryam",
+        "status": "pending"
+    }
 
+    return jsonify(new_request)
+@app.route("/api/accept_request")
+def accept_request():
+
+    request = {
+        "id": 1,
+        "status": "accepted"
+    }
+
+    return jsonify(request)
+@app.route("/api/reject_request")
+def reject_request():
+
+    request = {
+        "id": 2,
+        "status": "rejected"
+    }
+
+    return jsonify(request)
 if __name__ == "__main__":
     app.run(debug=True)

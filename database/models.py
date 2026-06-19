@@ -1,0 +1,42 @@
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+class User(db.Model):
+    _tablename_= "users"
+
+    user_id= db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name= db.Columd(db.String(100), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.Strings(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    items = db.relationship("Item", backref="owner", lazy=True)
+    requests = db.relationship("Request", backref="borrower", lazy=True)
+
+
+
+class Item(db.Model):
+    _tablename_= "items"
+
+    item_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    title= db.Column(db.String(150), nullable=False)
+    description= db.Column(db.Text)
+    category= db.Column(db.String(100))
+    image_url= db.Column(db.String(300))
+    availability = db.Column(db.String(50), default="available")
+    created_at= db.Column(db.DateTime, default=datetime.utcnow)
+
+
+
+class Request(db.Model):
+    _tablename_ = "requests"
+
+    request_id = db.Column(db.Integer, primary_key=True)
+    item_id= db.Column(db.Integer, db.ForeignKey("items.item_id"), nullable=False)
+    borrower_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+    status = db.Column(db.String(50), default="pending")
+    request_date = db.Column(db.DateTime, default=datetime.utcnow)
+    message= db.Column(db.Text)

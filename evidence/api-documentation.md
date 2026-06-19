@@ -111,6 +111,18 @@ Beispiel:
 
 ---
 
+## API Status Übersicht
+
+Der Endpoint `/api/status´ dient zur Überprüfung des aktuellen API-Zustands.
+Er liefert:
+
+-API Name
+-Version
+-Laufzeitstatus
+Liste aller verfügbaren Endpunkte 
+
+Dieser Endpoint kann für Monitoring und Debuggig verwendet werden.
+
 # Anfrage-Workflow
 
 1. Ein Benutzer erstellt eine Anfrage.

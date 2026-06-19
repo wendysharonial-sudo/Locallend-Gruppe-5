@@ -132,6 +132,15 @@ Dieser Endpoint kann für Monitoring und Debuggig verwendet werden.
 5. Die Anfrage kann auch abgelehnt werden.
 6. Dann erhält sie den Status "rejected".
 
+## statuswerte
+## Statuswerte
+
+| Status | Bedeutung |
+|----------|----------|
+| pending | Anfrage wurde erstellt |
+| accepted | Anfrage wurde angenommen |
+| rejected | Anfrage wurde abgelehnt |
+| deleted | Anfrage wurde gelöscht |
 # Verwendete Technologie
 
 - Python

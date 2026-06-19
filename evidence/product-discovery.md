@@ -132,7 +132,7 @@ LocalLend verbindet Verleiher und Leiher auf einer gemeinsamen Plattform und ver
 
 ## Zentrale Funktionen
 
-- Rgistrierung und Login
+- Registrierung und Login
 - Gegenstände erstelllen
 - Gegenstände durchsuchen
 - Detailansicht eines Gegenstands

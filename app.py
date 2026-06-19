@@ -98,5 +98,25 @@ def delete_request():
     return jsonify(request)
 
 
+@app.route("/api/status")
+def api_status():
+
+    status = {
+        "api": "LocalLend API",
+        "version": "1.0",
+        "status": "running",
+        "available_endpoints": [
+            "/api/items",
+            "/api/requests",
+            "/api/create_request",
+            "/api/accept_request",
+            "/api/reject_request",
+            "/api/delete_request"
+        ]
+    }
+
+    return jsonify(status)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

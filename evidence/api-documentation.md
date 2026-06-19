@@ -95,6 +95,19 @@ Beispiel:
     "id": 2,
     "status": "rejected"
 }
+## Endpunkt: /api/delete_request
+
+Methode: GET
+
+Beschreibung: 
+Löscht eine Anfrage.
+
+Beispiel:
+
+{
+    "id": 3,
+    "status": "deleted"
+}
 
 ---
 

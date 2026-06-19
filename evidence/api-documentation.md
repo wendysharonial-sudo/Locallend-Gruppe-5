@@ -148,7 +148,19 @@ Dieser Endpoint kann für Monitoring und Debuggig verwendet werden.
 - JSON
 - Git
 - GitHub
+## JSON Erklärung
 
+JSON steht für javaScript object Notation.
+
+Die API liefert Daten im JSON-Format.
+
+Beispiel:
+{
+    "id": 1,
+    "name":"Bohrmaschine"
+    "status":"availabe"
+}
+JSON ermöglicht den Datenautausch zwischen Backend und Frontend.
 # Beitrag von Maryam
 
 - API-Endpunkte erstellt

@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -49,6 +50,8 @@ def api_requests():
     ]
 
     return jsonify(requests)
+
+
 @app.route("/api/create_request")
 def create_request():
 
@@ -60,6 +63,8 @@ def create_request():
     }
 
     return jsonify(new_request)
+
+
 @app.route("/api/accept_request")
 def accept_request():
 
@@ -69,6 +74,8 @@ def accept_request():
     }
 
     return jsonify(request)
+
+
 @app.route("/api/reject_request")
 def reject_request():
 
@@ -78,5 +85,18 @@ def reject_request():
     }
 
     return jsonify(request)
+
+
+@app.route("/api/delete_request")
+def delete_request():
+
+    request = {
+        "id": 3,
+        "status": "deleted"
+    }
+
+    return jsonify(request)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

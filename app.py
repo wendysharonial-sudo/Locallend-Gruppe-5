@@ -14,16 +14,22 @@ def api_items():
         {
             "id": 1,
             "name": "Bohrmaschine",
+            "category": "Werkzeug",
             "status": "available"
         },
         {
             "id": 2,
             "name": "Leiter",
+            "category": "Werkzeug",
             "status": "available"
         }
     ]
 
-    return jsonify(items)
+    return jsonify({
+        "success": True,
+        "message": "Items loaded successfully",
+        "data": items
+    })
 
 
 @app.route("/api/requests")
@@ -49,12 +55,15 @@ def api_requests():
         }
     ]
 
-    return jsonify(requests)
+    return jsonify({
+        "success": True,
+        "message": "Requests loaded successfully",
+        "data": requests
+    })
 
 
 @app.route("/api/create_request")
 def create_request():
-
     new_request = {
         "id": 4,
         "item": "Laptop",
@@ -62,45 +71,57 @@ def create_request():
         "status": "pending"
     }
 
-    return jsonify(new_request)
+    return jsonify({
+        "success": True,
+        "message": "Request created successfully",
+        "data": new_request
+    })
 
 
 @app.route("/api/accept_request")
 def accept_request():
-
     request = {
         "id": 1,
         "status": "accepted"
     }
 
-    return jsonify(request)
+    return jsonify({
+        "success": True,
+        "message": "Request accepted successfully",
+        "data": request
+    })
 
 
 @app.route("/api/reject_request")
 def reject_request():
-
     request = {
         "id": 2,
         "status": "rejected"
     }
 
-    return jsonify(request)
+    return jsonify({
+        "success": True,
+        "message": "Request rejected successfully",
+        "data": request
+    })
 
 
 @app.route("/api/delete_request")
 def delete_request():
-
     request = {
         "id": 3,
         "status": "deleted"
     }
 
-    return jsonify(request)
+    return jsonify({
+        "success": True,
+        "message": "Request deleted successfully",
+        "data": request
+    })
 
 
 @app.route("/api/status")
 def api_status():
-
     status = {
         "api": "LocalLend API",
         "version": "1.0",
@@ -111,11 +132,16 @@ def api_status():
             "/api/create_request",
             "/api/accept_request",
             "/api/reject_request",
-            "/api/delete_request"
+            "/api/delete_request",
+            "/api/status"
         ]
     }
 
-    return jsonify(status)
+    return jsonify({
+        "success": True,
+        "message": "API is running",
+        "data": status
+    })
 
 
 if __name__ == "__main__":

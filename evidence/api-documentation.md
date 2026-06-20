@@ -36,16 +36,53 @@ GET
     ]
 }
 
-Methode: GET
+## Endpunkt: /api/requests
 
-Beschreibung:
-Gibt alle Ausleihanfragen zurück.
+### Methode
 
-Statuswerte:
+GET
 
-- pending
-- accepted
-- rejected
+### Beschreibung
+
+Gibt alle Ausleihanfragen und deren aktuellen Status als JSON zurück.
+
+### Beispielantwort
+
+```json
+{
+  "success": true,
+  "message": "Requests loaded successfully",
+  "data": [
+    {
+      "id": 1,
+      "item": "Bohrmaschine",
+      "borrower": "Max",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "item": "Leiter",
+      "borrower": "Anna",
+      "status": "accepted"
+    },
+    {
+      "id": 3,
+      "item": "Beamer",
+      "borrower": "Sara",
+      "status": "rejected"
+    }
+  ]
+}
+```
+
+### Erklärung der Felder
+
+| Feld | Bedeutung |
+|---|---|
+| id | Eindeutige Nummer der Anfrage |
+| item | Angefragter Gegenstand |
+| borrower | Name des Ausleihers |
+| status | Aktueller Status der Anfrage |
 
 ---
 

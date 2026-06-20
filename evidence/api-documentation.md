@@ -11,29 +11,30 @@ Die API stellt Daten im JSON-Format bereit und verwaltet Ausleihanfragen.
 
 ## Endpunkt: /api/items
 
-Methode: GET
-
-Beschreibung:
-Gibt eine Liste aller verfügbaren Gegenstände zurück.
-
-Beispiel:
-
-[
-    {
-        "id": 1,
-        "name": "Bohrmaschine",
-        "status": "available"
-    },
-    {
-        "id": 2,
-        "name": "Leiter",
-        "status": "available"
-    }
-]
-
----
-
-## Endpunkt: /api/requests
+### Beschreibung
+Gibt alle verfügbaren Gegenstände als JSON zurück.
+### Methode 
+GET 
+### Beispielantwort
+```json
+{
+    "success": true,
+    "message": "Items loaded successfully",
+    "data": [
+        {
+            "id":1,
+            "name": "Bohrmaschine",
+            "category": "Werkzeug",
+            "status": "available"
+        },
+        {
+           "id": 2,
+           "name": "Leiter"
+           "categorie": "Werkzeug",
+           "status": "available"
+        }
+    ]
+}
 
 Methode: GET
 

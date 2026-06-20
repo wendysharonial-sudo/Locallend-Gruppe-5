@@ -1,48 +1,48 @@
-Product Discovery - LocalLend
+Product Discovery – LocalLend
 
 Design Challenge
 
-Wie können wir Studierenden und Anwohnern helfen, einfachen und kostengünstigen Zugang zu Werkzeugen und technischen Geräten zu erhalten, unter Berücksichtigung begrenzter Budgets, seltener Nutzung solcher Gegenstände und des Wunsches nach nachhaltiger Ressourcennutzung?
+How can we help students and local residents gain simple and affordable access to tools and technical devices while considering limited budgets, infrequent usage, and the desire for sustainable resource sharing?
 
-Viele Studierende und Anwohner benötigen Werkzeuge oder technische Geräte nur für einen kurzen Zeitraum. Beispiele sind Bohrmaschinen für Reparaturen, Leitern für Renovierungsarbeiten oder Beamer für Präsentationen.
+Many students and local residents only need tools or technical devices for a short period of time. Examples include drills for repairs, ladders for renovation work, or projectors for presentations.
 
-Der Kauf solcher Gegenstände lohnt sich häufig nicht, insbesondere wenn sie nur selten genutzt werden. Gleichzeitig besitzen viele Menschen genau diese Gegenstände bereits, verwenden sie jedoch nur gelegentlich.
+Purchasing such items is often expensive and not worthwhile when they are only needed occasionally. At the same time, many people already own these items but rarely use them.
 
-Die Herausforderung besteht darin, Angebot und Nachfrage lokal zusammenzubringen und den Austausch von Gegenständen möglichst einfach und übersichtlich zu gestalten.
+The challenge is to connect local supply and demand and make the borrowing process simple, transparent, and accessible.
 
 ⸻
 
 Need Finding
 
-Zur Analyse des Problems haben wir die Situation aus Sicht der Leiher und Verleiher betrachtet.
+To better understand the problem, we analyzed the situation from both the borrower’s and lender’s perspective.
 
-Dabei wurden folgende Probleme identifiziert:
+The following needs and problems were identified:
 
-* Werkzeuge und technische Geräte sind oft teuer in der Anschaffung.
-* Viele Gegenstände werden nur selten benötigt.
-* Nutzer wissen häufig nicht, wer in ihrer Umgebung passende Gegenstände besitzt.
-* Bestehende Plattformen konzentrieren sich überwiegend auf Kauf und Verkauf.
-* Es fehlt eine einfache Möglichkeit zum lokalen Ausleihen.
-* Nutzer wünschen Transparenz über den Status ihrer Anfragen.
-* Verleiher möchten selbst entscheiden können, ob sie eine Anfrage annehmen oder ablehnen.
+* Tools and technical devices are often expensive to purchase.
+* Many items are only needed occasionally.
+* People often do not know who owns useful tools in their local area.
+* Existing platforms mainly focus on buying and selling rather than borrowing.
+* Borrowers need a simple way to find available items.
+* Lenders want control over who can borrow their items.
+* Users need transparency regarding the status of lending requests.
 
-Diese Erkenntnisse zeigen, dass eine lokale Verleihplattform einen echten Mehrwert bieten kann.
+These findings indicate a clear opportunity for a local lending platform.
 
 ⸻
 
-Zielgruppe
+Target Group
 
-Studierende
+Students
 
-* verfügen häufig über ein begrenztes Budget
-* benötigen Werkzeuge oder technische Geräte nur gelegentlich
-* möchten unnötige Anschaffungskosten vermeiden
+* Often have limited budgets.
+* Need specific tools or devices only occasionally.
+* Want to avoid unnecessary purchases.
 
-Anwohner
+Local Residents
 
-* besitzen Werkzeuge oder technische Geräte
-* nutzen diese oft nur selten
-* möchten vorhandene Ressourcen sinnvoll einsetzen
+* Own tools and technical devices.
+* Often use them only rarely.
+* Want to make better use of existing resources.
 
 ⸻
 
@@ -50,223 +50,136 @@ Persona
 
 Anna Müller
 
-Alter: 23 Jahre
+Age: 23
 
-Beruf: Studentin
+Occupation: Student
 
-Wohnort: Berlin
+Location: Berlin
 
-Familienstand: Ledig
+Marital Status: Single
 
-Ziele
+Goals
 
-* Geld sparen
-* Werkzeuge bei Bedarf nutzen
-* Unnötige Anschaffungen vermeiden
+* Save money.
+* Access tools when needed.
+* Avoid unnecessary purchases.
 
-Herausforderungen
+Challenges
 
-* Begrenztes Budget
-* Besitzt nur wenige Werkzeuge
-* Benötigt Gegenstände nur gelegentlich
+* Limited budget.
+* Owns only a few tools.
+* Needs equipment only occasionally.
 
-Zitat
+Quote
 
-„Ich brauche eine Bohrmaschine nur für ein einziges Projekt. Ein Kauf lohnt sich nicht.“
+“I only need a drill for one project. Buying one does not make sense.”
 
-Erkenntnis
+Insight
 
-Anna legt mehr Wert auf einen einfachen Zugang zu Werkzeugen als auf deren Besitz.
-
-⸻
-
-Nutzerbedürfnisse
-
-Bedürfnisse der Leiher
-
-* schneller Zugang zu benötigten Gegenständen
-* geringere Kosten gegenüber einem Neukauf
-* einfache Suche nach verfügbaren Gegenständen
-* Transparenz über den Status einer Anfrage
-
-Bedürfnisse der Verleiher
-
-* einfache Verwaltung ihrer Gegenstände
-* Kontrolle über Ausleihanfragen
-* Übersicht über laufende Anfragen
-* Möglichkeit, Anfragen anzunehmen oder abzulehnen
+Anna values easy access to tools more than ownership.
 
 ⸻
 
-Umfrage
+User Needs
 
-Zur Überprüfung unserer Annahmen haben wir folgende Umfragefragen erstellt:
+Borrowers
 
-1. Haben Sie schon einmal ein Werkzeug oder technisches Gerät nur für kurze Zeit benötigt?
-2. Würden Sie einen Gegenstand lieber ausleihen als kaufen?
-3. Besitzen Sie Werkzeuge oder technische Geräte, die Sie selten nutzen?
-4. Würden Sie eigene Gegenstände an andere verleihen?
-5. Ist es Ihnen wichtig, Ausleihanfragen selbst annehmen oder ablehnen zu können?
-6. Würden Sie eine Plattform wie LocalLend nutzen?
-7. Welche Funktion wäre für Sie am wichtigsten?
+* Quick access to needed items.
+* Lower costs compared to buying.
+* Easy search for available items.
+* Transparent request status.
 
-⸻
+Lenders
 
-Lösungsansätze
-
-Lösung	Vorteile	Nachteile
-WhatsApp-Gruppe	Schnell umsetzbar	Unübersichtlich bei vielen Anfragen
-Gemeinsame Tabelle	Einfach zu erstellen	Schlechte Benutzerfreundlichkeit
-Kauf-/Verkaufsplattform	Bekanntes Konzept	Fokus auf Kauf statt Ausleihe
-Verleih-Web-App	Strukturierter Prozess	Höherer Entwicklungsaufwand
+* Easy management of listed items.
+* Control over lending requests.
+* Clear overview of active requests.
+* Ability to accept or reject requests.
 
 ⸻
 
-Gewählte Lösung
+Solution Idea
 
-Wir haben uns für eine webbasierte Verleihplattform entschieden.
+LocalLend is a web-based platform for borrowing and lending tools and technical devices within a local community.
 
-Mit LocalLend können Nutzer:
-
-* Gegenstände einstellen
-* verfügbare Angebote durchsuchen
-* Ausleihanfragen stellen
-* Anfragen annehmen oder ablehnen
-* den Status von Anfragen verfolgen
-
-Dadurch werden sowohl die Bedürfnisse der Leiher als auch der Verleiher berücksichtigt.
+Users can list items, browse available offers, and send lending requests. The platform supports the complete lending process from item discovery to request management.
 
 ⸻
 
-Nutzerrollen
+User Roles
 
-Wir haben uns bewusst dafür entschieden, Nutzer nicht dauerhaft als „Verleiher“ oder „Leiher“ einzustufen.
+We intentionally decided not to permanently classify users as either lenders or borrowers.
 
-Jeder Nutzer kann sowohl Gegenstände verleihen als auch ausleihen. Die Rolle ergibt sich jeweils aus der aktuellen Interaktion innerhalb der Plattform.
+Every user can both lend and borrow items. The role depends on the current interaction within the platform.
 
-Diese Entscheidung erhöht die Flexibilität der Anwendung und entspricht dem tatsächlichen Verhalten unserer Zielgruppe.
-
-⸻
-
-Prototyp
-
-Der aktuelle Prototyp umfasst folgende Kernfunktionen:
-
-Benutzerverwaltung
-
-* Registrierung
-* Login
-* Logout
-
-Gegenstandsverwaltung
-
-* Gegenstände erstellen
-* Gegenstände anzeigen
-* Gegenstände durchsuchen
-
-Anfrage-System
-
-* Ausleihanfrage stellen
-* Anfrage annehmen
-* Anfrage ablehnen
-* Anfrage löschen
-* Status einer Anfrage anzeigen
-
-API
-
-* JSON-Endpunkt für Gegenstände
-* JSON-Endpunkt für Anfragen
-* JSON-Endpunkt zum Erstellen einer Anfrage
-* JSON-Endpunkt zum Annehmen einer Anfrage
-* JSON-Endpunkt zum Ablehnen einer Anfrage
-* JSON-Endpunkt zum Löschen einer Anfrage
-* API-Status-Endpunkt
-
-⸻
-
-Zusammenhang mit dem Anfrage-System
-
-Im Anfrage-System werden verschiedene Statuswerte verwendet:
-
-Status	Bedeutung
-pending	Anfrage wurde erstellt
-accepted	Anfrage wurde angenommen
-rejected	Anfrage wurde abgelehnt
-deleted	Anfrage wurde gelöscht
-
-Dadurch können Nutzer jederzeit nachvollziehen, in welchem Zustand sich ihre Anfrage befindet.
-
-⸻
-
-Feedback
-
-Erstes informelles Feedback aus dem Team und dem Umfeld zeigt:
-
-Positives Feedback
-
-* hilfreiche Lösung für Studierende
-* spart Kosten
-* leicht verständliches Konzept
-* unterstützt nachhaltige Ressourcennutzung
-
-Verbesserungsvorschläge
-
-* Suchfunktion erweitern
-* Kategorien ergänzen
-* Status von Anfragen deutlicher anzeigen
-* mehr Informationen zu Gegenständen anzeigen
+This decision increases flexibility and reflects the real behavior of our target group.
 
 ⸻
 
 Value Proposition
 
-Kundengruppe
+Customer Segments
 
-* Studierende
-* Anwohner
+* Students
+* Local residents
 
-Aufgaben der Nutzer
+Customer Jobs
 
-* Werkzeuge ausleihen
-* Gegenstände verleihen
-* Geld sparen
-* Ressourcen sinnvoll nutzen
+* Borrow tools
+* Lend unused items
+* Save money
+* Use resources efficiently
 
-Probleme
+Problems
 
-* Hohe Anschaffungskosten
-* Fehlender Zugang zu bestimmten Werkzeugen
-* Seltene Nutzung vieler Gegenstände
+* High purchase costs
+* Missing access to specific tools
+* Items are used only rarely
 
-Nutzen
+Benefits
 
-* Kostengünstiger Zugang zu Werkzeugen und Geräten
-* Nachhaltige Nutzung vorhandener Ressourcen
-* Unterstützung lokaler Gemeinschaften
-* Transparente Anfrageverwaltung
+* Affordable access to tools and devices
+* Sustainable use of existing resources
+* Support for local communities
+* Transparent lending process
 
-Unsere Lösung
+Our Solution
 
-LocalLend verbindet Verleiher und Leiher auf einer gemeinsamen Plattform und vereinfacht den gesamten Ausleihprozess – von der Suche bis zur Anfrageverwaltung.
-
-⸻
-
-Zusammenhang mit den Design Decisions
-
-Die Ergebnisse des Product Discovery haben unsere Design Decisions beeinflusst:
-
-* Nutzer wünschen Kontrolle → Anfragebasiertes Ausleihen wurde gewählt.
-* Nutzer wünschen Transparenz → Statuswerte wie „pending“, „accepted“ und „rejected“ wurden eingeführt.
-* Strukturierte Daten werden benötigt → JSON-API wurde implementiert.
-* Eine einfache Nutzung ist wichtig → klare Benutzeroberfläche mit Suchfunktion.
-* Die Anwendung soll später erweitert werden können → API und Frontend wurden getrennt aufgebaut.
+LocalLend connects borrowers and lenders on a single platform and simplifies the entire lending process from searching for items to managing lending requests.
 
 ⸻
 
-Fazit
+Key Features
 
-Das Product Discovery hat gezeigt, dass ein echter Bedarf für eine lokale Plattform zum Verleihen und Ausleihen von Werkzeugen und technischen Geräten besteht.
+* User registration and login
+* Create item listings
+* Browse available items
+* Item detail page
+* Send lending requests
+* Accept or reject requests
+* Manage item availability
+* JSON API endpoints for item and request data
 
-Leiher profitieren von einem kostengünstigen Zugang zu benötigten Gegenständen, während Verleiher ihre vorhandenen Ressourcen sinnvoll nutzen können.
+⸻
 
-Die bisherigen Erkenntnisse bestätigen die Relevanz der Lösung LocalLend und unterstützen die Entwicklung einer lokalen Plattform für das Verleihen und Ausleihen von Werkzeugen und technischen Geräten.
+Expected Benefits
+
+For Borrowers
+
+* Lower costs
+* Quick access to required items
+* Avoid unnecessary purchases
+
+For Lenders
+
+* Better utilization of existing items
+* Opportunity to support the local community
+* Promotion of sustainable resource sharing
+
+⸻
+
+Why LocalLend?
+
+Many existing platforms focus on buying and selling products.
+
+LocalLend focuses on temporary access and resource sharing instead of ownership. This approach helps users save money, reduces unnecessary purchases, and encourages sustainable use of tools and technical devices.

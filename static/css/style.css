@@ -1,0 +1,60 @@
+/* Globale Einstellungen (Hintergrund und Schrift) */
+body {
+    font-family: 'Inter', sans-serif;
+    /* Ein sehr helles Blaugrau, wirkt viel moderner als reines Weiß */
+    background-color: #f8fafc; 
+    /* Ein weiches Dunkelgrau für den Text, ist angenehmer zu lesen als Tiefschwarz */
+    color: #1e293b; 
+    padding-top: 76px; /* Platz für die Navbar */
+}
+
+/* Navbar Design */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0; /* Sehr feine Linie unter der Navbar */
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #2563eb !important; /* Ein starkes, modernes Blau */
+    font-size: 1.5rem;
+}
+
+/* Interaktive Buttons mit sanfter Animation */
+.btn-custom {
+    border-radius: 8px; /* Leicht abgerundete Ecken */
+    font-weight: 600;
+    /* Das ist das Geheimnis: 'transition' macht alle Änderungen fließend (0.3 Sekunden) */
+    transition: all 0.3s ease; 
+}
+
+/* Wenn man mit der Maus über den Button fährt (Hover-Effekt) */
+.btn-custom:hover {
+    /* 'transform' bewegt den Button um 2 Pixel nach oben */
+    transform: translateY(-2px); 
+    /* Fügt einen blauen Schatten hinzu, wenn der Button "angehoben" wird */
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); 
+}
+
+/* Formular-Karten (Login & Register) */
+.custom-card {
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    /* Ein weicher, realistischer Schatten für die Karte */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); 
+    padding: 40px;
+}
+
+/* Input-Felder (Texteingabe) */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    padding: 12px;
+}
+
+/* Wenn das Input-Feld angeklickt wird (Focus) */
+.form-control:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Moderner Fokus-Ring */
+}

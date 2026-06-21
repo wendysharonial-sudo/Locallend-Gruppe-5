@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Seite nicht gefunden - LocalLend{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5 text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="display-1 text-primary fw-bold mb-0" style="font-size: 8rem;">404</div>
+            <h2 class="fw-bold mb-4">Ups! Diese Seite ist leider nicht auffindbar.</h2>
+            <p class="text-secondary mb-5">
+                Vielleicht wurde das gesuchte Objekt bereits verliehen, gelöscht, oder die URL ist falsch. 
+                Lass uns zurück zur sicheren Basis gehen.
+            </p>
+            <a href="/" class="btn btn-primary btn-lg btn-custom px-4 me-2">
+                <i class="bi bi-house-door"></i> Zur Startseite
+            </a>
+            <a href="/items" class="btn btn-outline-secondary btn-lg btn-custom px-4">
+                <i class="bi bi-search"></i> Objekte durchsuchen
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,249 +1,328 @@
-Design Decisions
+# Design Decisions
 
-01: Provide item and request data through a JSON API
+## Overview
 
-Meta
+This document records the most important design decisions made during the development of **LocalLend**.
 
-Status
-: Decided
+LocalLend is a Flask-based web application that enables users to lend and borrow tools and technical devices within their local community.
 
-Updated
-: 23-Jun-2026
+The purpose of this document is to explain not only **what** was implemented, but also **why** specific technical and product decisions were made.
 
-Team
-: LocalLend
+Each design decision includes:
 
-Lead
-: Maryam
+- the problem that needed to be solved
+- the selected solution
+- alternative options that were considered
+- the trade-offs of each option
+- the consequences of the final decision
 
-Problem statement
+---
 
-LocalLend is a Flask web application for borrowing and lending tools and technical devices.
+# DD-01: Provide Item and Request Data Through a JSON API
 
-Users need access to item data and lending request data. The project also requires at least one headless API endpoint that returns data as JSON.
+## Meta Information
 
-Therefore, we had to decide whether this data should only be shown on HTML pages or also be provided through a structured JSON API.
+| Field | Value |
+|---|---|
+| Status | Decided |
+| Updated | 23-Jun-2026 |
+| Team | LocalLend |
+| Lead | Maryam |
 
-Decision
+## Problem Statement
+
+LocalLend manages item listings and lending requests.
+
+Users and system components require access to structured information about available items and request states. The project also requires at least one headless API endpoint that returns data in JSON format.
+
+The team therefore had to decide whether item and request data should only be displayed through HTML pages or also be exposed through a structured JSON API.
+
+## Decision
 
 We decided to provide selected item and request data through a JSON API.
 
-JSON is structured, machine-readable and independent from the HTML layout. This makes the data easier to test, document and reuse. It also fulfils the project requirement of providing at least one headless API endpoint.
+JSON is structured, machine-readable and independent from the HTML layout. This makes the data easier to test, document and reuse. It also fulfils the project requirement of providing a headless API endpoint.
 
-Decision was taken by: Maryam
+**Decision Owner:** Maryam
 
-Regarded options
+## Options Considered
 
-We regarded two options:
+| Criterion | HTML Pages Only | JSON API |
+|---|---|---|
+| Human readability | Easy to read in the browser | Not designed as a visual page |
+| Structured data access | Data is mixed with HTML | Data is clearly structured |
+| Project requirement | Does not fulfil the JSON API requirement | Fulfils the JSON API requirement |
+| Testing | Harder to test separately | Easier to test through API endpoints |
+| Documentation | Harder to document as an interface | Endpoints and responses can be documented clearly |
+| Future extensibility | Limited | Strong |
 
-* Show data only through HTML pages.
-* Provide selected data through a JSON API.
+## Consequences
 
-Criterion	HTML pages only	JSON API
-Human users	Easy to read in the browser	Not designed as a visual page
-Structured data	Data is mixed with HTML	Data is clearly structured
-Project requirement	Does not fulfil the JSON API requirement	Fulfils the JSON API requirement
-Testing	Harder to test separately	Easy to test through API endpoints
-Documentation	Harder to document as an interface	Endpoints and responses can be documented clearly
+### Positive
 
-⸻
+- Meets the JSON API project requirement
+- Enables structured data exchange
+- Makes testing and debugging easier
+- Supports future frontend integration
 
-02: Manage lending requests through status values
+### Negative
 
-Meta
+- Additional endpoints must be maintained
+- API responses need separate documentation
 
-Status
-: Decided
+---
 
-Updated
-: 23-Jun-2026
+# DD-02: Manage Lending Requests Through Status Values
 
-Team
-: LocalLend
+## Meta Information
 
-Lead
-: Maryam
+| Field | Value |
+|---|---|
+| Status | Decided |
+| Updated | 23-Jun-2026 |
+| Team | LocalLend |
+| Lead | Maryam |
 
-Problem statement
+## Problem Statement
 
-Borrowers can send lending requests for tools and technical devices.
+Lending requests move through multiple stages during their lifecycle.
 
-A request does not end immediately after it is created. First, it is open. Then the lender can either accept or reject it. The application therefore needs a clear way to represent the current state of each request.
+A newly created request is open first. Afterwards, the lender can either accept or reject it. The application therefore needs a clear way to represent the current state of each request.
 
-We had to decide whether handled requests should disappear after a decision or whether they should remain visible with a status value.
+The team had to decide whether handled requests should disappear after a decision or remain visible with a status value.
 
-Decision
+## Decision
 
-We decided to keep lending requests in the system and manage them through status values.
+We decided to manage lending requests through status values.
 
-A new request starts with the status pending. If the lender accepts the request, the status changes to accepted. If the lender rejects the request, the status changes to rejected.
+A new request starts with the status `pending`. If the lender accepts the request, the status changes to `accepted`. If the lender rejects the request, the status changes to `rejected`. A request can also be marked as `deleted`.
 
-This makes the request process easier to understand, explain and debug.
+This makes the request process transparent, understandable and easier to explain.
 
-Decision was taken by: Maryam
+**Decision Owner:** Maryam
 
-Regarded options
+## Options Considered
 
-We regarded two options:
+| Criterion | Delete Requests After Handling | Store Request Status |
+|---|---|---|
+| Simplicity | Less data remains visible | Requires an additional status value |
+| Traceability | Hard to see what happened later | Request history remains understandable |
+| User understanding | Request may suddenly disappear | User can see the current state |
+| Request workflow | No clear lifecycle | Clear lifecycle from pending to accepted/rejected |
+| Debugging | Harder to check previous states | Easier to inspect the current state |
 
-* Delete requests after they are handled.
-* Keep requests and update their status.
+## Consequences
 
-Criterion	Delete handled requests	Store request status
-Simplicity	Less data remains visible	Requires an additional status value
-Traceability	Hard to see what happened later	Request history remains understandable
-User understanding	Request may suddenly disappear	User can see pending, accepted or rejected
-Request workflow	No clear lifecycle	Clear lifecycle from pending to accepted/rejected
-Debugging	Harder to check previous states	Easier to inspect the current state
+### Positive
 
-⸻
+- Clear request lifecycle
+- Better transparency for users
+- Easier debugging
+- Easier documentation of the workflow
 
-03: Use request-based lending instead of automatic lending
+### Negative
 
-Meta
+- Requires status management
+- Status values must be documented consistently
 
-Status
-: Decided
+---
 
-Updated
-: 23-Jun-2026
+# DD-03: Use Request-Based Lending Instead of Automatic Lending
 
-Team
-: LocalLend
+## Meta Information
 
-Lead
-: Maryam
+| Field | Value |
+|---|---|
+| Status | Decided |
+| Updated | 23-Jun-2026 |
+| Team | LocalLend |
+| Lead | Maryam |
 
-Problem statement
+## Problem Statement
 
-LocalLend focuses on tools and technical devices. These items can be valuable, fragile or personally important to the lender.
+LocalLend focuses on tools and technical devices. These items can be valuable, fragile or personally important to their owners.
 
-We had to decide whether borrowers should be able to borrow an item automatically or whether the lender should first approve each request.
+The team had to decide whether borrowers should automatically receive an item after selecting it or whether the lender should approve each borrowing request manually.
 
-This decision is important because lenders should keep control over who borrows their tools or technical devices.
+This decision is important because lenders should remain in control of who can borrow their items.
 
-Decision
+## Decision
 
-We decided to use request-based lending.
+We decided to use a request-based lending process.
 
-Borrowers can send a lending request, but the item is not automatically borrowed. The lender must accept or reject the request.
+Borrowers can submit a lending request, but the item is not automatically borrowed. The lender must first accept or reject the request.
 
-This gives lenders more control and fits the focus on tools and technical devices, because these items often require trust and careful handling.
+This approach gives lenders more control and better fits the trust-based nature of local lending.
 
-Decision was taken by: Maryam
+**Decision Owner:** Maryam
 
-Regarded options
+## Options Considered
 
-We regarded two options:
+| Criterion | Automatic Lending | Request-Based Lending |
+|---|---|---|
+| Borrowing speed | Faster for borrowers | Borrower must wait for approval |
+| Lender control | Lower | Higher |
+| Trust and security | Riskier for valuable items | Better for tools and technical devices |
+| Request management | No accept/reject process | Clear accept/reject workflow |
+| Fit for LocalLend | Too automatic for personal items | Fits local lending between people |
 
-* Automatic lending after a borrower selects an item.
-* Request-based lending with lender approval.
+## Consequences
 
-Criterion	Automatic lending	Request-based lending
-Speed	Faster for borrowers	Borrower must wait for approval
-Lender control	Lender has less control	Lender decides who can borrow
-Trust	Riskier for valuable items	Better for tools and technical devices
-Request management	No accept/reject process	Clear accept/reject workflow
-Fit for LocalLend	Too automatic for personal items	Fits local lending between people
+### Positive
 
-⸻
+- Greater control for lenders
+- Better trust between users
+- Clear approval workflow
+- Better protection of valuable items
 
-04: Categorize tools and technical devices
+### Negative
 
-Meta
+- Borrowers must wait for approval
+- Additional request management is required
 
-Status
-: Decided
+---
 
-Updated
-: 23-Jun-2026
+# DD-04: Categorize Tools and Technical Devices
 
-Team
-: LocalLend
+## Meta Information
 
-Lead
-: Maryam
+| Field | Value |
+|---|---|
+| Status | Decided |
+| Updated | 23-Jun-2026 |
+| Team | LocalLend |
+| Lead | Maryam |
 
-Problem statement
+## Problem Statement
 
 Users need an easy way to find tools and technical devices.
 
-Without categories, searching becomes difficult when many items are listed. This is especially relevant for LocalLend because tools and technical devices can belong to different groups, such as power tools, electronic devices or accessories.
+Without categories, searching becomes difficult when many items are listed. This is especially relevant for LocalLend because items can belong to different groups such as tools, technical devices or accessories.
 
-We had to decide whether items should be listed without structure, grouped into fixed categories or described with flexible tags.
+The team had to decide whether items should be listed without structure, grouped into fixed categories or described with flexible tags.
 
-Decision
+## Decision
 
 We decided to use fixed categories for listed items.
 
-Items can be grouped into categories such as tools, technical devices and others. This makes it easier for borrowers to find relevant items and gives lenders a clearer structure when adding an item.
+Examples include:
 
-Fixed categories are simple enough for the current prototype and can later be extended if needed.
+- Tools
+- Technical devices
+- Accessories
+- Other
 
-Decision was taken by: Maryam
+Fixed categories provide a consistent structure and improve discoverability while keeping the implementation simple.
 
-Regarded options
+For the current prototype, simplicity and clarity are more important than maximum flexibility.
 
-We regarded three options:
+**Decision Owner:** Maryam
 
-* No categories.
-* Fixed categories.
-* Flexible tags.
+## Options Considered
 
-Criterion	No categories	Fixed categories	Flexible tags
-Easy to find items	Harder when many items exist	Clear structure	Useful for detailed search
-Simple implementation	Very simple	Manageable	More complex
-User friendliness	Less guidance for users	Easy to understand	Can become inconsistent
-Fit for tools/devices	Too unstructured	Good fit	Good, but more effort
-Future extension	Limited	Can be extended later	Flexible from the start
+| Criterion | No Categories | Fixed Categories | Flexible Tags |
+|---|---|---|---|
+| Ease of use | Low | High | Medium |
+| Implementation complexity | Very low | Low | Medium |
+| Consistency | Low | High | Medium |
+| Search support | Low | Medium | High |
+| Suitability for prototype | Low | High | Medium |
+| Future extension | Limited | Can be extended later | Flexible from the start |
 
-⸻
+## Consequences
 
-05: Format API responses as JSON objects
+### Positive
 
-Meta
+- Easier item discovery
+- Consistent item structure
+- Simple implementation
+- Easy for users to understand
 
-Status
-: Decided
+### Negative
 
-Updated
-: 23-Jun-2026
+- Less flexible than tags
+- Categories may need expansion later
 
-Team
-: LocalLend
+---
 
-Lead
-: Maryam
+# DD-05: Standardize API Responses Using JSON Objects
 
-Problem statement
+## Meta Information
 
-The frontend, documentation and testing process need a consistent way to understand data returned by the backend.
+| Field | Value |
+|---|---|
+| Status | Decided |
+| Updated | 23-Jun-2026 |
+| Team | LocalLend |
+| Lead | Maryam |
 
-Because the project includes a JSON API, we had to decide how API responses should be formatted. The response format should be easy to read, easy to document and suitable for structured item and request data.
+## Problem Statement
 
-Decision
+The API provides data for items, lending requests and status information.
 
-We decided to return API responses as JSON objects or lists of JSON objects.
+Without a standardized response structure, different endpoints could return data in inconsistent formats. This would make testing, debugging and documentation more difficult.
 
-JSON is easy to inspect, common for web APIs and works well with Flask through jsonify. This makes the API easier to test and explain.
+The team therefore had to decide how API responses should be structured.
 
-For single actions, such as accepting or rejecting a request, the API returns one JSON object. For lists, such as all items or all requests, the API returns a list of JSON objects.
+## Decision
 
-Decision was taken by: Maryam
+We decided to use a consistent JSON response structure for all API endpoints.
 
-Regarded options
+Example:
 
-We regarded three options:
+```json
+{
+  "success": true,
+  "message": "Items loaded successfully",
+  "data": []
+}
+```
 
-* Plain text.
-* JSON.
-* XML.
+This structure ensures that every endpoint follows the same pattern.
 
-Criterion	Plain text	JSON	XML
-Easy to inspect	Simple text	Readable structure	More verbose
-Common for APIs	Not suitable for structured APIs	Very common	Possible, but less common in this context
-Structured data	Hard to represent item/request fields	Good for objects and lists	Structured, but more complex
-Fit with Flask	Manual formatting needed	Works well with jsonify	More effort
-Documentation	Harder to document consistently	Easy to document with examples	More complex to explain
+- `success` shows whether the request was successful.
+- `message` explains what happened.
+- `data` contains the actual response data.
 
-⸻
+**Decision Owner:** Maryam
+
+## Options Considered
+
+| Criterion | Plain Text | JSON Objects | XML |
+|---|---|---|---|
+| Readability | Medium | High | Medium |
+| Structured data | Low | High | High |
+| Flask integration | Low | High | Medium |
+| API standardization | Low | High | Medium |
+| Documentation | Medium | High | Medium |
+| Suitability for this project | Low | High | Medium |
+
+## Consequences
+
+### Positive
+
+- Consistent API behavior
+- Easier testing
+- Easier documentation
+- Better maintainability
+- Clearer communication between backend and frontend
+
+### Negative
+
+- All endpoints must follow the same response format
+
+---
+
+# Summary
+
+The design decisions documented above focus on the most important architectural and workflow-related choices made during the development of LocalLend.
+
+They support:
+
+- structured API communication through JSON
+- transparent request management
+- trust-based lending workflows
+- improved usability through categorization
+- consistent and maintainable backend behavior
+
+Together, these decisions provide a clear foundation for a scalable and understandable lending platform.

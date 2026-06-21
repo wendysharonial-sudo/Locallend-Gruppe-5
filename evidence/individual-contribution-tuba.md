@@ -1,6 +1,6 @@
 Individual Contribution - Tuba Celik
 
-Verantwortungsbereich
+## Verantwortungsbereich
 
 Mein Verantwortungsbereich im Projekt lag hauptsächlich im Backend-Bereich für die Benutzerverwaltung.
 

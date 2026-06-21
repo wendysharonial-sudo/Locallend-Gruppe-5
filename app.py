@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from database.models import db, User, Item, Request as BorrowRequest
 
 app = Flask(__name__)
@@ -10,7 +10,9 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-    if User.query.count() == 0:
+    existing_user = db.session.execute(db.select(User)).first()
+    
+    if existing_user is None:
         user1 = User(
         first_name="Anna",
         last_name="Müller",
@@ -92,13 +94,17 @@ def home():
 
 @app.route("/browse")
 def browse():
-    items = Item.query.all()
+    items = db.session.execute(db.select(Item)).scalars().all()
     return render_template("browse.html", items=items)
 
 
 @app.route("/item/<int:item_id>")
 def item_detail(item_id):
-    selected_item = Item.query.get_or_404(item_id)
+    selected_item = db.session.get(Item, item_id)
+
+    if selected_item is None:
+        abort(404)
+   
     return render_template("item_detail.html", item=selected_item)
 
 
@@ -123,14 +129,17 @@ def create_item():
 
 @app.route("/requests")
 def requests_page():
-    requests = BorrowRequest.query.all()
+    requests = db.session.execute(db.select(BorrowRequest)).scalars().all
     return render_template("requests.html", requests=requests)
 
 
 @app.route("/requests/<int:request_id>/accept")
 def accept_request(request_id):
    
-    request_item = BorrowRequest.query.get_or_404(request_id)
+    request_item = db.session.get(BorrowRequest, request_id)
+
+    if request_item is None:
+        abort(404)
 
     request_item.status = "accepted"
 
@@ -142,7 +151,10 @@ def accept_request(request_id):
 @app.route("/requests/<int:request_id>/reject")
 def reject_request(request_id):
     
-    request_item = BorrowRequest.query.get_or_404(request_id)
+    request_item = db.session.get(BorrowRequest, request_id)
+
+    if request_item is None:
+        abort(404)
 
     request_item.status = "rejected"
 
@@ -153,7 +165,7 @@ def reject_request(request_id):
 
 @app.route("/api/items")
 def api_items():
-    items = Item.query.all()
+    items = db.session.execute(db.select(Item)).scalars().all()
 
     items_data = []
 

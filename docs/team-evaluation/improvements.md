@@ -1,19 +1,19 @@
 ---
-title: Improvements
+title: Verbesserungen
 parent: Team Evaluation
 nav_order: 2
 layout: default
 ---
 
-# Improvements
+# Verbesserungen
 
-## How We Would Improve Next Time
+Während der Entwicklung konnten mehrere Verbesserungen identifiziert werden:
 
-- Use SQLAlchemy instead of direct SQLite queries.
-- Improve project planning at the beginning of the project.
-- Separate backend logic into additional modules.
-- Add more automated testing.
-- Improve API documentation with more examples.
-- Create a more advanced search and filter system.
-- Implement notifications for request status changes.
-- Enhance responsive design for mobile devices.
+- Erweiterung des Anfrage-Systems mit Benachrichtigungen.
+- Upload von Bildern für Gegenstände.
+- Such- und Filterfunktionen.
+- Bewertungssystem für Nutzer.
+- Responsive Design für mobile Geräte.
+- Verbesserte Fehlerbehandlung und Validierung.
+
+Diese Funktionen könnten in zukünftigen Versionen ergänzt werden.

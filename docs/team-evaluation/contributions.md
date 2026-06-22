@@ -1,81 +1,62 @@
 ---
-title: Contributions
+title: Beiträge
 parent: Team Evaluation
 nav_order: 4
 layout: default
 ---
 
-# Contributions
-
-## Maryam – API & Request System
-
-### Responsibilities
-
-- API endpoints
-- JSON responses
-- Lending request workflow
-- Request status management
-- API documentation
-- API testing
-
-### Contributions
-
-- Implemented request creation
-- Implemented request approval
-- Implemented request rejection
-- Implemented request status handling
-- Created API endpoints
-- Documented API functionality
-- Tested API behaviour
-
----
+# Beiträge
 
 ## Tuba – Backend & Login
 
-### Responsibilities
-
-- Flask setup
+- Flask-Setup
 - Login
-- Registration
+- Registrierung
 - Logout
 - Sessions
 
-### Contributions
+### Beitrag
 
-- Implemented authentication logic
-- Implemented session management
-- Configured Flask routes
+Erklärung der Flask-Routen und Benutzerverwaltung.
 
 ---
 
-## Wendy – Database & Data Model
+## Wendy – Datenbank & Datenmodell
 
-### Responsibilities
+- SQLite-Datenbank
+- Tabellen users, items und requests
+- Datenbankabfragen
+- Datenmodell
 
-- SQLite database
-- User table
-- Item table
-- Request table
+### Beitrag
 
-### Contributions
-
-- Designed database schema
-- Implemented database queries
-- Connected SQLite with Flask
+Erklärung der Datenspeicherung und Beziehungen zwischen den Tabellen.
 
 ---
 
-## Yves – Frontend & User Interface
+## Yves – Frontend & Benutzeroberfläche
 
-### Responsibilities
-
-- HTML templates
-- CSS styling
+- HTML-Seiten
+- CSS-Design
 - Navigation
-- User interface testing
+- Jinja2 Templates
+- Frontend-Tests
 
-### Contributions
+### Beitrag
 
-- Created frontend pages
-- Improved user experience
-- Fixed frontend issues
+Erklärung des Benutzerinterfaces und der Benutzerführung.
+
+---
+
+## Maryam – API & Anfrage-System
+
+- API-Endpunkte
+- JSON-Daten
+- Ausleihanfragen
+- Statusverwaltung
+- API-Dokumentation
+- API-Tests
+
+### Beitrag
+
+Erklärung der API-Struktur und des Anfrage-Workflows.

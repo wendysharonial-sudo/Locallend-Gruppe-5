@@ -4,8 +4,8 @@
   <div>
     <h2>{{ item.title }}</h2>
     <p>Kategorie: {{ item.category }}</p>
-    <p>Status: {{ item.status }}</p>
-    <a href="/item/{{ item.id }}">Details ansehen</a>
+    <p>Status: {{ item.availability }}</p>
+    <a href="/item/{{ item.item_id }}">Details ansehen</a>
   </div>
   <hr>
 {% endfor %}

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from database.models import db, User
+from database.models import db, User, Item
 
 app = Flask(__name__)
 
@@ -122,9 +122,33 @@ def logout():
 
     return redirect(url_for("home"))
 
+@app.route("/profile")
+def profile():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    user = User.query.get(session["user_id"])
+
+    return render_template("profile.html", user=user)
+
+@app.route("/items")
+def items_page():
+    database_items = Item.query.all()
+
+    items = []
+    for item in database_items:
+        items.append({
+            "name": item.title,
+            "status": item.availability
+        })
+
+    return render_template("items.html", items=items)
+
+
 
 @app.route("/browse")
 def browse():
+    items = Item.query.all()
     return render_template("browse.html", items=items)
 
 
@@ -138,22 +162,31 @@ def item_detail(item_id):
 
     return render_template("item_detail.html", item=selected_item)
 
+@app.route("/add_item", methods=["GET", "POST"])
+def add_item():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
 
-@app.route("/create-item", methods=["GET", "POST"])
-def create_item():
     if request.method == "POST":
-        new_item = {
-            "id": len(items) + 1,
-            "title": request.form["title"],
-            "category": request.form["category"],
-            "description": request.form["description"],
-            "status": "available"
-        }
+        name = request.form["name"]
+        description = request.form["description"]
+        category = request.form["category"]
 
-        items.append(new_item)
-        return redirect(url_for("browse"))
+        new_item = Item(
+            user_id=session["user_id"],
+            title=name,
+            description=description,
+            category=category,
+            availability="available"
+        )
 
-    return render_template("create_item.html")
+        db.session.add(new_item)
+        db.session.commit()
+
+        return redirect(url_for("items_page"))
+
+    return render_template("add_item.html")
+
 
 @app.route("/requests")
 def requests_page():

@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, session
+
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session, abort
 from werkzeug.security import generate_password_hash, check_password_hash
-from database.models import db, User, Item
+from database.models import db, User, Item, Request as BorrowRequest
 
 app = Flask(__name__)
 
@@ -9,40 +10,50 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///locallend.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+
 with app.app_context():
     db.create_all()
 
-items = [
-    {
-        "id": 1,
-        "title": "Bohrmaschine",
-        "category": "Werkzeug",
-        "description": "Für kleine Reparaturen und Umzüge",
-        "status": "available"
-    },
-    {
-        "id": 2,
-        "title": "Beamer",
-        "category": "Technik",
-        "description": "Für Präsentationen oder Filmabende.",
-        "status": "available"
-    }
-]
+    existing_user = db.session.execute(db.select(User)).first()
+    
+    if existing_user is None:
+        user1 = User(
+        first_name="Anna",
+        last_name="Müller",
+        email="anna@example.com",
+        password=generate_password_hash("test123")
 
-requests = [
-    {
-        "id": 1,
-        "item": "Bohrmaschine",
-        "borrower": "Jean",
-        "status": "pending"
-    },
-    {
-        "id": 2,
-        "item": "Beamer",
-        "borrower": "Maryam",
-        "status": "accepted"
-    }
-]
+        )
+
+        user2 = User(
+        first_name="Max",
+        last_name="Soleil",
+        email="max@example.com",
+        password=generate_password_hash("test123")
+
+        )
+
+        db.session.add_all([user1,user2])
+        db.session.commit()
+
+        item1 = Item(
+        user_id= user1.user_id,
+        title="Bohrmachine",
+        category= "Werkzeug",
+        description= "Für kleine Reperaturen und Umzüge",
+        availability= "available"
+        )
+
+        item2 = Item(
+        user_id= user2.user_id,
+        title= "Beamer",
+        category="Technik",
+        description="Für Präsentationen oder Filmabende",
+        availability="available"
+        )
+
+        db.session.add_all([item1, item2])
+        db.session.commit()
 
 
 @app.route("/")
@@ -90,8 +101,8 @@ def register():
 
     return render_template("register.html")
 
-@app.route("/login", methods=["GET", "POST"])
 
+@app.route("/login", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
@@ -115,11 +126,8 @@ def login():
     return render_template("login.html")
 
 @app.route("/logout")
-
 def logout():
-
     session.clear()
-
     return redirect(url_for("home"))
 
 @app.route("/profile")
@@ -148,19 +156,20 @@ def items_page():
 
 @app.route("/browse")
 def browse():
-    items = Item.query.all()
+
+    items = db.session.execute(db.select(Item)).scalars().all()
     return render_template("browse.html", items=items)
 
 
 @app.route("/item/<int:item_id>")
 def item_detail(item_id):
-    selected_item = None
+    selected_item = db.session.get(Item, item_id)
 
-    for item in items:
-        if item["id"] == item_id:
-            selected_item = item
-
+    if selected_item is None:
+        abort(404)
+   
     return render_template("item_detail.html", item=selected_item)
+
 
 @app.route("/add_item", methods=["GET", "POST"])
 def add_item():
@@ -190,30 +199,59 @@ def add_item():
 
 @app.route("/requests")
 def requests_page():
+    requests = db.session.execute(db.select(BorrowRequest)).scalars().all
     return render_template("requests.html", requests=requests)
 
 
 @app.route("/requests/<int:request_id>/accept")
 def accept_request(request_id):
-    for request_item in requests:
-        if request_item["id"] == request_id:
-            request_item["status"] = "accepted"
+   
+    request_item = db.session.get(BorrowRequest, request_id)
+
+    if request_item is None:
+        abort(404)
+
+    request_item.status = "accepted"
+
+    db.session.commit()
 
     return redirect(url_for("requests_page"))
 
 
 @app.route("/requests/<int:request_id>/reject")
 def reject_request(request_id):
-    for request_item in requests:
-        if request_item["id"] == request_id:
-            request_item["status"] = "rejected"
+    
+    request_item = db.session.get(BorrowRequest, request_id)
+
+    if request_item is None:
+        abort(404)
+
+    request_item.status = "rejected"
+    db.session.commit()
 
     return redirect(url_for("requests_page"))
 
 
 @app.route("/api/items")
 def api_items():
-    return jsonify(items)
+    items = db.session.execute(db.select(Item)).scalars().all()
 
-if __name__ == "__main__":
+    items_data = []
+
+    for item in items:
+        items_data.append({
+            "id": item.item_id,
+            "title": item.title,
+            "category": item.category,
+            "description": item.description,
+            "status": item.availability
+        })
+
+    return jsonify(items_data)
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html"), 404
+
+
+if __name__== "__main__":
     app.run(debug=True)

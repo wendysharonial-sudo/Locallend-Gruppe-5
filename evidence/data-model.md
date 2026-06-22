@@ -180,5 +180,5 @@ Dieses Modell unterstützt den vollständigen Happy Path von LocalLend:
 
 Das folgende Diagramm zeigt die Beziehungen zwischen den Tabellen `users`, `items` und `requests`.
 
-![ER-Diagramm](er-diagramm.png)
+![ER-Diagramm](ER-Diagramm.png)
 

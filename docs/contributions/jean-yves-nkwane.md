@@ -4,21 +4,11 @@ parent: Individual Contributions
 nav_order: 2
 ---
 
-{: .no_toc }
 # Jean Yves Nkwane
-
-<details open markdown="block">
-<summary>Inhaltsverzeichnis</summary>
-{: .text-delta }
-
-- TOC
-{:toc}
-</details>
 
 ## Meta-Goals
 
 ### Target grade
-...
 
 1.0
 

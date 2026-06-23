@@ -9,14 +9,16 @@ nav_order: 2
 
 <details open markdown="block">
 <summary>Inhaltsverzeichnis</summary>
-+ ToC
-{: toc }
 {: .text-delta }
+
+- TOC
+{:toc}
 </details>
 
 ## Meta-Goals
 
 ### Target grade
+...
 
 1.0
 

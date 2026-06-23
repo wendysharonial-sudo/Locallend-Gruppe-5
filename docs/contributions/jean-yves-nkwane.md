@@ -69,8 +69,4 @@ Mir ist weiterhin bewusst, dass ich, sofern ich zur Erstellung dieser Arbeit KI-
 
 ## AI Directory
 
-| # | AI Tool | Purpose of Use | Affected Sections (Code + Docs) | Remarks, Procedure, Prompts |
-| :-- | :-- | :-- | :-- | :-- |
-| 01 | ChatGPT | Um neue Konzepte und Technologien zu lernen (Bootstrap 5). | `style.css`, `base.html`, Landingpage | Ich habe den Chat genutzt, um zu verstehen, wie das Bootstrap-Grid funktioniert. Ich verstehe das Ergebnis vollständig und kann den Code erklären. |
-| 02 | ChatGPT | Zum Brainstorming für die Projektstruktur (Jinja2). | Alle `.html` Templates | Ich habe als Assistenz gefragt, wie man Flask-Templates aufbaut. Die Erklärungen haben mir beim Start geholfen. Ich trage die volle Verantwortung für meine Implementierung. |
-| 03 | ChatGPT / Copilot | Für kleine Code-Snippets und Erklärungen (CSS). | `style.css` | Ich habe mir kleine Beispiele (Snippets) für CSS-Hover-Effekte generieren lassen. Ich habe den Code verstanden, ihn selbst angepasst und in mein Projekt integriert. |
+Ich habe KI-Tools in diesem Projekt in einem ganz klar definierten Rahmen als reine Assistenz genutzt. ChatGPT diente mir dabei vor allem als Lernhilfe und technischer Berater – zum Beispiel, um beim Brainstorming auf neue Ansätze zu kommen, Fehlermeldungen schneller einzuordnen oder mir spezifische Frontend-Konzepte erklären zu lassen. In meiner Entwicklungsumgebung habe ich zudem die Code-Vervollständigung genutzt, allerdings nur, um mir bei wiederkehrendem Standardcode oder sehr kleinen Snippets etwas Tipparbeit zu sparen. Mir war dabei stets wichtig, dass die KI mir das Denken nicht abnimmt.

@@ -30,12 +30,26 @@
                     <li class="nav-item">
                         <a class="nav-link fw-semibold" href="/browse">Durchsuchen</a>
                     </li>
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-outline-primary btn-custom w-100 mb-2 mb-lg-0" href="/login">Anmelden</a>
-                    </li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-primary btn-custom w-100" href="/register">Registrieren</a>
-                    </li>
+
+                    {% if session.get("user_id") %}
+                        <!-- Nutzer ist angemeldet -->
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-outline-primary btn-custom w-100 mb-2 mb-lg-0" href="/profile">
+                                <i class="bi bi-person"></i> Profil
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-primary btn-custom w-100" href="/logout">Abmelden</a>
+                        </li>
+                    {% else %}
+                        <!-- Nutzer ist nicht angemeldet -->
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-outline-primary btn-custom w-100 mb-2 mb-lg-0" href="/login">Anmelden</a>
+                        </li>
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-primary btn-custom w-100" href="/register">Registrieren</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

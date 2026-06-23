@@ -172,3 +172,5 @@ Unterstützung beim Brainstorming, Strukturierung der Value Proposition sowie be
 
 **Verantwortung:**  
 Alle Inhalte wurden von uns überprüft und angepasst. Es wurden keine Agentic-AI-Tools verwendet, die eigenständig Code oder Repository-Strukturen erzeugen.
+## Aditional Documentation
+- [Sources](sources.md)

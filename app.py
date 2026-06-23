@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from database.models import db, User, Item, Request as BorrowRequest
@@ -66,17 +65,15 @@ def register():
     if request.method == "POST":
 
         first_name = request.form["first_name"]
-
         last_name = request.form["last_name"]
-
         email = request.form["email"]
-
         password = request.form["password"]
-
-        existing_user = User.query.filter_by(email=email).first()
+        
+        existing_user = db.session.execute(
+            db.select(User).filter_by(email=email)
+        ).scalar()
 
         if existing_user:
-
             return "Email already registered."
 
         hashed_password = generate_password_hash(password)
@@ -84,17 +81,13 @@ def register():
         new_user = User(
 
             first_name=first_name,
-
             last_name=last_name,
-
             email=email,
-
             password=hashed_password
 
         )
 
         db.session.add(new_user)
-
         db.session.commit()
 
         return redirect(url_for("login"))
@@ -111,14 +104,13 @@ def login():
 
         password = request.form["password"]
 
-        user = User.query.filter_by(email=email).first()
+        user = db.session.execute(
+            db.select(User).filter_by(email=email)
+        ).scalar()
 
         if user and check_password_hash(user.password, password):
-
             session["user_id"] = user.user_id
-
             session["user_name"] = user.first_name
-
             return redirect(url_for("home"))
 
         return "Login failed."
@@ -135,13 +127,17 @@ def profile():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    user = User.query.get(session["user_id"])
+    user = db.session.get(User, session["user_id"])
 
-    return render_template("profile.html", user=user)
+    my_items = db.session.execute(
+        db.select(Item).filter_by(user_id=session["user_id"])
+    ).scalars().all()
+
+    return render_template("profile.html", user=user, my_items=my_items)
 
 @app.route("/items")
 def items_page():
-    database_items = Item.query.all()
+    database_items = db.session.execute(db.select(Item)).scalars().all()
 
     items = []
     for item in database_items:
@@ -177,7 +173,7 @@ def add_item():
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        name = request.form["name"]
+        name = request.form.get("name") or request.form.get("title")
         description = request.form["description"]
         category = request.form["category"]
 
@@ -199,20 +195,32 @@ def add_item():
 
 @app.route("/requests")
 def requests_page():
-    requests = db.session.execute(db.select(BorrowRequest)).scalars().all
+    database_requests = db.session.execute(db.select(BorrowRequest)).scalars().all()
+
+    requests = []
+    
+    for request_item in database_requests:
+
+        item = db.session.get(Item, request_item.item_id)
+        borrower = db.session.get(User, request_item.borrower_id)
+
+        requests.append({
+            "id": request_item.request_id,
+            "item": item.title if item else "Unknown item",
+            "borrower": borrower.first_name if borrower else "Unknown user",
+            "status": request_item.status
+        })
     return render_template("requests.html", requests=requests)
 
 
 @app.route("/requests/<int:request_id>/accept")
 def accept_request(request_id):
-   
     request_item = db.session.get(BorrowRequest, request_id)
 
     if request_item is None:
         abort(404)
 
     request_item.status = "accepted"
-
     db.session.commit()
 
     return redirect(url_for("requests_page"))
@@ -220,7 +228,6 @@ def accept_request(request_id):
 
 @app.route("/requests/<int:request_id>/reject")
 def reject_request(request_id):
-    
     request_item = db.session.get(BorrowRequest, request_id)
 
     if request_item is None:
@@ -248,6 +255,59 @@ def api_items():
         })
 
     return jsonify(items_data)
+
+@app.route("/api/requests")
+def api_requests():
+    database_requests = db.session.execute(db.select(BorrowRequest)).scalars().all()
+
+    requests_data = []
+
+    for requests_item in database_requests:
+        item = db.session.get(Item, request_item.item_id)
+        borrower = db.session.get(User,request_item.borrower_id)
+
+        requests_data.append({
+
+            "id": request_item.request_id,
+            "item": item.title if item else "Unknown item",
+            "borrower": borrower.first_name if borrower else "Unknown user",
+            "status": request_item.status
+
+        })
+
+    return jsonify({
+
+        "success": True,
+        "message": "Requests loaded successfully",
+        "data": requests_data
+
+    })
+
+@app.route("/api/status")
+def api_status():
+
+    return jsonify({
+
+        "success": True,
+        "message": "API is running",
+        "data": {
+
+            "api": "LocalLend API",
+            "version": "1.0",
+            "status": "running",
+            "available_endpoints": [
+
+                "/api/items",
+                "/api/requests",
+                "/api/status"
+
+            ]
+
+        }
+
+    })
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("404.html"), 404

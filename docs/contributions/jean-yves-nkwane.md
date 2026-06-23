@@ -67,8 +67,10 @@ Mir ist weiterhin bewusst, dass ich, sofern ich zur Erstellung dieser Arbeit KI-
 
 ## AI Directory
 
-| #   | AI Tool | Purpose of Use | Affected Sections (Code + Docs) | Remarks, Procedure, Prompts |
-| :-- | :--     | :--            | :--                             | :--                         |
-| 01  | ChatGPT | Verständnisfragen zu Bootstrap 5 Grid-System und Layout-Klassen | `style.css`, `base.html`, Landingpage | Ich habe nach Best Practices gefragt, um Container responsiv auszurichten (z.B. für die Hero-Section). Den Code habe ich daraufhin manuell konzipiert. |
-| 02  | ChatGPT | Erklärung von Jinja2 Template-Vererbung (`extends`, `block`) | Alle `.html` Templates | Gefragt: "Wie strukturiert man in Flask am besten ein modulares Base-Template?". Das gelieferte Konzept habe ich selbst in die Architektur übertragen. |
-| 03  | ChatGPT | Hilfe beim Verständnis von CSS-Transitions und Custom Styles | `style.css` | Gefragt nach Beispielen für sanfte Hover-Effekte auf Web-Elementen. Die exakten Werte und Farbpaletten wurden von mir manuell ins Design integriert. |
+## AI Directory
+
+| # | AI Tool | Purpose of Use | Affected Sections (Code + Docs) | Remarks, Procedure, Prompts |
+| :-- | :-- | :-- | :-- | :-- |
+| 01 | ChatGPT | Um neue Konzepte und Technologien zu lernen (Bootstrap 5). | `style.css`, `base.html`, Landingpage | Ich habe den Chat genutzt, um zu verstehen, wie das Bootstrap-Grid funktioniert. Ich verstehe das Ergebnis vollständig und kann den Code erklären. |
+| 02 | ChatGPT | Zum Brainstorming für die Projektstruktur (Jinja2). | Alle `.html` Templates | Ich habe als Assistenz gefragt, wie man Flask-Templates aufbaut. Die Erklärungen haben mir beim Start geholfen. Ich trage die volle Verantwortung für meine Implementierung. |
+| 03 | ChatGPT / Copilot | Für kleine Code-Snippets und Erklärungen (CSS). | `style.css` | Ich habe mir kleine Beispiele (Snippets) für CSS-Hover-Effekte generieren lassen. Ich habe den Code verstanden, ihn selbst angepasst und in mein Projekt integriert. |

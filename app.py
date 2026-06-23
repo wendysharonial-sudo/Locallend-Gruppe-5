@@ -1,78 +1,340 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session, abort, flash
+from werkzeug.security import generate_password_hash, check_password_hash
+from database.models import db, User, Item, Request as BorrowRequest
 
 app = Flask(__name__)
 
-# --- BESTEHENDE ROUTEN ---
+app.secret_key = "locallend-security-key"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///locallend.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+
+    existing_user = db.session.execute(db.select(User)).first()
+    
+    if existing_user is None:
+        user1 = User(
+            first_name="Anna",
+            last_name="Müller",
+            email="anna@example.com",
+            password=generate_password_hash("test123")
+        )
+
+        user2 = User(
+            first_name="Max",
+            last_name="Soleil",
+            email="max@example.com",
+            password=generate_password_hash("test123")
+        )
+
+        db.session.add_all([user1, user2])
+        db.session.commit()
+
+    existing_item = db.session.execute(db.select(Item)).first()  
+    
+    if existing_item is None:
+        user = db.session.execute(db.select(User)).scalar()
+
+        item1 = Item(
+            user_id=user.user_id,
+            title="Bohrmaschine",
+            category="Werkzeug",
+            description="Für kleine Reperaturen und Umzüge",
+            availability="available"
+        )
+
+        item2 = Item(
+            user_id=user.user_id,
+            title="Beamer",
+            category="Technik",
+            description="Für Präsentationen oder Filmabende",
+            availability="available"
+        )
+
+        db.session.add_all([item1, item2])
+        db.session.commit()
+
+
+# ============================================
+# SEITEN-ROUTEN (HTML Templates)
+# ============================================
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
-@app.route("/api/items")
-def api_items():
-    items = [
-        {"id": 1, "name": "Bohrmaschine", "status": "available"},
-        {"id": 2, "name": "Leiter", "status": "available"}
-    ]
-    return jsonify(items)
-
-# --- NEUE ROUTEN FÜR DIE TEMPLATES ---
-
-@app.route("/login")
-def login():
-    return render_template("login.html")
-
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
+    if request.method == "POST":
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        
+        existing_user = db.session.execute(
+            db.select(User).filter_by(email=email)
+        ).scalar()
+
+        if existing_user:
+            flash("Diese E-Mail ist bereits registriert.", "danger")
+            return redirect(url_for("register"))
+
+        hashed_password = generate_password_hash(password)
+
+        new_user = User(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=hashed_password
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash("Registrierung erfolgreich! Bitte melde dich an.", "success")
+        return redirect(url_for("login"))
+
     return render_template("register.html")
 
-@app.route("/browse")
-def browse():
-    # Temporäre leere Liste, um Fehler in der Jinja-Schleife zu vermeiden
-    return render_template("items.html", items=[])
 
-@app.route("/add_item")
-def add_item():
-    return render_template("add_item.html")
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+
+        user = db.session.execute(
+            db.select(User).filter_by(email=email)
+        ).scalar()
+
+        if user and check_password_hash(user.password, password):
+            session["user_id"] = user.user_id
+            session["user_name"] = user.first_name
+            flash(f"Willkommen zurück, {user.first_name}!", "success")
+            return redirect(url_for("home"))
+
+        flash("Login fehlgeschlagen. Bitte überprüfe deine Daten.", "danger")
+        return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("Du wurdest erfolgreich abgemeldet.", "success")
+    return redirect(url_for("home"))
 
 @app.route("/profile")
 def profile():
-    # Temporärer Dummy-Benutzer für das Profil-Template
-    fake_user = {"first_name": "Yves", "last_name": "Nkwane", "email": "yves@beispiel.de"}
-    return render_template("profile.html", user=fake_user, items=[])
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    user = db.session.get(User, session["user_id"])
+
+    my_items = db.session.execute(
+        db.select(Item).filter_by(user_id=session["user_id"])
+    ).scalars().all()
+
+    # WICHTIG: Dein profile.html erwartet "items", nicht "my_items"
+    return render_template("profile.html", user=user, items=my_items)
+
+
+@app.route("/browse")
+def browse():
+    items = db.session.execute(db.select(Item)).scalars().all()
+    return render_template("items.html", items=items)
+
 
 @app.route("/item/<int:item_id>")
 def item_detail(item_id):
-    # Temporäres Dummy-Objekt für das Template
-    fake_item = {
-        "id": item_id,
-        "name": "Bohrmaschine",
-        "category": "Werkzeuge",
-        "condition": "Gut",
-        "description": "Eine hochwertige Bosch Schlagbohrmaschine, ideal für Heimwerkerprojekte.",
-        "status": "available"
-    }
-    fake_owner = {"first_name": "Max", "last_name": "Mustermann"}
-    return render_template("item_detail.html", item=fake_item, owner=fake_owner)
+    selected_item = db.session.get(Item, item_id)
+
+    if selected_item is None:
+        abort(404)
+
+    # Besitzer des Objekts finden
+    owner = db.session.get(User, selected_item.user_id)
+   
+    return render_template("item_detail.html", item=selected_item, owner=owner)
+
+
+@app.route("/add_item", methods=["GET", "POST"])
+def add_item():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        name = request.form.get("name") or request.form.get("title")
+        description = request.form["description"]
+        category = request.form["category"]
+
+        new_item = Item(
+            user_id=session["user_id"],
+            title=name,
+            description=description,
+            category=category,
+            availability="available"
+        )
+
+        db.session.add(new_item)
+        db.session.commit()
+
+        flash("Objekt erfolgreich hinzugefügt!", "success")
+        return redirect(url_for("browse"))
+
+    return render_template("add_item.html")
+
+
+@app.route("/edit_item/<int:item_id>", methods=["GET", "POST"])
+def edit_item(item_id):
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    selected_item = db.session.get(Item, item_id)
+
+    if selected_item is None:
+        abort(404)
+
+    if request.method == "POST":
+        selected_item.title = request.form.get("name", selected_item.title)
+        selected_item.description = request.form.get("description", selected_item.description)
+        selected_item.category = request.form.get("category", selected_item.category)
+
+        # Status-Switch (checkbox)
+        if request.form.get("status"):
+            selected_item.availability = "available"
+        else:
+            selected_item.availability = "unavailable"
+
+        db.session.commit()
+
+        flash("Objekt erfolgreich aktualisiert!", "success")
+        return redirect(url_for("profile"))
+
+    return render_template("edit_item.html", item=selected_item)
+
 
 @app.route("/requests")
 def requests_page():
-    # Temporäre Dummy-Anfragen für das Template
-    fake_requests = [
-        {"id": 1, "item": "Bohrmaschine", "borrower": "Anna Schmidt", "status": "pending"},
-        {"id": 2, "item": "Leiter", "borrower": "Tom Weber", "status": "accepted"}
-    ]
-    return render_template("requests.html", requests=fake_requests)
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    database_requests = db.session.execute(db.select(BorrowRequest)).scalars().all()
+
+    requests = []
+    
+    for request_item in database_requests:
+        item = db.session.get(Item, request_item.item_id)
+        borrower = db.session.get(User, request_item.borrower_id)
+
+        requests.append({
+            "id": request_item.request_id,
+            "item": item.title if item else "Unbekannt",
+            "borrower": borrower.first_name if borrower else "Unbekannt",
+            "status": request_item.status
+        })
+    return render_template("requests.html", requests=requests)
+
 
 @app.route("/requests/<int:request_id>/accept")
 def accept_request(request_id):
-    # TODO: Alice muss hier die echte Logik implementieren
-    return "Anfrage akzeptiert! (Platzhalter)"
+    request_item = db.session.get(BorrowRequest, request_id)
+
+    if request_item is None:
+        abort(404)
+
+    request_item.status = "accepted"
+    db.session.commit()
+
+    flash("Anfrage akzeptiert!", "success")
+    return redirect(url_for("requests_page"))
+
 
 @app.route("/requests/<int:request_id>/reject")
 def reject_request(request_id):
-    # TODO: Alice muss hier die echte Logik implementieren
-    return "Anfrage abgelehnt! (Platzhalter)"
+    request_item = db.session.get(BorrowRequest, request_id)
 
-if __name__ == "__main__":
+    if request_item is None:
+        abort(404)
+
+    request_item.status = "rejected"
+    db.session.commit()
+
+    flash("Anfrage abgelehnt.", "warning")
+    return redirect(url_for("requests_page"))
+
+
+# ============================================
+# API-ROUTEN (JSON)
+# ============================================
+
+@app.route("/api/items")
+def api_items():
+    items = db.session.execute(db.select(Item)).scalars().all()
+
+    items_data = []
+    for item in items:
+        items_data.append({
+            "id": item.item_id,
+            "title": item.title,
+            "category": item.category,
+            "description": item.description,
+            "status": item.availability
+        })
+
+    return jsonify({
+        "success": True,
+        "message": "Items loaded successfully",
+        "data": items_data
+    })
+
+@app.route("/api/requests")
+def api_requests():
+    database_requests = db.session.execute(db.select(BorrowRequest)).scalars().all()
+
+    requests_data = []
+    for request_item in database_requests:
+        item = db.session.get(Item, request_item.item_id)
+        borrower = db.session.get(User, request_item.borrower_id)
+
+        requests_data.append({
+            "id": request_item.request_id,
+            "item": item.title if item else "Unknown item",
+            "borrower": borrower.first_name if borrower else "Unknown user",
+            "status": request_item.status
+        })
+
+    return jsonify({
+        "success": True,
+        "message": "Requests loaded successfully",
+        "data": requests_data
+    })
+
+@app.route("/api/status")
+def api_status():
+    return jsonify({
+        "success": True,
+        "message": "API is running",
+        "data": {
+            "api": "LocalLend API",
+            "version": "1.0",
+            "status": "running",
+            "available_endpoints": [
+                "/api/items",
+                "/api/requests",
+                "/api/status"
+            ]
+        }
+    })
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html"), 404
+
+
+if __name__== "__main__":
     app.run(debug=True)

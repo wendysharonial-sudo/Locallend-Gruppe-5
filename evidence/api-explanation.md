@@ -1,236 +1,220 @@
-# API Explanation
+API-Erklärung
 
-## Responsible
+Verantwortlich
 
-Maryam – API & Request System
+Maryam – API & Request-System
 
-## Purpose
+Zweck
 
-This document explains how the LocalLend API works, how JSON is used, and how the request workflow is implemented.
+Dieses Dokument erklärt die Funktionsweise der LocalLend-API, die Verwendung von JSON sowie den Ablauf des Anfrage- und Verleihsystems.
 
----
+⸻
 
-## What is an API?
+Was ist eine API?
 
-API stands for Application Programming Interface.
+API steht für Application Programming Interface (Programmierschnittstelle).
 
-An API allows different parts of an application to communicate with each other.
+Eine API ermöglicht die Kommunikation zwischen verschiedenen Teilen einer Anwendung.
 
-In the LocalLend project, the API provides data about items and lending requests.
+Im Projekt LocalLend stellt die API Informationen über Gegenstände und Ausleihanfragen bereit.
 
-Instead of returning a normal web page, the API returns JSON data.
+Anstatt eine normale Webseite zurückzugeben, liefert die API strukturierte Daten im JSON-Format.
 
----
+⸻
 
-## What is JSON?
+Was ist JSON?
 
-JSON stands for JavaScript Object Notation.
+JSON steht für JavaScript Object Notation.
 
-JSON is a structured format used to exchange data between the backend and the frontend.
+JSON ist ein standardisiertes Datenformat, das für den Datenaustausch zwischen Frontend und Backend verwendet wird.
 
-Example:
+Beispiel:
 
-```json
 {
   "id": 1,
   "name": "Bohrmaschine",
-  "status": "available"
+  "status": "verfügbar"
 }
-```
 
-The object contains information about an item.
+Dieses Objekt enthält Informationen über einen Gegenstand.
 
----
+⸻
 
-## Frontend and Backend
+Frontend und Backend
 
-The frontend is the part that the user sees and interacts with.
+Das Frontend ist der Teil der Anwendung, mit dem die Nutzer direkt interagieren.
 
-Examples:
+Beispiele:
 
-- Buttons
-- Forms
-- Pages
-- Navigation
+* Schaltflächen
+* Formulare
+* Webseiten
+* Navigation
 
-The backend works in the background.
+Das Backend arbeitet im Hintergrund und verarbeitet die Anwendungslogik.
 
-Examples:
+Beispiele:
 
-- Flask application
-- API endpoints
-- Data processing
-- Request management
+* Flask-Anwendung
+* API-Endpunkte
+* Datenverarbeitung
+* Verwaltung von Anfragen
 
-The frontend requests data from the backend.
+Das Frontend sendet Anfragen an das Backend.
 
-The backend processes the request and returns a JSON response.
+Das Backend verarbeitet diese Anfragen und liefert die entsprechenden Daten als JSON-Antwort zurück.
 
----
+⸻
 
-## How Data Flows Through the System
+Datenfluss im System
 
-The complete process works as follows:
+Der Datenfluss innerhalb von LocalLend erfolgt wie folgt:
 
-```text
-User
+Benutzer
 ↓
 Frontend
 ↓
-API Endpoint
+API-Endpunkt
 ↓
-Flask Backend
+Flask-Backend
 ↓
-JSON Response
+JSON-Antwort
 ↓
-Frontend displays the data
-```
+Anzeige im Frontend
 
-Example:
+Beispiel:
 
-1. The user opens the LocalLend website.
-2. The frontend requests data from an API endpoint.
-3. Flask receives the request.
-4. The corresponding function is executed.
-5. The data is converted into JSON.
-6. The JSON response is sent back.
-7. The frontend displays the information.
+1. Ein Nutzer öffnet die LocalLend-Webseite.
+2. Das Frontend sendet eine Anfrage an einen API-Endpunkt.
+3. Flask empfängt die Anfrage.
+4. Die entsprechende Funktion wird ausgeführt.
+5. Die Daten werden in JSON umgewandelt.
+6. Die JSON-Antwort wird zurückgesendet.
+7. Das Frontend zeigt die Informationen an.
 
----
+⸻
 
-## What jsonify() Does
+Die Funktion jsonify()
 
-The Flask function `jsonify()` converts Python data into a JSON response.
+Die Flask-Funktion jsonify() wandelt Python-Daten in eine JSON-Antwort um.
 
-Example:
+Beispiel:
 
-```python
 return jsonify({
     "success": True,
-    "message": "Items loaded successfully",
+    "message": "Gegenstände erfolgreich geladen",
     "data": items
 })
-```
 
-The response contains:
+Die Antwort enthält:
 
-- success
-- message
-- data
+* success
+* message
+* data
 
-This creates a standardized API response.
+Dadurch entsteht eine standardisierte und leicht verarbeitbare API-Antwort.
 
----
+⸻
 
-## Request Workflow
+Ablauf des Anfrage-Systems
 
-The request workflow describes how lending requests are processed.
+Der Anfrageprozess beschreibt die Verarbeitung von Ausleihanfragen innerhalb von LocalLend.
 
-### Step 1
+Schritt 1
 
-A borrower creates a request.
+Ein Nutzer erstellt eine Ausleihanfrage.
 
 Status:
 
-```text
 pending
-```
 
-### Step 2
+Schritt 2
 
-The lender reviews the request.
+Der Verleiher überprüft die Anfrage.
 
-### Step 3
+Schritt 3
 
-The lender accepts the request.
+Der Verleiher akzeptiert die Anfrage.
 
 Status:
 
-```text
 accepted
-```
 
-### Step 4
+Schritt 4
 
-The lender can also reject the request.
+Der Verleiher kann die Anfrage auch ablehnen.
 
 Status:
 
-```text
 rejected
-```
 
-### Step 5
+Schritt 5
 
-A request can be removed.
+Eine Anfrage kann gelöscht werden.
 
 Status:
 
-```text
 deleted
-```
 
----
+⸻
 
-## Status Values
+Verwendete Statuswerte
 
-| Status | Description |
-|----------|----------|
-| pending | Request created and waiting for a decision |
-| accepted | Request accepted |
-| rejected | Request rejected |
-| deleted | Request deleted |
-| available | Item available for borrowing |
+Status	Beschreibung
+pending	Anfrage wurde erstellt und wartet auf eine Entscheidung
+accepted	Anfrage wurde akzeptiert
+rejected	Anfrage wurde abgelehnt
+deleted	Anfrage wurde gelöscht
+available	Gegenstand ist verfügbar
 
----
+⸻
 
-## Implemented API Endpoints
+Implementierte API-Endpunkte
 
-| Endpoint | Purpose |
-|----------|----------|
-| /api/items | Returns available items |
-| /api/requests | Returns all requests |
-| /api/create_request | Creates a new request |
-| /api/accept_request | Accepts a request |
-| /api/reject_request | Rejects a request |
-| /api/delete_request | Deletes a request |
-| /api/status | Returns API information |
+Endpunkt	Zweck
+/api/items	Gibt verfügbare Gegenstände zurück
+/api/requests	Gibt alle Ausleihanfragen zurück
+/api/create_request	Erstellt eine neue Anfrage
+/api/accept_request	Akzeptiert eine Anfrage
+/api/reject_request	Lehnt eine Anfrage ab
+/api/delete_request	Löscht eine Anfrage
+/api/status	Liefert Informationen über die API
 
----
+⸻
 
-## Technologies Used
+Verwendete Technologien
 
-- Python
-- Flask
-- JSON
-- Git
-- GitHub
+* Python
+* Flask
+* JSON
+* Git
+* GitHub
 
----
+⸻
 
-## My Contribution
+Mein Beitrag
 
-As part of the API & Request System, I contributed the following:
+Im Bereich API & Request-System habe ich folgende Aufgaben übernommen:
 
-- Created API endpoints
-- Provided JSON responses
-- Implemented request management
-- Implemented request creation
-- Implemented request acceptance
-- Implemented request rejection
-- Implemented request deletion
-- Implemented status management
-- Tested API endpoints
-- Created API documentation
-- Documented the request workflow
-- Explained the API architecture and JSON usage
+* Entwicklung der API-Endpunkte
+* Bereitstellung von JSON-Antworten
+* Implementierung der Anfragenverwaltung
+* Implementierung der Anfrageerstellung
+* Implementierung der Annahme von Anfragen
+* Implementierung der Ablehnung von Anfragen
+* Implementierung der Löschung von Anfragen
+* Implementierung der Statusverwaltung
+* Testen der API-Endpunkte
+* Erstellung der API-Dokumentation
+* Dokumentation des Anfrageprozesses
+* Erklärung der API-Architektur und der JSON-Nutzung
 
----
+⸻
 
-## Conclusion
+Fazit
 
-The LocalLend API provides structured JSON data through multiple endpoints.
+Die LocalLend-API stellt strukturierte JSON-Daten über mehrere Endpunkte bereit.
 
-The API manages lending requests, status values, and item information.
+Sie verwaltet Gegenstände, Ausleihanfragen und Statuswerte und ermöglicht die Kommunikation zwischen Frontend und Backend.
 
-The implementation demonstrates how frontend and backend communicate using JSON and Flask.
+Die Implementierung demonstriert die Nutzung von Flask und JSON zur Entwicklung einer einfachen und übersichtlichen REST-ähnlichen API für das LocalLend-System.

@@ -150,24 +150,21 @@ Diese Erkenntnisse haben die Entwicklung von LocalLend direkt beeinflusst.
 
 ## Frage 1 – Bedarf an Werkzeugen und Geräten
 
-![Frage 1](images/survey-q1.png)
-
+![Frage 1](survey-q1.png)
 ## Frage 2 – Ausleihen statt Kaufen
 
-![Frage 2](images/survey-q2.png)
+![Frage 2](survey-q2.png)
 
 ## Frage 3 – Bereitschaft zum Verleihen
 
-![Frage 3](images/survey-q3.png)
+![Frage 3](survey-q3.png)
 
 ## Frage 4 – Bedeutung von Vertrauen
 
-![Frage 4](images/survey-q4.png)
-
+![Frage 4](survey-q4.png)
 ## Frage 5 – Probleme beim Verleihen und Ausleihen
 
-![Frage 5](images/survey-q5.png)
+![Frage 5](survey-q5.png)
 
 ## Frage 6 – Interesse an LocalLend
-
-![Frage 6](images/survey-6.png)
+![Frage 6](survey-q6.png)

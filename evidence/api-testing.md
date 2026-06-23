@@ -1,127 +1,152 @@
-API Testing Documentation
+# API-Testdokumentation
 
-Responsible
+## Verantwortlich
 
-Maryam – API & Request System
+**Maryam – API & Request-System**
 
-Purpose
+## Zweck
 
-The API endpoints were tested locally to verify that they return valid JSON responses and behave as expected.
+Die API-Endpunkte wurden lokal getestet, um sicherzustellen, dass sie gültige JSON-Antworten zurückgeben und die erwartete Funktionalität korrekt umsetzen.
 
-⸻
+---
 
-Tested Endpoints
+## Getestete API-Endpunkte
 
-/api/items
+### /api/items
 
-Method: GET
+**Methode:** GET
 
-Expected Result:
+**Erwartetes Ergebnis:**
 
-Returns all available items as JSON.
+Gibt alle verfügbaren Gegenstände als JSON-Daten zurück.
 
-Status: Passed
+**Status:** Erfolgreich getestet
 
-⸻
+---
 
-/api/requests
+### /api/requests
 
-Method: GET
+**Methode:** GET
 
-Expected Result:
+**Erwartetes Ergebnis:**
 
-Returns all lending requests and their current status.
+Gibt alle Ausleihanfragen inklusive ihres aktuellen Status zurück.
 
-Status: Passed
+**Status:** Erfolgreich getestet
 
-⸻
+---
 
-/api/create_request
+### /api/create_request
 
-Method: GET
+**Methode:** GET
 
-Expected Result:
+**Erwartetes Ergebnis:**
 
-Creates a new lending request with the status pending.
+Erstellt eine neue Ausleihanfrage mit dem Status `pending`.
 
-Status: Passed
+**Status:** Erfolgreich getestet
 
-⸻
+---
 
-/api/accept_request
+### /api/accept_request
 
-Method: GET
+**Methode:** GET
 
-Expected Result:
+**Erwartetes Ergebnis:**
 
-Changes the request status to accepted.
+Ändert den Status einer Anfrage auf `accepted`.
 
-Status: Passed
+**Status:** Erfolgreich getestet
 
-⸻
+---
 
-/api/reject_request
+### /api/reject_request
 
-Method: GET
+**Methode:** GET
 
-Expected Result:
+**Erwartetes Ergebnis:**
 
-Changes the request status to rejected.
+Ändert den Status einer Anfrage auf `rejected`.
 
-Status: Passed
+**Status:** Erfolgreich getestet
 
-⸻
+---
 
-/api/delete_request
+### /api/delete_request
 
-Method: GET
+**Methode:** GET
 
-Expected Result:
+**Erwartetes Ergebnis:**
 
-Changes the request status to deleted.
+Ändert den Status einer Anfrage auf `deleted`.
 
-Status: Passed
+**Status:** Erfolgreich getestet
 
-⸻
+---
 
-/api/status
+### /api/status
 
-Method: GET
+**Methode:** GET
 
-Expected Result:
+**Erwartetes Ergebnis:**
 
-Returns information about the API and all available endpoints.
+Liefert Informationen über die API sowie eine Übersicht aller verfügbaren Endpunkte.
 
-Status: Passed
+**Status:** Erfolgreich getestet
 
-⸻
+---
 
-Test Results
+## Testergebnisse
 
-All API endpoints returned valid JSON responses.
+Alle implementierten API-Endpunkte lieferten gültige JSON-Antworten zurück.
 
-The response structure was consistent across all endpoints and included:
+Die Antwortstruktur war bei allen Endpunkten konsistent aufgebaut und enthielt die folgenden Felder:
 
-* success
-* message
-* data
+- success
+- message
+- data
 
-The status values pending, accepted, rejected, deleted, and available were returned correctly.
+Die Statuswerte
 
-⸻
+- pending
+- accepted
+- rejected
+- deleted
+- available
 
-Technologies Used
+wurden in allen Tests korrekt verarbeitet und zurückgegeben.
 
-* Python
-* Flask
-* JSON
-* Browser Testing
-* Git
-* GitHub
+---
 
-⸻
+## Verwendete Technologien
 
-Conclusion
+- Python
+- Flask
+- JSON
+- Browser-Tests
+- Git
+- GitHub
 
-The API was successfully tested and all implemented endpoints behaved as expected. The request workflow and status management were verified through manual testing in the browser.
+---
 
+## Testnachweise
+
+### API-Endpunkt Tests
+
+Fügen Sie hier Screenshots der getesteten API-Endpunkte ein.
+
+Beispiel:
+
+![API-Test 1](images/api-test-1.png)
+
+![API-Test 2](images/api-test-2.png)
+
+---
+
+## Fazit
+
+Die LocalLend-API wurde erfolgreich getestet und alle implementierten Endpunkte funktionierten wie erwartet.
+
+Sowohl der Anfrageprozess als auch die Verwaltung der verschiedenen Statuswerte konnten durch manuelle Tests im Browser erfolgreich überprüft werden.
+
+Die Testergebnisse bestätigen die korrekte Kommunikation zwischen Frontend und Backend sowie die zuverlässige Bereitstellung von JSON-Daten über die API.

@@ -35,16 +35,21 @@ with app.app_context():
         db.session.add_all([user1,user2])
         db.session.commit()
 
+    existing_item = db.session.execute(db.select(Item)).first()  
+    
+    if existing_item is None:
+        user = db.session.execute(db.select(User)).scalar()
+
         item1 = Item(
-        user_id= user1.user_id,
-        title="Bohrmachine",
+        user_id= user.user_id,
+        title="Bohrmaschine",
         category= "Werkzeug",
         description= "Für kleine Reperaturen und Umzüge",
         availability= "available"
         )
 
         item2 = Item(
-        user_id= user2.user_id,
+        user_id= user.user_id,
         title= "Beamer",
         category="Technik",
         description="Für Präsentationen oder Filmabende",
@@ -254,7 +259,11 @@ def api_items():
             "status": item.availability
         })
 
-    return jsonify(items_data)
+    return jsonify({
+        "success":True,
+        "message": "Items loaded successfully",
+        "data": items_data
+    })
 
 @app.route("/api/requests")
 def api_requests():
@@ -262,7 +271,7 @@ def api_requests():
 
     requests_data = []
 
-    for requests_item in database_requests:
+    for request_item in database_requests:
         item = db.session.get(Item, request_item.item_id)
         borrower = db.session.get(User,request_item.borrower_id)
 

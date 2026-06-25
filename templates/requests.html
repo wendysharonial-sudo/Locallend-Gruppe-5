@@ -1,23 +1,71 @@
-<h1>Request Overview</h1>
+{% extends "base.html" %}
 
-{% for request in requests %}
+{% block title %}Anfragen - LocalLend{% endblock %}
 
-<h2>{{ request.item }}</h2>
+{% block content %}
+<div class="container mt-4 pt-3">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+        <h2 class="fw-bold m-0"><i class="bi bi-inbox text-primary me-2"></i>Meine Anfragen</h2>
+        <a href="/profile" class="btn btn-outline-secondary btn-custom">
+            <i class="bi bi-arrow-left"></i> Zurück zum Profil
+        </a>
+    </div>
 
-<p>Borrower: {{ request.borrower }}</p>
+    {% if requests %}
+        <div class="row row-cols-1 g-3">
+            {% for req in requests %}
+            <div class="col">
+                <div class="custom-card p-4">
+                    <div class="row align-items-center">
+                        <!-- Infos de la demande -->
+                        <div class="col-md-6">
+                            <h5 class="fw-bold mb-1">{{ req.item }}</h5>
+                            <p class="text-secondary mb-0">
+                                <i class="bi bi-person me-1"></i> Anfrage von: <strong>{{ req.borrower }}</strong>
+                            </p>
+                        </div>
 
-<p>Status: {{ request.status }}</p>
+                        <!-- Status -->
+                        <div class="col-md-3 text-md-center my-2 my-md-0">
+                            {% if req.status == 'pending' %}
+                                <span class="badge bg-warning-subtle text-warning px-3 py-2 rounded-pill">
+                                    <i class="bi bi-clock"></i> Ausstehend
+                                </span>
+                            {% elif req.status == 'accepted' %}
+                                <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+                                    <i class="bi bi-check-circle"></i> Akzeptiert
+                                </span>
+                            {% elif req.status == 'rejected' %}
+                                <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">
+                                    <i class="bi bi-x-circle"></i> Abgelehnt
+                                </span>
+                            {% endif %}
+                        </div>
 
-<a href="/requests/{{ request.id }}/accept">
-    accept
-    </a>
-</p>
-<p>
-
-<a href="/requests/{{ request.id}}/reject">
-    reject
-</a>
-</p>
-<hr>
-
-{% endfor %}
+                        <!-- Boutons d'action -->
+                        <div class="col-md-3 text-md-end">
+                            {% if req.status == 'pending' %}
+                                <a href="/requests/{{ req.id }}/accept" class="btn btn-sm btn-success btn-custom me-1">
+                                    <i class="bi bi-check-lg"></i> Akzeptieren
+                                </a>
+                                <a href="/requests/{{ req.id }}/reject" class="btn btn-sm btn-outline-danger btn-custom">
+                                    <i class="bi bi-x-lg"></i> Ablehnen
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Message si aucune demande -->
+        <div class="custom-card text-center py-5">
+            <div class="text-secondary mb-3"><i class="bi bi-inbox display-1"></i></div>
+            <h4>Keine Anfragen vorhanden</h4>
+            <p class="text-secondary">Du hast noch keine Ausleih-Anfragen erhalten.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

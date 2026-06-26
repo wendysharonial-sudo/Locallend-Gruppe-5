@@ -60,15 +60,12 @@ Mir ist weiterhin bewusst, dass ich, sofern ich zur Erstellung dieser Arbeit KI-
 
 ## Top-3 Contributions
 
-| \# | My contribution | Why I am proud of it | Which challenge I overcame |
 
-| :-- | :-- | :-- | :-- |
-
-| 1 | Implementierung von Registrierung, Login, Logout und Session-Verwaltung im Backend | Dieser Beitrag ist zentral, weil LocalLend ohne Benutzerverwaltung keinen sinnvollen Nutzerfluss hat. Durch Registrierung und Login können Nutzerkonten erstellt und angemeldete Nutzer über Sessions erkannt werden. | Ich musste verstehen, wie Flask GET- und POST-Anfragen verarbeitet, wie `request.form` funktioniert, wie Passwörter sicher gehasht werden und wie Sessions mit `session["user_id"]` und `session.clear()` verwaltet werden. |
-
+| # | My contribution | Why I am proud of it | Which challenge I overcame |
+| --- | --- | --- | --- |
+| 1 | Implementierung von Registrierung, Login, Logout und Session-Verwaltung im Backend | Dieser Beitrag ist zentral, weil LocalLend ohne Benutzerverwaltung keinen sinnvollen Nutzerfluss hätte. Durch Registrierung und Login können Nutzerkonten erstellt und angemeldete Nutzer über Sessions erkannt werden. | Ich musste verstehen, wie Flask GET- und POST-Anfragen verarbeitet, wie `request.form` funktioniert, wie Passwörter sicher gehasht werden und wie Sessions mit `session["user_id"]` und `session.clear()` verwaltet werden. |
 | 2 | Verbindung der Flask-Routen mit Datenbank und Templates, insbesondere für Profil, Browse, Items und Add-Item | Dadurch wurden Yves' HTML-Seiten und Wendys Datenbankmodell mit meinem Backend verbunden. Die App zeigt nicht nur statische Seiten, sondern arbeitet mit echten Datenbankobjekten. | Ich musste unterschiedliche Feldnamen zwischen HTML, Datenbankmodell und Backend zusammenführen, zum Beispiel `name` aus dem Formular mit `title` im Item-Modell, sowie alte Dummy-Listen durch Datenbankabfragen ersetzen. |
-
-| 3 | Integration der Teamänderungen über Git und Bereinigung von Merge-Konflikten | Ich bin darauf stolz, weil ich nicht nur einzelne Funktionen gebaut habe, sondern aktiv geholfen habe, die Arbeiten von Yves, Wendy und Maryam in einen lauffähigen gemeinsamen Stand zu bringen. | Ich musste mehrere Git-Probleme lösen, darunter Pull/Rebase-Probleme, Konflikte in `.gitignore` und `app.py`, sowie die saubere Zusammenführung von Frontend-, Datenbank- und API-Änderungen. |
+| 3 | Integration der Teamänderungen über Git und Bereinigung von Merge-Konflikten | Ich bin darauf stolz, weil ich nicht nur einzelne Funktionen entwickelt habe, sondern aktiv geholfen habe, die Arbeiten von Yves, Wendy und Maryam in einen gemeinsamen, lauffähigen Stand zu bringen. | Ich musste mehrere Git-Probleme lösen, darunter Pull-/Rebase-Probleme, Konflikte in `.gitignore` und `app.py` sowie die saubere Zusammenführung von Frontend-, Datenbank- und API-Änderungen. |
 
 ## Design Decisions that I led
 

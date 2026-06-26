@@ -24,12 +24,7 @@ Mein Ziel für dieses Modul ist die Note **1,3 oder besser**.
 
 ### Personal goals
 
-- Meine Kenntnisse in Datenbankmodellierung vertiefen
-- Den praktischen Umgang mit Flask und SQLAlchemy erlernen
-- Erfahrungen mit Git und kollaborativer Softwareentwicklung sammeln 
-- Backend-Entwicklung in einem realen Projekt anwenden 
-- Technische Entscheidungen dokumentieren und begründen können
-
+Mein persönliches Ziel in diesem Modul ist es, das Projekt erfolgreich abzuschließen und eine sehr gute Leistung zu erzielen. Gleichzeitig möchte ich meine Kenntnisse in der Webentwicklung und Datenbankmodellierung erweitern sowie den praktischen Umgang mit Flask, SQLAlchemy und Git vertiefen. Außerdem ist mir eine gute und zuverlässige Zusammenarbeit im Team wichtig, damit wir gemeinsam ein erfolgreiches Projektergebnis erreichen und voneinander lernen können.
 ---
 
 ## Eidesstattische Erklärung
@@ -44,7 +39,12 @@ Diese Arbeit habe ich selbständig und eigenhändig erstellt. Die den benutzten 
 
 ## Top-3 Contributions
 
-| # | My contribution | Why I am proud of it | Which challenge I overcame | | --- | --- | --- | --- | | 1 | Entwicklung des Datenmodells mit den Tabellen `users`, `items` und `requests` | Das Datenmodell bildet die Grundlage der gesamten Anwendung und verbindet alle zentralen Funktionen von LocalLend. | Ich musste Beziehungen zwischen Tabellen korrekt modellieren und Foreign Keys sinnvoll einsetzen. | | 2 | Integration von SQLAlchemy und Aufbau der Datenbankanbindung | Dadurch konnten Datenbank und Anwendung sauber miteinander verbunden werden. | Die Einarbeitung in SQLAlchemy und die Anpassung an die aktuelle SQLAlchemy-Syntax waren zunächst herausfordernd. | 3 | Erstellung und Pflege der technischen Dokumentation (Data Model, ER-Diagramm, Design Decisions und Team Evaluation) | Eine gute Dokumentation macht die technische Architektur nachvollziehbar und erleichtert die Zusammenarbeit im Team. | Technische Inhalte mussten verständlich dokumentiert und die Dokumentation kontinuierlich an den aktuellen Projektstand angepasst werden. |
+
+| # | My contribution | Why I am proud of it | Which challenge I overcame |
+| --- | --- | --- | --- |
+| 1 | Entwicklung des Datenmodells mit den Tabellen `users`, `items` und `requests` | Besonders stolz bin ich darauf, die Grundlage für die Datenverwaltung von LocalLend geschaffen zu haben. Das Datenmodell verbindet die wichtigsten Funktionen der Anwendung und war entscheidend für die spätere Umsetzung des Backends. | Ich musste Beziehungen zwischen Tabellen korrekt modellieren und Foreign Keys sinnvoll einsetzen. |
+| 2 | Integration von SQLAlchemy und Aufbau der Datenbankanbindung | Durch diese Aufgabe konnte ich mich intensiv in SQLAlchemy einarbeiten und erstmals eine vollständige Datenbankanbindung selbst umsetzen. Es motiviert mich, dass die Anwendung dadurch Daten dauerhaft speichern und verwalten kann. | Die Einarbeitung in SQLAlchemy und die Anpassung an die aktuelle SQLAlchemy-Syntax waren zunächst herausfordernd. |
+| 3 | Erstellung und Pflege der technischen Dokumentation (Data Model, ER-Diagramm, Design Decisions und Team Evaluation) | Mir war wichtig, die technischen Entscheidungen unseres Projekts nachvollziehbar zu dokumentieren. Eine gute Dokumentation erleichtert nicht nur die Zusammenarbeit im Team, sondern hilft auch anderen, die Architektur und Entwicklungsschritte schnell zu verstehen. | Technische Inhalte mussten verständlich dokumentiert und die Dokumentation kontinuierlich an den aktuellen Projektstand angepasst werden. |
 
 ## Design Decisions that I led
 
@@ -56,12 +56,22 @@ Diese Arbeit habe ich selbständig und eigenhändig erstellt. Die den benutzten 
 
 ## Contributions
 
-| Contribution | Proof, e.g., git commits | Sources used | | --- | --- | --- | | Entwicklung des Datenmodells für LocalLend | Branch `wendy-database`, Datei `database/models.py`, Datei `evidence/data-model.md` | SQLAlchemy Documentation | | Erstellung des ER-Diagramms | Datei `evidence/ER-Diagramm.png` | dbdiagram.io | | Integration von SQLAlchemy in die Anwendung | Branch `wendy-db-integration`, Datei `database/models.py` | Flask-SQLAlchemy Documentation | | Implementierung der API-Endpunkte für Datenbankobjekte | Route `/api/items`, JSON-Ausgabe der Datenbankeinträge | Flask Documentation | | Erstellung der Design Decision DD-01 | Datei `design-decisions/dd-01.md` | SQLAlchemy Documentation | | Erstellung der Design Decision DD-02 | Datei `design-decisions/dd-02.md` | Eigene Datenmodellanalyse | | Dokumentation des Datenmodells | Datei `evidence/data-model.md` | SQLAlchemy Documentation |
-| Erstellung und Aktualisierung des ER-Diagramms | Datei `evidence/ER-Diagramm.png` | dbdiagram.io |
-| Erstellung der Team Evaluation Dokumentation | Dateien im Ordner `docs/team-eval/` | Kursvorlage des Dozenten |
+| Contribution | Proof, e.g., git commits | Sources used |
+| --- | --- | --- |
+| Entwicklung des Datenmodells für LocalLend | [Git Commit](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/0d61d0f94e658cc140d818ede2d4f6643c1dd650) | SQLAlchemy Documentation |
+| Erstellung des ER-Diagramms | [Git Commit 1](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/a20e8c48dad5a1e52ee26fa3f7bf135bfaa07105), [Git Commit 2 ](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/f12b24572b0e0310abb08bc5112e370ebac9bf10) | dbdiagram.io |
+| Integration von SQLAlchemy in die Anwendung | [Git Commit 1 ](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/89fba40b157790d3880a84386cbf796e5b1a395c), [ Git Commit 2 ](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/becb6c5439b315b13383335d674522a20b0175a8) | Flask-SQLAlchemy Documentation |
+| Implementierung der API-Endpunkte | [Git Commit](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/269c33f5b2e36f049d7bb8a56164a5f82c164647) | Flask Documentation |
+| Erstellung der Design Decision DD-01 | [Git Commit](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/db4966985e0462777c9f12ba61f1a478131275dc) | SQLAlchemy Documentation |
+| Erstellung der Design Decision DD-02 | [Git Commit](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/db4966985e0462777c9f12ba61f1a478131275dc) | Eigene Datenmodellanalyse |
+| Dokumentation des Datenmodells | [Git Commit](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/9c645e8e827920d0f6a9aceccb40d931bb9b403b) | SQLAlchemy Documentation |
+| Erstellung der Team Evaluation Dokumentation | [Git Commit](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/db4966985e0462777c9f12ba61f1a478131275dc) | Kursvorlage des Dozenten |
 
 ---
 
 ## AI Directory
 
-| # | AI Tool | Purpose of Use | Affected Sections (Code + Docs) | Remarks, Procedure, Prompts | | --- | --- | --- | --- | --- | | 01 | ChatGPT | Unterstützung bei der Erstellung der Projektdokumentation | Data Model, Design Decisions, Individual Contribution | Formulierungshilfe und Strukturierung technischer Inhalte | | 02 | ChatGPT | Unterstützung bei Git- und SQLAlchemy-Fragen | Datenbankintegration und Backend | Erklärung von Befehlen und Fehlermeldungen |
+| # | AI Tool | Purpose of Use | Affected Sections (Code + Docs) | Remarks, Procedure, Prompts |
+| --- | --- | --- | --- | --- |
+| 01 | ChatGPT | Unterstützung bei der Erstellung der Projektdokumentation | Data Model, Design Decisions, Individual Contribution | Formulierungshilfe und Strukturierung technischer Inhalte |
+| 02 | ChatGPT | Unterstützung bei Git- und SQLAlchemy-Fragen | Datenbankintegration und Backend | Erklärung von Befehlen und Fehlermeldungen |

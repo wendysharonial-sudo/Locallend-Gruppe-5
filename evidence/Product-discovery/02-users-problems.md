@@ -1,7 +1,7 @@
 ---
-title: Design Challenge
+title: User Problems
 parent: Product Discovery
-nav_order: 1
+nav_order: 3
 ---
 
 # Design Challenge

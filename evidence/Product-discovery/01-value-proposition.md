@@ -1,6 +1,7 @@
 ---
 title: Value Proposition
-nav_order: 1
+parent: Product Discovery
+nav_order: 2
 ---
 
 {: .no_toc }

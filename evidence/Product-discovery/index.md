@@ -1,6 +1,8 @@
 ---
 title: Product Discovery
+parent: Evidence
 nav_order: 4
+has_children: true
 ---
 
 # Product Discovery – LocalLend

@@ -138,7 +138,15 @@ def profile():
         db.select(Item).filter_by(user_id=session["user_id"])
     ).scalars().all()
 
-    return render_template("profile.html", user=user, my_items=my_items)
+    my_requests = db.session.execute(
+        db.select(BorrowRequest).filter_by(borrower_id=session["user_id"])
+    ).scalars().all()
+
+    return render_template(
+        "profile.html", 
+        user=user, 
+        my_items=my_items, 
+        my_requests=my_requests)
 
 @app.route("/items")
 def items_page():
@@ -157,8 +165,17 @@ def items_page():
 
 @app.route("/browse")
 def browse():
+    search_term = request.args.get("q")
 
-    items = db.session.execute(db.select(Item)).scalars().all()
+    statement = db.select(Item)
+
+    if "user_id" in session:
+        statement = statement.filter(Item.user_id != session["user_id"])
+
+    if search_term:
+        statement = statement.filter(Item.title.contains(search_term))    
+
+    items = db.session.execute(statement).scalars().all()
     return render_template("browse.html", items=items)
 
 
@@ -193,9 +210,11 @@ def add_item():
         db.session.add(new_item)
         db.session.commit()
 
-        return redirect(url_for("items_page"))
+        return redirect(url_for("profile"))
 
     return render_template("add_item.html")
+
+
 
 
 @app.route("/requests")

@@ -11,6 +11,11 @@
                     <h2 class="fw-bold">Konto erstellen</h2>
                     <p class="text-secondary">Tritt unserer Community bei und beginne zu teilen.</p>
                 </div>
+                {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}          
+                </div>
+                {% endif %}
                 
                 <form action="/register" method="POST">
                     <div class="row">

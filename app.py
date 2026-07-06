@@ -79,7 +79,7 @@ def register():
         ).scalar()
 
         if existing_user:
-            return "Email already registered."
+            return render_template("register.html", error="Diese E-Mail ist bereits registriert.")
 
         hashed_password = generate_password_hash(password)
 
@@ -215,7 +215,40 @@ def add_item():
     return render_template("add_item.html")
 
 
+@app.route("/request/<int:item_id>")
+def create_request(item_id):
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+    
+    item = db.session.get(Item, item_id)
 
+    if item is None:
+        abort(404)
+
+    if item.user_id == session["user_id"]:
+        return redirect(url_for("profile"))
+
+    existing_request = db.session.execute(
+        db.select(BorrowRequest).filter_by(
+            item_id=item_id,
+            borrower_id=session["user_id"],
+            status="pending"
+        )
+    ).scalar()    
+
+    if existing_request:
+        return redirect(url_for("request_page"))
+    
+    new_request = BorrowRequest(
+        item_id=item_id,
+        borrower_id=session["user_id"],
+        status="pending"
+    )
+
+    db.session.add(new_request)
+    db.session.commit()
+
+    return redirect(url_for("requests_page"))
 
 @app.route("/requests")
 def requests_page():

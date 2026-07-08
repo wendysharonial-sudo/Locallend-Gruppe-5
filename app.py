@@ -137,10 +137,35 @@ def profile():
     my_items = db.session.execute(
         db.select(Item).filter_by(user_id=session["user_id"])
     ).scalars().all()
-
-    my_requests = db.session.execute(
+    
+    borrow_requests = db.session.execute(
         db.select(BorrowRequest).filter_by(borrower_id=session["user_id"])
     ).scalars().all()
+
+    my_requests = []
+
+    for request_item in borrow_requests:
+        item = db.session.get(Item, request_item.item_id)
+
+        owner = None
+        if item:
+            owner = db.session.get(User, item.user_id)
+
+        my_requests.append({
+            "id": request_item.request_id,
+            "item_title": item.title if item else "Unbekanntes Objekt",
+            "owner_name": owner.first_name if owner else "Unbekannter Verleiher",
+            "status": request_item.status
+        })
+
+    owner_requests = []   
+
+    all_requests = db.session.execute(
+        db.select(BorrowRequest)
+    ).scalars().all()
+
+    for request_item in all_requests:
+        item = db.session.get
 
     return render_template(
         "profile.html", 
@@ -150,16 +175,7 @@ def profile():
 
 @app.route("/items")
 def items_page():
-    database_items = db.session.execute(db.select(Item)).scalars().all()
-
-    items = []
-    for item in database_items:
-        items.append({
-            "name": item.title,
-            "status": item.availability
-        })
-
-    return render_template("items.html", items=items)
+    return redirect(url_for("browse"))
 
 
 
@@ -237,7 +253,7 @@ def create_request(item_id):
     ).scalar()    
 
     if existing_request:
-        return redirect(url_for("request_page"))
+        return redirect(url_for("profile"))
     
     new_request = BorrowRequest(
         item_id=item_id,
@@ -248,20 +264,25 @@ def create_request(item_id):
     db.session.add(new_request)
     db.session.commit()
 
-    return redirect(url_for("requests_page"))
+    return redirect(url_for("profile"))
 
 @app.route("/requests")
 def requests_page():
-    database_requests = db.session.execute(db.select(BorrowRequest)).scalars().all()
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+    database_requests = db.session.execute(
+        db.select(BorrowRequest)).scalars().all()
 
     requests = []
     
     for request_item in database_requests:
 
         item = db.session.get(Item, request_item.item_id)
-        borrower = db.session.get(User, request_item.borrower_id)
 
-        requests.append({
+        if item and item.user_id == session["user_id"]:
+            borrower = db.session.get(User, request_item.borrower_id)
+
+            requests.append({
             "id": request_item.request_id,
             "item": item.title if item else "Unknown item",
             "borrower": borrower.first_name if borrower else "Unknown user",

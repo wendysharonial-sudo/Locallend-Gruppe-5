@@ -15,9 +15,15 @@
         </span>
 
         <div class="mt-4">
+        {% if session.get("user_id") and item.user_id == session.get("user_id")%}
+            <a href="/profile" class="btn btn-outline-secondary btn-custom">
+                Eigenes Objekt 
+            </a>    
+        {% else %}    
             <a href="/request/{{ item.item_id }}" class="btn btn-primary btn-custom">
                 Ausleihen
             </a>
+        {% endif %}    
             <a href="/browse" class="btn btn-outline-secondary btn-custom">
                 Zurück
             </a>

@@ -54,6 +54,10 @@
                 <div class="mt-4 pt-2 text-center">
                     <a href="/add_item" class="btn btn-outline-primary btn-custom w-100"><i class="bi bi-plus"></i>
                         Neues Objekt anbieten</a>
+                    
+                    <a href="/requests" class="btn btn-outline-primary btn-custom w100 mt-3">
+                        Anfragen an meine Angebote ansehen
+                    </a>    
                 </div>
             </div>
         </div>
@@ -72,9 +76,10 @@
                     <li class="list-group-item px-0 py-3 border-light">
                        
                             <h6 class="mb-0 fw-semibold">
-                            Anfrage #{{ req.request_id }}</h6>
+                                {{ req.item_title }}</h6>
 
                             <small>
+                                Verleiher: {{ req.owner_name }} <br>
                                 Status: {{ req.status }}
                             </small>
                     </li>

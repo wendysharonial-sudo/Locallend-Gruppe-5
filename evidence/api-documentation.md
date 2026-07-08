@@ -1,331 +1,78 @@
-# API-Dokumentation
+# API-Erklärung
 
 ## Verantwortlich
 
-Maryam – API & Anfrage-System
+Maryam – API und Anfrage-System
 
-## Beschreibung
+## Ziel
 
-Die API stellt Daten im JSON-Format bereit und verwaltet Ausleihanfragen für LocalLend.
+Die API stellt ausgewählte Daten der LocalLend-Anwendung im JSON-Format bereit. Dadurch können Informationen unabhängig von den HTML-Seiten abgerufen werden.
 
-Alle API-Antworten haben eine einheitliche Struktur:
-
-```json
-{
-  "success": true,
-  "message": "Kurze Beschreibung der Antwort",
-  "data": {}
-}
-```
+Die API erfüllt außerdem die Projektanforderung eines headless API-Endpunkts.
 
 ---
 
-## Endpunkt: `/api/items`
+## Funktionsweise
 
-### Methode
+Die API wurde mit Flask umgesetzt.
 
-GET
+Jeder API-Endpunkt ist über eine eigene Route erreichbar. Wird ein Endpunkt aufgerufen, liest SQLAlchemy die benötigten Daten aus der SQLite-Datenbank.
 
-### Beschreibung
-
-Gibt alle verfügbaren Gegenstände als JSON zurück.
-
-### Beispielantwort
-
-```json
-{
-  "success": true,
-  "message": "Items loaded successfully",
-  "data": [
-    {
-      "id": 1,
-      "name": "Bohrmaschine",
-      "category": "Werkzeug",
-      "status": "available"
-    },
-    {
-      "id": 2,
-      "name": "Leiter",
-      "category": "Werkzeug",
-      "status": "available"
-    }
-  ]
-}
-```
+Die Daten werden anschließend in Python verarbeitet und mit `jsonify()` als JSON zurückgegeben.
 
 ---
 
-## Endpunkt: `/api/requests`
+## API-Endpunkte
 
-### Methode
+### `/api/items`
 
-GET
+Dieser Endpunkt gibt alle vorhandenen Gegenstände zurück.
 
-### Beschreibung
+Für jeden Gegenstand werden folgende Informationen ausgegeben:
 
-Gibt alle Ausleihanfragen und deren aktuellen Status als JSON zurück.
-
-### Beispielantwort
-
-```json
-{
-  "success": true,
-  "message": "Requests loaded successfully",
-  "data": [
-    {
-      "id": 1,
-      "item": "Bohrmaschine",
-      "borrower": "Max",
-      "status": "pending"
-    },
-    {
-      "id": 2,
-      "item": "Leiter",
-      "borrower": "Anna",
-      "status": "accepted"
-    },
-    {
-      "id": 3,
-      "item": "Beamer",
-      "borrower": "Sara",
-      "status": "rejected"
-    }
-  ]
-}
-```
+- ID
+- Titel
+- Kategorie
+- Beschreibung
+- Verfügbarkeit
 
 ---
 
-## Endpunkt: `/api/create_request`
+### `/api/requests`
 
-### Methode
+Dieser Endpunkt gibt alle Ausleihanfragen zurück.
 
-GET
+Für jede Anfrage werden folgende Informationen ausgegeben:
 
-### Beschreibung
+- Anfrage-ID
+- Gegenstand
+- Ausleiher
+- Status
 
-Erstellt eine neue Ausleihanfrage.
-
-Neue Anfragen erhalten automatisch den Status `pending`, bis der Verleiher über die Anfrage entscheidet.
-
-### Beispielantwort
-
-```json
-{
-  "success": true,
-  "message": "Request created successfully",
-  "data": {
-    "id": 4,
-    "item": "Laptop",
-    "borrower": "Maryam",
-    "status": "pending"
-  }
-}
-```
+Der Status zeigt an, ob eine Anfrage noch offen (`pending`), angenommen (`accepted`) oder abgelehnt (`rejected`) wurde.
 
 ---
 
-## Endpunkt: `/api/accept_request`
+### `/api/status`
 
-### Methode
+Dieser Endpunkt zeigt, ob die API erreichbar ist.
 
-GET
-
-### Beschreibung
-
-Nimmt eine Ausleihanfrage an.
-
-Der Status der Anfrage wird auf `accepted` gesetzt.
-
-### Beispielantwort
-
-```json
-{
-  "success": true,
-  "message": "Request accepted successfully",
-  "data": {
-    "id": 1,
-    "status": "accepted"
-  }
-}
-```
+Zusätzlich werden allgemeine Informationen über die API und die verfügbaren Endpunkte zurückgegeben.
 
 ---
 
-## Endpunkt: `/api/reject_request`
+## Aufbau einer Antwort
 
-### Methode
+Alle API-Antworten besitzen dieselbe Struktur.
 
-GET
+- `success` zeigt, ob die Anfrage erfolgreich war.
+- `message` enthält eine kurze Beschreibung.
+- `data` enthält die eigentlichen Informationen.
 
-### Beschreibung
-
-Lehnt eine Ausleihanfrage ab.
-
-Der Status der Anfrage wird auf `rejected` gesetzt.
-
-### Beispielantwort
-
-```json
-{
-  "success": true,
-  "message": "Request rejected successfully",
-  "data": {
-    "id": 2,
-    "status": "rejected"
-  }
-}
-```
+Diese einheitliche Struktur erleichtert die Nutzung und das Testen der API.
 
 ---
 
-## Endpunkt: `/api/delete_request`
+## Fazit
 
-### Methode
-
-GET
-
-### Beschreibung
-
-Löscht eine Ausleihanfrage beispielhaft.
-
-Der Status der Anfrage wird auf `deleted` gesetzt.
-
-### Beispielantwort
-
-```json
-{
-  "success": true,
-  "message": "Request deleted successfully",
-  "data": {
-    "id": 3,
-    "status": "deleted"
-  }
-}
-```
-
----
-
-## Endpunkt: `/api/status`
-
-### Methode
-
-GET
-
-### Beschreibung
-
-Gibt den aktuellen Status der API zurück.
-
-Dieser Endpunkt dient zur Überprüfung, ob die API erreichbar ist. Zusätzlich zeigt er den API-Namen, die Version, den Laufzeitstatus und alle verfügbaren Endpunkte.
-
-### Beispielantwort
-
-```json
-{
-  "success": true,
-  "message": "API is running",
-  "data": {
-    "api": "LocalLend API",
-    "version": "1.0",
-    "status": "running",
-    "available_endpoints": [
-      "/api/items",
-      "/api/requests",
-      "/api/create_request",
-      "/api/accept_request",
-      "/api/reject_request",
-      "/api/delete_request",
-      "/api/status"
-    ]
-  }
-}
-```
-
----
-
-## Erklärung der wichtigsten Felder
-
-| Feld | Bedeutung |
-|---|---|
-| success | Zeigt, ob die Anfrage erfolgreich war |
-| message | Beschreibt kurz das Ergebnis |
-| data | Enthält die eigentlichen Daten |
-| id | Eindeutige Nummer eines Gegenstands oder einer Anfrage |
-| item | Angefragter Gegenstand |
-| borrower | Name der ausleihenden Person |
-| category | Kategorie des Gegenstands |
-| status | Aktueller Status eines Gegenstands oder einer Anfrage |
-
----
-
-## Statuswerte
-
-| Status | Bedeutung |
-|---|---|
-| pending | Anfrage wurde erstellt und wartet auf Entscheidung |
-| accepted | Anfrage wurde angenommen |
-| rejected | Anfrage wurde abgelehnt |
-| deleted | Anfrage wurde gelöscht |
-| available | Gegenstand ist verfügbar |
-
----
-
-## Anfrage-Workflow
-
-1. Ein Benutzer erstellt eine Ausleihanfrage.
-2. Die Anfrage erhält den Status `pending`.
-3. Die Anfrage kann angenommen werden.
-4. Bei Annahme erhält sie den Status `accepted`.
-5. Die Anfrage kann abgelehnt werden.
-6. Bei Ablehnung erhält sie den Status `rejected`.
-7. Eine Anfrage kann außerdem gelöscht werden.
-8. Beim Löschen erhält sie den Status `deleted`.
-
----
-
-## Verwendete Technologien
-
-- Python
-- Flask
-- JSON
-- Git
-- GitHub
-
----
-
-## JSON-Erklärung
-
-JSON steht für **JavaScript Object Notation**.
-
-JSON ist ein strukturiertes Datenformat, das häufig für den Datenaustausch zwischen Backend und Frontend verwendet wird.
-
-Ein JSON-Objekt besteht aus Schlüssel-Wert-Paaren.
-
-### Beispiel
-
-```json
-{
-  "id": 1,
-  "name": "Bohrmaschine",
-  "status": "available"
-}
-```
-
-JSON ermöglicht den Datenaustausch zwischen Backend und Frontend.
-
----
-
-## Beitrag von Maryam
-
-- API-Endpunkte erstellt
-- JSON-Daten bereitgestellt
-- Einheitliche API-Antwortstruktur umgesetzt
-- Ausleihanfragen verwaltet
-- Anfrage erstellen implementiert
-- Anfrage annehmen implementiert
-- Anfrage ablehnen implementiert
-- Anfrage löschen implementiert
-- Statusverwaltung umgesetzt
-- API getestet
-- Anfrage-Workflow dokumentiert
-- API-Dokumentation erstellt und gepflegt wie lange braucht man um das einzutippen
+Die API stellt Daten strukturiert im JSON-Format bereit und trennt die Datenbereitstellung von der Darstellung im Browser. Dadurch können die Endpunkte einfach getestet und dokumentiert werden.

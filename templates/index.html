@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-      <title>LocalLend</title>
-</head>
-<body>
-      <h1>Willkommen bei LocalLend</h1>
-      <p>Flask läuft!</p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Startseite - LocalLend{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 60px;">
+    <div class="row align-items-center">
+        
+        <!-- Linke Seite: Text -->
+        <div class="col-lg-6 mb-5 mb-lg-0">
+            <span class="badge bg-primary-subtle text-primary mb-3 px-3 py-2 rounded-pill">Teilen statt Kaufen</span>
+            <h1 class="display-4 fw-bold mb-4">Leihe Dinge aus deiner <span class="text-primary">Nachbarschaft</span></h1>
+            <p class="lead text-secondary mb-5">
+                Warum einen Bohrer kaufen, wenn du ihn nur einmal brauchst? LocalLend verbindet dich mit Menschen in deiner Nähe, um Gegenstände einfach und sicher zu teilen.
+            </p>
+            <div class="d-flex gap-3">
+                <!-- Buttons mit Icons -->
+                <a href="/register" class="btn btn-primary btn-lg btn-custom px-4"><i class="bi bi-person-plus"></i> Jetzt starten</a>
+                <a href="/browse" class="btn btn-outline-secondary btn-lg btn-custom px-4"><i class="bi bi-search"></i> Entdecken</a>
+            </div>
+        </div>
+
+        <!-- Rechte Seite: Ein modernes Grid mit Icons (anstelle eines einfachen Bildes) -->
+        <div class="col-lg-6 text-center">
+            <div class="row g-4">
+                <div class="col-6">
+                    <div class="p-4 bg-white rounded-4 shadow-sm mb-4">
+                        <i class="bi bi-tools display-4 text-primary mb-3"></i>
+                        <h5 class="fw-bold">Werkzeuge</h5>
+                    </div>
+                </div>
+                <div class="col-6 mt-5"> <!-- 'mt-5' versetzt diesen Block leicht nach unten für einen coolen Effekt -->
+                    <div class="p-4 bg-white rounded-4 shadow-sm">
+                        <i class="bi bi-bicycle display-4 text-primary mb-3"></i>
+                        <h5 class="fw-bold">Sport & Freizeit</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

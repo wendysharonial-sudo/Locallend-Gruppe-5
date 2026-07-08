@@ -7,7 +7,7 @@ nav_order: 6
 # UI Components
 
 ## Ziel der Benutzeroberfläche
-
+git
 Die Benutzeroberfläche von LocalLend soll einfach, übersichtlich und verständlich sein.
 
 Nutzer sollen schnell erkennen können:

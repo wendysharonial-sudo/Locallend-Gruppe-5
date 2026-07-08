@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Objekt bearbeiten - LocalLend{% endblock %}
+
+{% block content %}
+<div class="container mt-4 pt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="custom-card">
+                <div class="d-flex align-items-center mb-4 border-bottom pb-3">
+                    <div class="bg-warning-subtle text-warning rounded-circle d-inline-flex p-3 me-3">
+                        <i class="bi bi-pencil-square fs-3"></i>
+                    </div>
+                    <div>
+                        <h2 class="fw-bold mb-0">Objekt bearbeiten</h2>
+                        <p class="text-secondary mb-0">Aktualisiere die Details deines Angebots.</p>
+                    </div>
+                </div>
+
+                <!-- Die ID des Objekts wird in der URL übergeben, z.B. /edit_item/5 -->
+                <form action="/edit_item/{{ item.id }}" method="POST">
+                    <div class="mb-4">
+                        <label for="name" class="form-label fw-semibold">Name von dem Objekt</label>
+                        <!-- 'value' wird vom Backend mit dem aktuellen Namen gefüllt -->
+                        <input type="text" class="form-control" id="name" name="name" value="{{ item.name }}" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="description" class="form-label fw-semibold">Beschreibung</label>
+                        <!-- Inhalt der Textarea wird vom Backend gefüllt -->
+                        <textarea class="form-control" id="description" name="description" rows="4"
+                            required>{{ item.description }}</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="category" class="form-label fw-semibold">Kategorie</label>
+                            <select class="form-select form-control" id="category" name="category" required>
+                                <!-- Jinja prüft, welche Kategorie das Objekt aktuell hat -->
+                                <option value="tools" {% if item.category=='tools' %}selected{% endif %}>Werkzeuge
+                                </option>
+                                <option value="sports" {% if item.category=='sports' %}selected{% endif %}>Sport &
+                                    Freizeit</option>
+                                <option value="electronics" {% if item.category=='electronics' %}selected{% endif %}>
+                                    Elektronik</option>
+                                <option value="other" {% if item.category=='other' %}selected{% endif %}>Sonstiges
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="condition" class="form-label fw-semibold">Zustand</label>
+                            <select class="form-select form-control" id="condition" name="condition" required>
+                                <option value="new" {% if item.condition=='new' %}selected{% endif %}>Wie neu</option>
+                                <option value="good" {% if item.condition=='good' %}selected{% endif %}>Gut</option>
+                                <option value="used" {% if item.condition=='used' %}selected{% endif %}>Gebraucht
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Zusatz für die Bearbeitungsseite: Status ändern -->
+                    <div class="mb-4 p-3 bg-light rounded border">
+                        <label class="form-label fw-semibold mb-2">Aktueller Status</label>
+                        <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" role="switch" id="status" name="status"
+                                value="available" {% if item.status=='available' %}checked{% endif %}>
+                            <label class="form-check-label" for="status">Sofort verfügbar zum Verleihen</label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                        <!-- Roter Button zum Löschen des Objekts -->
+                        <!-- In echt müsste das idealerweise ein kleines Formular oder ein JS-Confirm sein, aber für die Ansicht reicht das -->
+                        <button type="button" class="btn btn-outline-danger btn-custom">
+                            <i class="bi bi-trash"></i> Objekt löschen
+                        </button>
+
+                        <div>
+                            <a href="/profile" class="btn btn-outline-secondary btn-custom me-2">Abbrechen</a>
+                            <button type="submit" class="btn btn-warning btn-custom px-4">
+                                <i class="bi bi-save"></i> Änderungen speichern
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

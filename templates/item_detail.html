@@ -1,10 +1,36 @@
-<h1>Detailansicht</h1>
+{% extends "base.html" %}
 
-{% if item %}
-  <h2>{{ item.title }}</h2>
-  <p>Kategorie: {{ item.category }}</p>
-  <p>{{ item.description }}</p>
-  <p>Status: {{ item.status }}</p>
-{% else %}
-  <p>Gegenstand wurde nicht gefunden.</p>
-{% endif %}
+{% block title %}Detailansicht - LocalLend{% endblock %}
+
+{% block content %}
+<div class="container mt-4 pt-3">
+    {% if item %}
+    <div class="custom-card p-4">
+        <h2 class="fw-bold">{{ item.title }}</h2>
+        <p class="text-secondary"><i class="bi bi-tag"></i> Kategorie: {{ item.category }}</p>
+        <p>{{ item.description }}</p>
+
+        <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+            {{ item.availability }}
+        </span>
+
+        <div class="mt-4">
+        {% if session.get("user_id") and item.user_id == session.get("user_id")%}
+            <a href="/profile" class="btn btn-outline-secondary btn-custom">
+                Eigenes Objekt 
+            </a>    
+        {% else %}    
+            <a href="/request/{{ item.item_id }}" class="btn btn-primary btn-custom">
+                Ausleihen
+            </a>
+        {% endif %}    
+            <a href="/browse" class="btn btn-outline-secondary btn-custom">
+                Zurück
+            </a>
+        </div>
+    </div>
+    {% else %}
+        <p>Gegenstand wurde nicht gefunden.</p>
+    {% endif %}
+</div>
+{% endblock %}

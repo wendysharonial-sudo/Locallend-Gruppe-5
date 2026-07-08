@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Anmelden - LocalLend{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="custom-card">
+                <div class="text-center mb-4">
+                    <!-- Ein rundes Icon-Element als visuelles Highlight -->
+                    <div class="bg-primary-subtle text-primary rounded-circle d-inline-flex p-3 mb-3">
+                        <i class="bi bi-person-circle fs-1"></i>
+                    </div>
+                    <h2 class="fw-bold">Willkommen zurück</h2>
+                    <p class="text-secondary">Bitte melde dich an, um fortzufahren.</p>
+                </div>
+                
+                <form action="/login" method="POST">
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold">E-Mail Adresse</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-secondary"></i></span>
+                            <input type="email" class="form-control border-start-0 ps-0" id="email" name="email" placeholder="name@beispiel.de" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-semibold">Passwort</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-secondary"></i></span>
+                            <input type="password" class="form-control border-start-0 ps-0" id="password" name="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg btn-custom">
+                            <i class="bi bi-box-arrow-in-right"></i> Anmelden
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="text-center mt-4 pt-3 border-top">
+                    <p class="mb-0 text-secondary">Noch kein Konto? <a href="/register" class="text-primary fw-semibold text-decoration-none">Jetzt registrieren</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

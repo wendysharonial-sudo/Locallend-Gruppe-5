@@ -1,7 +1,7 @@
 ---
 title: Tests
 parent: Product Discovery
-nav_order: 5
+nav_order: 4
 ---
 
 # Tests

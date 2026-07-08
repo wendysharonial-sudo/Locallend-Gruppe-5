@@ -1,66 +1,156 @@
-# Locallend
 # LocalLend
 
-## Projektbeschreibung
+Contributors: Mariam Joumma, Tuba, Wendy, Yves
 
-LocalLend ist eine Webanwendung zum lokalen Verleihen und Ausleihen von Gegenständen innerhalb einer Community. Ziel des Projekts ist es, die gemeinsame Nutzung von Ressourcen zu fördern und nachhaltiges Handeln zu unterstützen. Nutzer können Gegenstände einstellen, durchsuchen und Ausleihanfragen verwalten.
-
-## Installation
-
-### Voraussetzungen
-
-- Python 3.x
-
-- Git
-
-### Repository klonen
+## How to run application
 
 ```bash
-
-git clone https://github.com/wendysharonial-sudo/Locallend-Gruppe-5.git
-
+flask run
 ```
 
-### Abhängigkeiten installieren
+## How to initialise development environment
+
+Create a Python virtual environment:
 
 ```bash
+python -m venv venv
+```
 
+Activate the virtual environment:
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Linux / macOS:
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
-
 ```
 
-### Anwendung starten
+## How to initialise database
 
 ```bash
-
-python app.py
-
+flask init-db
 ```
 
-## Happy Path
+The command creates the SQLite database and required tables.
 
-1. Benutzer registriert sich.
+## Project Description
 
-2. Benutzer meldet sich an.
+LocalLend is a web application for local lending and borrowing of items within a community.
 
-3. Benutzer veröffentlicht einen Gegenstand.
+The goal of the project is to reduce unnecessary purchases and support sustainable resource sharing. Users can create items, browse available items and manage borrowing requests.
 
-4. Andere Benutzer durchsuchen verfügbare Gegenstände.
+## Main Features
 
-5. Ein Benutzer sendet eine Ausleihanfrage.
+- User Registration
+- User Login
+- User Logout
+- Session Management
+- Create Items
+- Browse Available Items
+- Borrowing Requests
+- Accept Requests
+- Reject Requests
+- Request Status Management
+- JSON API Endpoints
 
-6. Der Besitzer bestätigt die Anfrage.
+## Request Status
 
-7. Der Gegenstand wird ausgeliehen.
+- pending
+- accepted
+- rejected
 
-8. Nach der Rückgabe wird die Anfrage abgeschlossen.
+## Technology Stack
 
-## Team
+- Python
+- Flask
+- SQLite
+- HTML
+- CSS
+- Jinja2
+- JSON API
 
-- Tuba Celik
+## Documentation
 
-- Jean Yves Nkwane
+Additional project documentation can be found in the evidence folder.
 
-- Wendy Sharonia Lontsi Doumtsop
+### Included Documentation
 
-- Maryam Joumma
+- Product Discovery
+- Design Challenge
+- User Problems
+- Value Proposition
+- Solution Elements
+- Tests
+- Survey Documentation
+- API Documentation
+- API Explanation
+- API Testing
+- Design Decisions
+
+## Team Responsibilities
+
+### Mariam Joumma
+
+Responsible for:
+
+- JSON API
+- API Endpoints
+- Request Management
+- Request Workflow
+- Request Status Management
+- API Documentation
+- API Testing
+- Product Discovery
+- Survey Documentation
+- Design Decisions
+
+### Tuba
+
+Responsible for:
+
+- Flask Setup
+- Login
+- Registration
+- Logout
+- Sessions
+
+### Wendy
+
+Responsible for:
+
+- Database Design
+- SQLite Integration
+- Data Model
+- Database Queries
+- Tables for Users, Items and Requests
+
+### Yves
+
+Responsible for:
+
+- Frontend Development
+- HTML Templates
+- CSS Styling
+- Navigation
+- User Interface Testing
+
+## Authors
+
+- Mariam Joumma
+- Tuba
+- Wendy
+- Yves
+
+
+

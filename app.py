@@ -1,12 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session, abort
+from werkzeug.security import generate_password_hash, check_password_hash
 from database.models import db, User, Item, Request as BorrowRequest
 
 app = Flask(__name__)
 
+app.secret_key = "locallend-security-key"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///locallend.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
+
 with app.app_context():
     db.create_all()
 
@@ -17,7 +20,7 @@ with app.app_context():
         first_name="Anna",
         last_name="Müller",
         email="anna@example.com",
-        password="test123"
+        password=generate_password_hash("test123")
 
         )
 
@@ -25,24 +28,28 @@ with app.app_context():
         first_name="Max",
         last_name="Soleil",
         email="max@example.com",
-        password="test123"
-
+        password=generate_password_hash("test123")
 
         )
 
         db.session.add_all([user1,user2])
         db.session.commit()
 
+    existing_item = db.session.execute(db.select(Item)).first()  
+    
+    if existing_item is None:
+        user = db.session.execute(db.select(User)).scalar()
+
         item1 = Item(
-        user_id= user1.user_id,
-        title="Bohrmachine",
+        user_id= user.user_id,
+        title="Bohrmaschine",
         category= "Werkzeug",
         description= "Für kleine Reperaturen und Umzüge",
         availability= "available"
         )
 
         item2 = Item(
-        user_id= user2.user_id,
+        user_id= user.user_id,
         title= "Beamer",
         category="Technik",
         description="Für Präsentationen oder Filmabende",
@@ -53,48 +60,138 @@ with app.app_context():
         db.session.commit()
 
 
-
-items = [
-    {
-        "id": 1,
-        "title": "Bohrmaschine",
-        "category": "Werkzeug",
-        "description": "Für kleine Reparaturen und Umzüge",
-        "status": "available"
-    },
-    {
-        "id": 2,
-        "title": "Beamer",
-        "category": "Technik",
-        "description": "Für Präsentationen oder Filmabende.",
-        "status": "available"
-    }
-]
-
-requests = [
-    {
-        "id": 1,
-        "item": "Bohrmaschine",
-        "borrower": "Jean",
-        "status": "pending"
-    },
-    {
-        "id": 2,
-        "item": "Beamer",
-        "borrower": "Maryam",
-        "status": "accepted"
-    }
-]
-
-
 @app.route("/")
 def home():
     return render_template("index.html")
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+
+    if request.method == "POST":
+
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        
+        existing_user = db.session.execute(
+            db.select(User).filter_by(email=email)
+        ).scalar()
+
+        if existing_user:
+            return render_template("register.html", error="Diese E-Mail ist bereits registriert.")
+
+        hashed_password = generate_password_hash(password)
+
+        new_user = User(
+
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=hashed_password
+
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect(url_for("login"))
+
+    return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+
+        email = request.form["email"]
+
+        password = request.form["password"]
+
+        user = db.session.execute(
+            db.select(User).filter_by(email=email)
+        ).scalar()
+
+        if user and check_password_hash(user.password, password):
+            session["user_id"] = user.user_id
+            session["user_name"] = user.first_name
+            return redirect(url_for("home"))
+
+        return "Login failed."
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("home"))
+
+@app.route("/profile")
+def profile():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    user = db.session.get(User, session["user_id"])
+
+    my_items = db.session.execute(
+        db.select(Item).filter_by(user_id=session["user_id"])
+    ).scalars().all()
+    
+    borrow_requests = db.session.execute(
+        db.select(BorrowRequest).filter_by(borrower_id=session["user_id"])
+    ).scalars().all()
+
+    my_requests = []
+
+    for request_item in borrow_requests:
+        item = db.session.get(Item, request_item.item_id)
+
+        owner = None
+        if item:
+            owner = db.session.get(User, item.user_id)
+
+        my_requests.append({
+            "id": request_item.request_id,
+            "item_title": item.title if item else "Unbekanntes Objekt",
+            "owner_name": owner.first_name if owner else "Unbekannter Verleiher",
+            "status": request_item.status
+        })
+
+    owner_requests = []   
+
+    all_requests = db.session.execute(
+        db.select(BorrowRequest)
+    ).scalars().all()
+
+    for request_item in all_requests:
+        item = db.session.get
+
+    return render_template(
+        "profile.html", 
+        user=user, 
+        my_items=my_items, 
+        my_requests=my_requests)
+
+@app.route("/items")
+def items_page():
+    return redirect(url_for("browse"))
+
+
 
 @app.route("/browse")
 def browse():
-    items = db.session.execute(db.select(Item)).scalars().all()
+    search_term = request.args.get("q")
+
+    statement = db.select(Item)
+
+    if "user_id" in session:
+        statement = statement.filter(Item.user_id != session["user_id"])
+
+    if search_term:
+        statement = statement.filter(Item.title.contains(search_term))    
+
+    items = db.session.execute(statement).scalars().all()
     return render_template("browse.html", items=items)
 
 
@@ -108,41 +205,100 @@ def item_detail(item_id):
     return render_template("item_detail.html", item=selected_item)
 
 
-@app.route("/create-item", methods=["GET", "POST"])
-def create_item():
+@app.route("/add_item", methods=["GET", "POST"])
+def add_item():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
 
     if request.method == "POST":
+        name = request.form.get("name") or request.form.get("title")
+        description = request.form["description"]
+        category = request.form["category"]
+
         new_item = Item(
-            user_id=1,
-            title=request.form["title"],
-            category=request.form["category"],
-            description=request.form["description"],
+            user_id=session["user_id"],
+            title=name,
+            description=description,
+            category=category,
             availability="available"
         )
 
         db.session.add(new_item)
         db.session.commit()
 
-        return redirect(url_for("browse"))
+        return redirect(url_for("profile"))
 
-    return render_template("create_item.html")
+    return render_template("add_item.html")
+
+
+@app.route("/request/<int:item_id>")
+def create_request(item_id):
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+    
+    item = db.session.get(Item, item_id)
+
+    if item is None:
+        abort(404)
+
+    if item.user_id == session["user_id"]:
+        return redirect(url_for("profile"))
+
+    existing_request = db.session.execute(
+        db.select(BorrowRequest).filter_by(
+            item_id=item_id,
+            borrower_id=session["user_id"],
+            status="pending"
+        )
+    ).scalar()    
+
+    if existing_request:
+        return redirect(url_for("profile"))
+    
+    new_request = BorrowRequest(
+        item_id=item_id,
+        borrower_id=session["user_id"],
+        status="pending"
+    )
+
+    db.session.add(new_request)
+    db.session.commit()
+
+    return redirect(url_for("profile"))
 
 @app.route("/requests")
 def requests_page():
-    requests = db.session.execute(db.select(BorrowRequest)).scalars().all
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+    database_requests = db.session.execute(
+        db.select(BorrowRequest)).scalars().all()
+
+    requests = []
+    
+    for request_item in database_requests:
+
+        item = db.session.get(Item, request_item.item_id)
+
+        if item and item.user_id == session["user_id"]:
+            borrower = db.session.get(User, request_item.borrower_id)
+
+            requests.append({
+            "id": request_item.request_id,
+            "item": item.title if item else "Unknown item",
+            "borrower": borrower.first_name if borrower else "Unknown user",
+            "status": request_item.status
+        })
     return render_template("requests.html", requests=requests)
 
 
 @app.route("/requests/<int:request_id>/accept")
 def accept_request(request_id):
-   
     request_item = db.session.get(BorrowRequest, request_id)
 
     if request_item is None:
         abort(404)
 
     request_item.status = "accepted"
-
     db.session.commit()
 
     return redirect(url_for("requests_page"))
@@ -150,14 +306,12 @@ def accept_request(request_id):
 
 @app.route("/requests/<int:request_id>/reject")
 def reject_request(request_id):
-    
     request_item = db.session.get(BorrowRequest, request_id)
 
     if request_item is None:
         abort(404)
 
     request_item.status = "rejected"
-
     db.session.commit()
 
     return redirect(url_for("requests_page"))
@@ -178,7 +332,68 @@ def api_items():
             "status": item.availability
         })
 
-    return jsonify(items_data)
+    return jsonify({
+        "success":True,
+        "message": "Items loaded successfully",
+        "data": items_data
+    })
+
+@app.route("/api/requests")
+def api_requests():
+    database_requests = db.session.execute(db.select(BorrowRequest)).scalars().all()
+
+    requests_data = []
+
+    for request_item in database_requests:
+        item = db.session.get(Item, request_item.item_id)
+        borrower = db.session.get(User,request_item.borrower_id)
+
+        requests_data.append({
+
+            "id": request_item.request_id,
+            "item": item.title if item else "Unknown item",
+            "borrower": borrower.first_name if borrower else "Unknown user",
+            "status": request_item.status
+
+        })
+
+    return jsonify({
+
+        "success": True,
+        "message": "Requests loaded successfully",
+        "data": requests_data
+
+    })
+
+@app.route("/api/status")
+def api_status():
+
+    return jsonify({
+
+        "success": True,
+        "message": "API is running",
+        "data": {
+
+            "api": "LocalLend API",
+            "version": "1.0",
+            "status": "running",
+            "available_endpoints": [
+
+                "/api/items",
+                "/api/requests",
+                "/api/status"
+
+            ]
+
+        }
+
+    })
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html"), 404
+
 
 if __name__== "__main__":
     app.run(debug=True)

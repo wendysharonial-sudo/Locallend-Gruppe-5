@@ -1,5 +1,5 @@
 ---
-title: Design Challenge                                                                                     
+title: Design Challenge
 parent: Product Discovery
 nav_order: 1
 ---

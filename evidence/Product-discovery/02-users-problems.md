@@ -1,10 +1,8 @@
-
 ---
-title: Target Users + Problems
+title: Target Users + Problem
 parent: Product Discovery
 nav_order: 2
 ---
-
 # Target Users + Problems
 
 ## Zielgruppen

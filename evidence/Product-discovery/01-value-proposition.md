@@ -1,6 +1,6 @@
 ---
 title: Value Proposition
-nav_order: 1
+nav_order: 5
 ---
 
 {: .no_toc }

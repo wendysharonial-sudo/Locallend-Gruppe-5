@@ -129,19 +129,6 @@ wurden in allen Tests korrekt verarbeitet und zurückgegeben.
 
 ---
 
-## Testnachweise
-
-### API-Endpunkt Tests
-
-Fügen Sie hier Screenshots der getesteten API-Endpunkte ein.
-
-Beispiel:
-
-![API-Test 1](images/api-test-1.png)
-
-![API-Test 2](images/api-test-2.png)
-
----
 
 ## Fazit
 

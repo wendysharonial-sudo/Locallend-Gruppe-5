@@ -328,4 +328,4 @@ JSON ermöglicht den Datenaustausch zwischen Backend und Frontend.
 - Statusverwaltung umgesetzt
 - API getestet
 - Anfrage-Workflow dokumentiert
-- API-Dokumentation erstellt und gepflegt wie lange braucht man um das einzutippen
+- API-Dokumentation erstellt und gepflegt

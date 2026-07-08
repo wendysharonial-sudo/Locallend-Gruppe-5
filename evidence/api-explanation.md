@@ -158,63 +158,9 @@ deleted
 
 ⸻
 
-Verwendete Statuswerte
-
-Status	Beschreibung
-pending	Anfrage wurde erstellt und wartet auf eine Entscheidung
-accepted	Anfrage wurde akzeptiert
-rejected	Anfrage wurde abgelehnt
-deleted	Anfrage wurde gelöscht
-available	Gegenstand ist verfügbar
-
-⸻
-
-Implementierte API-Endpunkte
-
-Endpunkt	Zweck
-/api/items	Gibt verfügbare Gegenstände zurück
-/api/requests	Gibt alle Ausleihanfragen zurück
-/api/create_request	Erstellt eine neue Anfrage
-/api/accept_request	Akzeptiert eine Anfrage
-/api/reject_request	Lehnt eine Anfrage ab
-/api/delete_request	Löscht eine Anfrage
-/api/status	Liefert Informationen über die API
-
-⸻
-
-Verwendete Technologien
-
-* Python
-* Flask
-* JSON
-* Git
-* GitHub
-
-⸻
-
-Mein Beitrag
-
-Im Bereich API & Request-System habe ich folgende Aufgaben übernommen:
-
-* Entwicklung der API-Endpunkte
-* Bereitstellung von JSON-Antworten
-* Implementierung der Anfragenverwaltung
-* Implementierung der Anfrageerstellung
-* Implementierung der Annahme von Anfragen
-* Implementierung der Ablehnung von Anfragen
-* Implementierung der Löschung von Anfragen
-* Implementierung der Statusverwaltung
-* Testen der API-Endpunkte
-* Erstellung der API-Dokumentation
-* Dokumentation des Anfrageprozesses
-* Erklärung der API-Architektur und der JSON-Nutzung
-
-⸻
-
 Fazit
 
 Die LocalLend-API stellt strukturierte JSON-Daten über mehrere Endpunkte bereit.
 
 Sie verwaltet Gegenstände, Ausleihanfragen und Statuswerte und ermöglicht die Kommunikation zwischen Frontend und Backend.
 
-Die Implementierung demonstriert die Nutzung von Flask und JSON zur Entwicklung einer einfachen und übersichtlichen REST-ähnlichen API für das LocalLend-System.

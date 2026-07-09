@@ -165,13 +165,30 @@ def profile():
     ).scalars().all()
 
     for request_item in all_requests:
-        item = db.session.get
+        item = db.session.get(Item, request_item.item_id)
+
+        if item and item.user_id == session["user_id"]:
+
+            borrower = db.session.get(User, request_item.borrower_id)
+
+            owner_requests.append({
+
+                "id": request_item.request_id,
+
+            "item_title": item.title,
+
+            "borrower_name": borrower.first_name if borrower else "Unbekannter Nutzer",
+
+            "status": request_item.status
+
+        })
 
     return render_template(
         "profile.html", 
         user=user, 
         my_items=my_items, 
-        my_requests=my_requests)
+        my_requests=my_requests,
+        owner_requests=owner_requests)
 
 @app.route("/items")
 def items_page():

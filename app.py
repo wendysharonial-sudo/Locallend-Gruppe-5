@@ -137,28 +137,37 @@ def profile():
     my_items = db.session.execute(
         db.select(Item).filter_by(user_id=session["user_id"])
     ).scalars().all()
-    
+
     borrow_requests = db.session.execute(
-        db.select(BorrowRequest).filter_by(borrower_id=session["user_id"])
+        db.select(BorrowRequest).filter_by(
+            borrower_id=session["user_id"]
+        )
     ).scalars().all()
 
     my_requests = []
+    completed_requests = []
 
     for request_item in borrow_requests:
         item = db.session.get(Item, request_item.item_id)
 
         owner = None
+
         if item:
             owner = db.session.get(User, item.user_id)
 
-        my_requests.append({
+        request_data = {
             "id": request_item.request_id,
             "item_title": item.title if item else "Unbekanntes Objekt",
             "owner_name": owner.first_name if owner else "Unbekannter Verleiher",
             "status": request_item.status
-        })
+        }
 
-    owner_requests = []   
+        if request_item.status == "returned":
+            completed_requests.append(request_data)
+        else:
+            my_requests.append(request_data)
+
+    owner_requests = []
 
     all_requests = db.session.execute(
         db.select(BorrowRequest)
@@ -168,48 +177,54 @@ def profile():
         item = db.session.get(Item, request_item.item_id)
 
         if item and item.user_id == session["user_id"]:
-
             borrower = db.session.get(User, request_item.borrower_id)
 
             owner_requests.append({
-
                 "id": request_item.request_id,
-
-            "item_title": item.title,
-
-            "borrower_name": borrower.first_name if borrower else "Unbekannter Nutzer",
-
-            "status": request_item.status
-
-        })
+                "item_title": item.title,
+                "borrower_name": (
+                    borrower.first_name
+                    if borrower
+                    else "Unbekannter Nutzer"
+                ),
+                "status": request_item.status
+            })
 
     return render_template(
-        "profile.html", 
-        user=user, 
-        my_items=my_items, 
+        "profile.html",
+        user=user,
+        my_items=my_items,
         my_requests=my_requests,
-        owner_requests=owner_requests)
+        completed_requests=completed_requests,
+        owner_requests=owner_requests
+    )
 
 @app.route("/items")
 def items_page():
     return redirect(url_for("browse"))
 
 
-
 @app.route("/browse")
 def browse():
-    search_term = request.args.get("q")
+    search_term = request.args.get("q", "").strip()
 
-    statement = db.select(Item)
+    statement = db.select(Item).filter_by(availability="available")
 
     if "user_id" in session:
         statement = statement.filter(Item.user_id != session["user_id"])
 
     if search_term:
-        statement = statement.filter(Item.title.contains(search_term))    
+        statement = statement.filter(
+            Item.title.ilike(f"%{search_term}%")
+        )
 
     items = db.session.execute(statement).scalars().all()
-    return render_template("browse.html", items=items)
+
+    return render_template(
+        "browse.html",
+        items=items,
+        search_term=search_term
+    )
 
 
 @app.route("/item/<int:item_id>")
@@ -248,30 +263,35 @@ def add_item():
     return render_template("add_item.html")
 
 
-@app.route("/request/<int:item_id>")
+@app.route("/request/<int:item_id>", methods=["POST"])
 def create_request(item_id):
     if "user_id" not in session:
         return redirect(url_for("login"))
-    
+
     item = db.session.get(Item, item_id)
 
     if item is None:
         abort(404)
 
     if item.user_id == session["user_id"]:
-        return redirect(url_for("profile"))
+        return redirect(
+            url_for("item_detail", item_id=item_id)
+        )
+
+    if item.availability != "available":
+        return redirect(url_for("browse"))
 
     existing_request = db.session.execute(
-        db.select(BorrowRequest).filter_by(
-            item_id=item_id,
-            borrower_id=session["user_id"],
-            status="pending"
+        db.select(BorrowRequest).filter(
+            BorrowRequest.item_id == item_id,
+            BorrowRequest.borrower_id == session["user_id"],
+            BorrowRequest.status.in_(["pending", "accepted"])
         )
-    ).scalar()    
+    ).scalar()
 
     if existing_request:
         return redirect(url_for("profile"))
-    
+
     new_request = BorrowRequest(
         item_id=item_id,
         borrower_id=session["user_id"],
@@ -308,31 +328,102 @@ def requests_page():
     return render_template("requests.html", requests=requests)
 
 
-@app.route("/requests/<int:request_id>/accept")
+@app.route("/requests/<int:request_id>/accept", methods=["POST"])
 def accept_request(request_id):
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
     request_item = db.session.get(BorrowRequest, request_id)
 
     if request_item is None:
         abort(404)
 
+    item = db.session.get(Item, request_item.item_id)
+
+    if item is None:
+        abort(404)
+
+    if item.user_id != session["user_id"]:
+        abort(403)
+
+    if request_item.status != "pending":
+        return redirect(url_for("requests_page"))
+
+    if item.availability != "available":
+        return redirect(url_for("requests_page"))
+
     request_item.status = "accepted"
+    item.availability = "borrowed"
+
+    other_requests = db.session.execute(
+        db.select(BorrowRequest).filter(
+            BorrowRequest.item_id == item.item_id,
+            BorrowRequest.request_id != request_item.request_id,
+            BorrowRequest.status == "pending"
+        )
+    ).scalars().all()
+
+    for other_request in other_requests:
+        other_request.status = "rejected"
+
     db.session.commit()
 
     return redirect(url_for("requests_page"))
 
 
-@app.route("/requests/<int:request_id>/reject")
+@app.route("/requests/<int:request_id>/reject", methods=["POST"])
 def reject_request(request_id):
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
     request_item = db.session.get(BorrowRequest, request_id)
 
     if request_item is None:
         abort(404)
+
+    item = db.session.get(Item, request_item.item_id)
+
+    if item is None:
+        abort(404)
+
+    if item.user_id != session["user_id"]:
+        abort(403)
+
+    if request_item.status != "pending":
+        return redirect(url_for("requests_page"))
 
     request_item.status = "rejected"
     db.session.commit()
 
     return redirect(url_for("requests_page"))
 
+@app.route("/requests/<int:request_id>/return", methods=["POST"])
+def return_item(request_id):
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    request_item = db.session.get(BorrowRequest, request_id)
+
+    if request_item is None:
+        abort(404)
+
+    if request_item.borrower_id != session["user_id"]:
+        abort(403)
+
+    if request_item.status != "accepted":
+        return redirect(url_for("profile"))
+
+    item = db.session.get(Item, request_item.item_id)
+
+    if item is None:
+        abort(404)
+
+    request_item.status = "returned"
+    item.availability = "available"
+
+    db.session.commit()
+
+    return redirect(url_for("profile"))
 
 @app.route("/api/items")
 def api_items():

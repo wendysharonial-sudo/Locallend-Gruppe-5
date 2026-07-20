@@ -40,18 +40,33 @@
                                 <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">
                                     <i class="bi bi-x-circle"></i> Abgelehnt
                                 </span>
+                            {% elif req.status == 'returned' %}
+                                <span class="badge bg-secondary-subtle text-secondary px-3 py-2 rounded-pill">
+                                    <i class="bi bi-arrow-return-left"></i> Zurückgegeben
+                                </span>
                             {% endif %}
                         </div>
 
                         <!-- Boutons d'action -->
                         <div class="col-md-3 text-md-end">
                             {% if req.status == 'pending' %}
-                                <a href="/requests/{{ req.id }}/accept" class="btn btn-sm btn-success btn-custom me-1">
-                                    <i class="bi bi-check-lg"></i> Akzeptieren
-                                </a>
-                                <a href="/requests/{{ req.id }}/reject" class="btn btn-sm btn-outline-danger btn-custom">
-                                    <i class="bi bi-x-lg"></i> Ablehnen
-                                </a>
+                                <form action="{{ url_for('accept_request', request_id=req.id) }}"
+                                      method="POST"
+                                      class="d-inline">
+                                    <button type="submit"
+                                            class="btn btn-sm btn-success btn-custom me-1">
+                                        <i class="bi bi-check-lg"></i> Akzeptieren
+                                    </button>
+                                </form>
+
+                                <form action="{{ url_for('reject_request', request_id=req.id) }}"
+                                      method="POST"
+                                      class="d-inline">
+                                    <button type="submit"
+                                            class="btn btn-sm btn-outline-danger btn-custom">
+                                        <i class="bi bi-x-lg"></i> Ablehnen
+                                    </button>
+                                </form>
                             {% endif %}
                         </div>
                     </div>

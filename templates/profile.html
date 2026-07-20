@@ -39,7 +39,15 @@
                         class="list-group-item d-flex justify-content-between align-items-center px-0 py-3 border-light">
                         <div>
                             <h6 class="mb-0 fw-semibold">{{ item.title }}</h6>
-                            <small class="text-success"><i class="bi bi-circle-fill"></i> {{ item.availability }}</small>
+                            {% if item.availability == "available" %}
+                                <small class="text-success">
+                                    <i class="bi bi-circle-fill"></i> Verfügbar
+                                </small>
+                            {% else %}
+                                <small class="text-danger">
+                                    <i class="bi bi-circle-fill"></i> Ausgeliehen
+                                </small>
+                            {% endif %}
                         </div>
                         <a href="/item/{{ item.item_id }}" class="btn btn-sm btn-outline-secondary btn-custom">Details</a>
                     </li>
@@ -55,7 +63,7 @@
                     <a href="/add_item" class="btn btn-outline-primary btn-custom w-100"><i class="bi bi-plus"></i>
                         Neues Objekt anbieten</a>
                     
-                    <a href="/requests" class="btn btn-outline-primary btn-custom w100 mt-3">
+                    <a href="/requests" class="btn btn-outline-primary btn-custom w-100 mt-3">
                         Anfragen an meine Angebote ansehen
                     </a>    
                 </div>
@@ -64,38 +72,148 @@
 
         <!-- Rechte Spalte: Meine ausgeliehenen Objekte (Emprunteur) -->
         <div class="col-md-6 mb-4">
-            <div class="custom-card h-100 p-4">
-                <h4 class="fw-bold mb-4 border-bottom pb-2"><i class="bi bi-bag-check text-primary"></i> Meine Ausleihen
-                </h4>
 
-                <ul class="list-group list-group-flush">
-                    <!-- Platzhalter für ausgeliehene Dinge -->
-                    {% if my_requests %}
-                        {% for req in my_requests %}
+    <div class="custom-card h-100 p-4">
 
-                    <li class="list-group-item px-0 py-3 border-light">
-                       
-                            <h6 class="mb-0 fw-semibold">
-                                {{ req.item_title }}</h6>
+        <h4 class="fw-bold mb-4 border-bottom pb-2">
 
-                            <small>
-                                Verleiher: {{ req.owner_name }} <br>
-                                Status: {{ req.status }}
-                            </small>
-                    </li>
+            <i class="bi bi-bag-check text-primary"></i>
 
-                    {% endfor %}     
+            Meine Ausleihen
 
-                {% else %}      
+        </h4>
 
-                <li class="list-group-item px-0 py-3 border-light text-secondary">
-                    Du hast aktuell keine Ausleihen.
+        <ul class="list-group list-group-flush">
+
+            {% if my_requests %}
+
+                {% for req in my_requests %}
+
+                <li class="list-group-item px-0 py-3 border-light">
+
+                    <h6 class="mb-0 fw-semibold">
+
+                        {{ req.item_title }}
+
+                    </h6>
+
+                    <small>
+
+                        Verleiher: {{ req.owner_name }}<br>
+
+                        {% if req.status == "pending" %}
+
+                            Status: Ausstehend
+
+                        {% elif req.status == "accepted" %}
+
+                            Status: Akzeptiert
+
+                        {% elif req.status == "rejected" %}
+
+                            Status: Abgelehnt
+
+                        {% else %}
+
+                            Status: {{ req.status }}
+
+                        {% endif %}
+
+                    </small>
+
+                    {% if req.status == "accepted" %}
+
+                        <form action="{{ url_for('return_item', request_id=req.id) }}"
+
+                              method="POST"
+
+                              class="mt-2">
+
+                            <button type="submit"
+
+                                    class="btn btn-sm btn-outline-primary">
+
+                                Rückgabe bestätigen
+
+                            </button>
+
+                        </form>
+
+                    {% endif %}
+
                 </li>
 
-                {%endif%}
-                </ul>            
-            </div>
-        </div>
+                {% endfor %}
+
+            {% else %}
+
+                <li class="list-group-item px-0 py-3 border-light text-secondary">
+
+                    Du hast aktuell keine Ausleihen.
+
+                </li>
+
+            {% endif %}
+
+        </ul>
+
+        <hr class="my-4">
+
+        <h5 class="fw-bold mb-3">
+
+            <i class="bi bi-check-circle text-success"></i>
+
+            Abgeschlossene Ausleihen
+
+        </h5>
+
+        <ul class="list-group list-group-flush">
+
+            {% if completed_requests %}
+
+                {% for req in completed_requests %}
+
+                <li class="list-group-item px-0 py-3 border-light">
+
+                    <h6 class="mb-0 fw-semibold">
+
+                        {{ req.item_title }}
+
+                    </h6>
+
+                    <small>
+
+                        Verleiher: {{ req.owner_name }}
+
+                    </small>
+
+                    <br>
+
+                    <span class="badge bg-success">
+
+                        ✔ Ausleihe abgeschlossen
+
+                    </span>
+
+                </li>
+
+                {% endfor %}
+
+            {% else %}
+
+                <li class="list-group-item px-0 py-3 border-light text-secondary">
+
+                    Noch keine abgeschlossenen Ausleihen.
+
+                </li>
+
+            {% endif %}
+
+        </ul>
+
+    </div>
+
+</div>
     </div>
 </div>
 {% endblock %}

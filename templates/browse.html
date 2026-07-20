@@ -5,30 +5,59 @@
 {% block content %}
 <div class="container mt-4 pt-3">
     <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-        <h2 class="fw-bold m-0"><i class="bi bi-search text-primary me-2"></i>Verfügbare Objekte</h2>
-        <a href="/add_item" class="btn btn-primary btn-custom">+ Objekt anbieten</a>
+        <h2 class="fw-bold m-0">
+            <i class="bi bi-search text-primary me-2"></i>Verfügbare Objekte
+        </h2>
+
+        <a href="/add_item" class="btn btn-primary btn-custom">
+            + Objekt anbieten
+        </a>
     </div>
 
     <form method="GET" action="/browse" class="input-group shadow-sm mb-4" style="max-width: 600px;">
-        <input type="text" class="form-control" name="q" placeholder="Suche nach Bohrmaschine, Fahrrad...">
-        <button class="btn btn-primary btn-custom" type="submit">Suchen</button>
+        <input
+            type="text"
+            class="form-control"
+            name="q"
+            value="{{ request.args.get('q', '') }}"
+            placeholder="Suche nach Bohrmaschine, Fahrrad..."
+        >
+        <button class="btn btn-primary btn-custom" type="submit">
+            Suchen
+        </button>
     </form>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for item in items %}
         <div class="col">
             <div class="custom-card p-4 h-100">
+
                 <h5 class="fw-bold">{{ item.title }}</h5>
-                <p class="text-secondary">{{ item.category }}</p>
+
+                <p class="text-secondary">
+                    <i class="bi bi-tag"></i> {{ item.category|capitalize }}
+                </p>
+
                 <p>{{ item.description }}</p>
-                <span class="badge bg-success-subtle text-success">{{ item.availability }}</span>
+
+                <span class="badge bg-success-subtle text-success">
+                    Verfügbar
+                </span>
+
                 <div class="mt-3">
-                    <a href="/item/{{ item.item_id }}" class="btn btn-outline-primary btn-custom">Details</a>
+                    <a href="/item/{{ item.item_id }}" class="btn btn-outline-primary btn-custom">
+                        Details
+                    </a>
                 </div>
+
             </div>
         </div>
         {% else %}
-        <p class="text-secondary">Keine passenden Objekte gefunden.</p>
+        <div class="col-12">
+            <p class="text-secondary text-center">
+                Keine passenden Objekte gefunden.
+            </p>
+        </div>
         {% endfor %}
     </div>
 </div>

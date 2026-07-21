@@ -57,3 +57,25 @@ https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
 
 Pallets. (n.d.). *Werkzeug Security Helpers*. Retrieved July 01, 2026, from  
 https://werkzeug.palletsprojects.com/en/stable/utils/#module-werkzeug.security
+
+## JSON API
+
+Flask. (o. D.). *Flask API Documentation*. Abgerufen am 21. Juli 2026 von  
+https://flask.palletsprojects.com/en/stable/api/
+
+## Flask-Dokumentation
+
+Flask. (o. D.). *Flask Documentation*. Abgerufen am 21. Juli 2026 von  
+https://flask.palletsprojects.com/
+
+## Google Forms
+
+Google Forms. (2026). *LocalLend User Survey*.  
+https://docs.google.com/forms/d/e/1FAIpQLSfQNjvo-MK1pfODjh_LX11n0GXlcTb7MahzCn6xnmcUFFASOA/viewform
+
+## ChatGPT
+
+OpenAI. (2026). *ChatGPT*.  
+https://chatgpt.com/
+
+Verwendet zur Unterstützung bei der Strukturierung, sprachlichen Überarbeitung und Dokumentation des Projekts. Alle Vorschläge wurden manuell überprüft und an die tatsächliche Projektumsetzung angepasst.

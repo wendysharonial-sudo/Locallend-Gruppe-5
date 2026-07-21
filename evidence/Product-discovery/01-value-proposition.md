@@ -8,24 +8,28 @@ nav_order: 5
 
 <details open markdown="block">
 <summary>Table of contents</summary>
+
 + ToC
+
 {: toc }
+
 {: .text-delta }
+
 </details>
 
 ## The Problem
 
-Viele Studierende und Anwohner benötigen Werkzeuge oder technische Geräte nur für einen kurzen Zeitraum. Häufig lohnt sich der Kauf solcher Gegenstände nicht, da sie nur selten genutzt werden. Gleichzeitig besitzen viele Menschen Geräte, die den Großteil der Zeit ungenutzt bleiben.
+Viele Studierende und Anwohner benötigen Werkzeuge oder technische Geräte häufig nur für einen kurzen Zeitraum. Der Kauf solcher Gegenstände lohnt sich oft nicht, da sie anschließend nur selten genutzt werden. Gleichzeitig besitzen viele Menschen Geräte, die den Großteil der Zeit ungenutzt bleiben.
 
-Dadurch entstehen unnötige Kosten, Ressourcenverschwendung und zusätzlicher Platzbedarf. Zudem fehlt oft eine einfache Möglichkeit, Personen aus der Umgebung zu finden, die bereit sind, Gegenstände auszuleihen.
+Dadurch entstehen unnötige Kosten, Ressourcenverschwendung und zusätzlicher Platzbedarf. Außerdem fehlt häufig eine einfache Möglichkeit, Personen aus der eigenen Umgebung zu finden, die bereit sind, Gegenstände zu verleihen.
 
 ## Our Solution
 
 LocalLend ist eine Webanwendung, die das Verleihen und Ausleihen von Werkzeugen und technischen Geräten innerhalb einer lokalen Gemeinschaft ermöglicht.
 
-Nutzer können eigene Gegenstände einstellen und anderen Personen zur Verfügung stellen. Gleichzeitig können sie verfügbare Gegenstände durchsuchen und Ausleihanfragen stellen.
+Nutzer können eigene Gegenstände anbieten, verfügbare Gegenstände durchsuchen, nach bestimmten Gegenständen suchen und Ausleihanfragen stellen. Besitzer können eingehende Anfragen verwalten, akzeptieren oder ablehnen. Nach erfolgreicher Rückgabe wird der Gegenstand automatisch wieder als verfügbar gekennzeichnet.
 
-Die Anwendung bietet eine zentrale Plattform, auf der Gegenstände übersichtlich verwaltet und Anfragen organisiert werden können. Dadurch wird die gemeinsame Nutzung von Ressourcen erleichtert und nachhaltiger Konsum gefördert.
+Die Plattform unterstützt damit nachhaltigen Konsum und erleichtert die gemeinsame Nutzung vorhandener Ressourcen.
 
 ## Target User(s)
 
@@ -45,39 +49,57 @@ Max besitzt verschiedene Werkzeuge und technische Geräte, die er nur selten nut
 
 ## Happy Path
 
-1. Ein Nutzer registriert sich bei LocalLend.
+1. Ein Nutzer registriert sich und erstellt ein Konto.
 2. Der Nutzer meldet sich an.
-3. Der Nutzer erstellt einen neuen Gegenstand (z. B. Bohrmaschine oder Beamer).
-4. Ein anderer Nutzer durchsucht die verfügbaren Gegenstände.
+3. Der Nutzer bietet einen Gegenstand zum Verleihen an.
+4. Ein anderer Nutzer durchsucht oder durchsucht mithilfe der Suchfunktion die verfügbaren Gegenstände.
 5. Der Nutzer öffnet die Detailansicht eines Gegenstands.
-6. Der Nutzer sendet eine Ausleihanfrage.
-7. Der Besitzer erhält die Anfrage.
-8. Die Anfrage wird angenommen.
-9. Der Gegenstand wird erfolgreich ausgeliehen.
+6. Der Nutzer stellt eine Ausleihanfrage.
+7. Der Besitzer sieht die Anfrage in seiner Anfragenübersicht.
+8. Der Besitzer akzeptiert oder lehnt die Anfrage.
+9. Wird die Anfrage akzeptiert, ändert sich der Status des Gegenstands automatisch von **„verfügbar“** zu **„ausgeliehen“**.
+10. Nach der Nutzung bestätigt der ausleihende Nutzer die Rückgabe.
+11. Der Gegenstand wird wieder als **„verfügbar“** angezeigt.
+
+## Improvements Since the First Submission
+
+Seit der First Submission wurde die Anwendung funktional erweitert und verbessert:
+
+- Vollständiger Ausleih- und Rückgabeprozess
+- Akzeptieren und Ablehnen von Ausleihanfragen
+- Automatische Statusänderung von Gegenständen
+- Suchfunktion für Gegenstände
+- Erweiterte Gegenstandskategorien
+- Verbesserte Profilübersicht
+- Trennung zwischen aktiven und abgeschlossenen Ausleihen
+- Verbesserte Navigation abhängig vom Login-Status
 
 ## Target Scope
 
-Die Anwendung umfasst die folgenden Kernfunktionen:
+Die Anwendung umfasst folgende Kernfunktionen:
 
 - Benutzerregistrierung und Anmeldung
-- Verwaltung von Benutzerkonten
-- Erstellen und Verwalten von Gegenständen
+- Benutzerprofil
+- Erstellen eigener Gegenstände
+- Kategorisierung von Gegenständen
 - Durchsuchen verfügbarer Gegenstände
-- Detailansicht von Gegenständen
+- Suchfunktion
+- Detailansicht eines Gegenstands
 - Erstellen von Ausleihanfragen
+- Akzeptieren und Ablehnen von Anfragen
 - Verwaltung des Anfrage-Status
-- Datenbereitstellung über REST-API und JSON-Endpunkte
+- Rückgabe eines Gegenstands
+- JSON-API-Endpunkte
 
-### Geplante Benutzeroberflächen
+### Umgesetzte Benutzeroberflächen
 
 - Startseite
-- Login- und Registrierungsseite
+- Login-Seite
+- Registrierungsseite
+- Profilseite
 - Übersicht verfügbarer Gegenstände
+- Suchfunktion
 - Detailansicht eines Gegenstands
 - Formular zum Erstellen eines Gegenstands
-- Verwaltung von Ausleihanfragen
-
-
-
-
-
+- Übersicht eingehender Anfragen
+- Übersicht aktiver und abgeschlossener Ausleihen

@@ -1,156 +1,131 @@
 # LocalLend
 
-Contributors: Mariam Joumma, Tuba, Wendy, Yves
+Contributors: Mariam Joumma, Tuba Celik, Wendy Sharonia Lontsi Doumtsop, Jean Yves Nkwane
 
-## How to run application
+# Project Description
 
-```bash
-flask run
-```
+LocalLend is a Flask-based web application for lending and borrowing everyday items within a local community.
 
-## How to initialise development environment
+The goal of the project is to encourage resource sharing, reduce unnecessary purchases and make it easy for users to lend and borrow items.
 
-Create a Python virtual environment:
+---
+
+# How to run the application
+
+## 1. Create a virtual environment
+
+Windows
 
 ```bash
 python -m venv venv
-```
-
-Activate the virtual environment:
-
-Windows:
-
-```bash
 venv\Scripts\activate
 ```
 
-Linux / macOS:
+macOS / Linux
 
 ```bash
+python3 -m venv venv
 source venv/bin/activate
 ```
 
-Install dependencies:
+## 2. Install all dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## How to initialise database
+## 3. Start the application
+
+macOS / Linux
+
+```bash
+python3 app.py
+```
+
+Alternative
+
+```bash
+flask run
+```
+
+Windows
+
+```bash
+python app.py
+```
+
+The application will be available at
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+# Database
+
+The SQLite database is created automatically on first start if it does not already exist.
+
+If required, it can also be initialized manually:
 
 ```bash
 flask init-db
 ```
 
-The command creates the SQLite database and required tables.
+---
 
-## Project Description
+# Main Features
 
-LocalLend is a web application for local lending and borrowing of items within a community.
+- User registration
+- User login
+- Secure password hashing
+- Session management
+- Create lending offers
+- Browse available items
+- Search for items
+- View item details
+- Send borrowing requests
+- Accept or reject requests
+- Automatic item status updates
+- Return borrowed items
+- User profile
+- JSON API endpoints
 
-The goal of the project is to reduce unnecessary purchases and support sustainable resource sharing. Users can create items, browse available items and manage borrowing requests.
+---
 
-## Main Features
-
-- User Registration
-- User Login
-- User Logout
-- Session Management
-- Create Items
-- Browse Available Items
-- Borrowing Requests
-- Accept Requests
-- Reject Requests
-- Request Status Management
-- JSON API Endpoints
-
-## Request Status
-
-- pending
-- accepted
-- rejected
-
-## Technology Stack
+# Technology Stack
 
 - Python
 - Flask
+- SQLAlchemy
 - SQLite
 - HTML
 - CSS
+- Bootstrap
 - Jinja2
-- JSON API
 
-## Documentation
+---
 
-Additional project documentation can be found in the evidence folder.
+# Documentation
 
-### Included Documentation
+Additional documentation is available in the `docs` and `evidence` folders.
+
+It includes:
 
 - Product Discovery
-- Design Challenge
-- User Problems
 - Value Proposition
-- Solution Elements
-- Tests
-- Survey Documentation
-- API Documentation
-- API Explanation
-- API Testing
 - Design Decisions
-
-## Team Responsibilities
-
-### Mariam Joumma
-
-Responsible for:
-
-- JSON API
-- API Endpoints
-- Request Management
-- Request Workflow
-- Request Status Management
 - API Documentation
 - API Testing
-- Product Discovery
-- Survey Documentation
-- Design Decisions
-
-### Tuba
-
-Responsible for:
-
-- Flask Setup
-- Login
-- Registration
-- Logout
-- Sessions
-
-### Wendy
-
-Responsible for:
-
-- Database Design
-- SQLite Integration
+- Technical Documentation
+- User Survey
 - Data Model
-- Database Queries
-- Tables for Users, Items and Requests
 
-### Yves
+---
 
-Responsible for:
-
-- Frontend Development
-- HTML Templates
-- CSS Styling
-- Navigation
-- User Interface Testing
-
-## Authors
+# Authors
 
 - Mariam Joumma
-- Tuba
-- Wendy
-- Yves
-
-
-
+- Tuba Celik
+- Wendy Sharonia Lontsi Doumtsop
+- Jean Yves Nkwane

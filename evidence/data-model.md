@@ -2,7 +2,7 @@
 
 ## Ziel des Datenmodells 
 
-Das Datenmodell beschreibt, welche Daten die Anwendung speichern muss und wie diese Daten miteinander verbunden sind.
+Das Datenmodell beschreibt, welche Daten die Anwendung speichern muss und wie diese miteinander verbunden sind.
 
 Für LocalLend werden drei zentrale Datenbereiche benötigt:
 
@@ -10,23 +10,21 @@ Für LocalLend werden drei zentrale Datenbereiche benötigt:
 - Gegenstände
 - Ausleihanfragen
 
-Diese drei Bereiche bilden die Grundlage für den Happy Path der Anwendung.
+Diese drei Bereiche bilden die Grundlage für den gesamten Happy Path der Anwendung.
 
 ---
 
-## Übersicht der Tabellen
-
-Das Datenmodell besteht aus drei Haupttabellen:
+# Übersicht der Tabellen
 
 | Tabelle | Zweck |
-| --- | --- |
-| users | Speichert registrierte Nutzer | 
+|----------|-------|
+| users | Speichert registrierte Nutzer |
 | items | Speichert Gegenstände, die verliehen werden können |
 | requests | Speichert Ausleihanfragen zwischen Nutzern und Gegenständen |
 
 ---
 
-## Beziehungen zwischen den Tabellen
+# Beziehungen zwischen den Tabellen
 
 Ein Nutzer kann mehrere Gegenstände einstellen.
 
@@ -34,150 +32,177 @@ Ein Gegenstand gehört genau einem Nutzer.
 
 Ein Nutzer kann mehrere Ausleihanfragen stellen.
 
-Eine Ausleihanfrage bezieht sich genau auf einen Gegenstand.
+Eine Ausleihanfrage bezieht sich immer genau auf einen Gegenstand.
 
-```text
+```
 users
-  1 ─── n items
+  │
+  ├──── items
 
 users
-  1 ─── n requests
+  │
+  └──── requests
 
 items
-  1 ─── n requests
+  │
+  └──── requests
 ```
-  ## Tabelle: users
 
-  Speichert alle registrierten Nutzer der Plattforrm.
+---
 
-  | Feld | Datentyp | Beschreibung |
-|--------|--------|--------|
+# Tabelle: users
+
+Speichert alle registrierten Nutzer der Plattform.
+
+| Feld | Datentyp | Beschreibung |
+|------|----------|--------------|
 | user_id | INTEGER | Eindeutige Nutzer-ID (Primary Key) |
-| first_name | TEXT | Vorname des Nutzers |
-| last_name | TEXT | Nachname des Nutzers |
+| first_name | TEXT | Vorname |
+| last_name | TEXT | Nachname |
 | email | TEXT | E-Mail-Adresse |
-| password | TEXT | Passwort (verschlüsselt gespeichert) |
-| created_at | DATETIME | Zeitpunkt der Registrierung |
+| password | TEXT | Verschlüsseltes Passwort |
 
-#### Primärschlüssel
+## Primärschlüssel
 
 - user_id
 
-### Begründung
+## Begründung
 
-Jeder Nutzer benötigt eine eindeutige ID, damit Gegenstände und Ausleihanfragen eindeutig zugeordnet werden können.
+Jeder Nutzer benötigt eine eindeutige ID.
 
-Die E-Mail-Adresse dient der Anmeldung und eindeutigen Identifikation des Nutzers.
+Die E-Mail dient gleichzeitig als eindeutiger Login.
 
-## Tabelle: items
+Das Passwort wird verschlüsselt gespeichert.
 
-Speichert alle Gegenstände, die von Nutzern zum Verleihen angeboten werden.
+---
+
+# Tabelle: items
+
+Speichert alle Gegenstände, die Nutzer verleihen möchten.
 
 | Feld | Datentyp | Beschreibung |
-|--------|--------|--------|
-| item_id | INTEGER | Eindeutige Gegenstand-ID (Primary Key) |
+|------|----------|--------------|
+| item_id | INTEGER | Eindeutige Gegenstands-ID (Primary Key) |
 | user_id | INTEGER | Besitzer des Gegenstands (Foreign Key) |
 | title | TEXT | Name des Gegenstands |
-| description | TEXT | Beschreibung des Gegenstands |
-| category | TEXT | Kategorie des Gegenstands |
-| image_url | TEXT | Bild des Gegenstands |
-| availability | TEXT | Verfügbarkeitsstatus |
-| created_at | DATETIME | Zeitpunkt der Erstellung |
+| description | TEXT | Beschreibung |
+| category | TEXT | Kategorie |
+| availability | TEXT | Aktueller Verfügbarkeitsstatus |
 
-### Primärschlüssel
+## Primärschlüssel
 
-- item_id 
+- item_id
 
 ## Fremdschlüssel
 
-- user_id -> users.user_id
+- user_id → users.user_id
 
 ## Begründung
 
 Jeder Gegenstand gehört genau einem Nutzer.
-Über die user_id kann nachvollzogen werden, welcher Nutzer den Gegenstand eingestellt hat.
 
-Die Felder Titel, Beschreibung und Kategorie ermöglichen eine übersichtliche Darstellung und Suche innerhalb der Plattform.
+Dadurch weiß das System jederzeit, wem der Gegenstand gehört.
 
-Der Verfügbarkeitsstatus zeigt an, ob ein Gegenstand aktuell ausgeliehen werden kann.
+Das Feld **availability** zeigt den aktuellen Zustand des Gegenstands.
 
-## Tabelle: requests
+Mögliche Werte:
 
+- available
+- borrowed
+
+Wird eine Anfrage angenommen, wird der Gegenstand auf **borrowed** gesetzt.
+
+Nach der Rückgabe erhält er wieder den Status **available**.
+
+---
+
+# Tabelle: requests
 
 Speichert alle Ausleihanfragen zwischen Nutzern und Gegenständen.
 
 | Feld | Datentyp | Beschreibung |
-|--------|--------|--------|
+|------|----------|--------------|
 | request_id | INTEGER | Eindeutige Anfrage-ID (Primary Key) |
 | item_id | INTEGER | Angefragter Gegenstand (Foreign Key) |
 | borrower_id | INTEGER | Nutzer, der die Anfrage stellt (Foreign Key) |
 | status | TEXT | Status der Anfrage |
 | request_date | DATETIME | Zeitpunkt der Anfrage |
-| message | TEXT | Optionale Nachricht des Nutzers |
+| message | TEXT | Optionale Nachricht |
 
-### Primärschlüssel
+## Primärschlüssel
 
 - request_id
 
-### Fremdschlüssel
+## Fremdschlüssel
 
 - item_id → items.item_id
+
 - borrower_id → users.user_id
 
-### Begründung
+## Begründung
 
-Die Tabelle requests speichert alle Ausleihanfragen innerhalb der Plattform.
+Die Tabelle requests verwaltet den kompletten Ausleihprozess.
 
-Über item_id wird festgelegt, welcher Gegenstand angefragt wird.
+Über item_id wird gespeichert, welcher Gegenstand ausgeliehen werden soll.
 
 Über borrower_id wird gespeichert, welcher Nutzer die Anfrage gestellt hat.
 
-Das Statusfeld ermöglicht die Verwaltung des Anfrageprozesses.
+Der Status beschreibt den aktuellen Stand der Anfrage.
 
 Mögliche Statuswerte:
 
 - pending
 - accepted
 - rejected
+- returned
 
-## Zusammenfassung des Datenmodells
+Bedeutung:
 
-Das Datenmodell basiert auf drei zentralen Tabellen:
+- pending → Anfrage wurde gestellt.
+- accepted → Anfrage wurde angenommen.
+- rejected → Anfrage wurde abgelehnt.
+- returned → Gegenstand wurde erfolgreich zurückgegeben.
 
-### users
+---
+
+# Zusammenfassung des Datenmodells
+
+Das Datenmodell basiert auf drei zentralen Tabellen.
+
+## users
 
 Verwaltet alle registrierten Nutzer.
 
-### items
+## items
 
-Verwaltet alle Gegenstände, die zum Verleihen angeboten werden.
+Verwaltet alle angebotenen Gegenstände.
 
-### requests
+Über das Feld **availability** erkennt das System sofort, ob ein Gegenstand ausgeliehen werden kann.
 
-Verwaltet alle Ausleihanfragen zwischen Nutzern und Gegenständen.
+## requests
 
-### Datenbankstruktur
+Verwaltet sämtliche Ausleihanfragen.
 
-```text
-users
-│
-├── items
-│     └── requests
-│
-└── requests
-```
+Der Status dokumentiert den gesamten Ablauf einer Ausleihe – von der Anfrage bis zur Rückgabe.
 
-Dieses Modell unterstützt den vollständigen Happy Path von LocalLend:
+---
+
+# Happy Path
+
+Dieses Datenmodell unterstützt den vollständigen Ablauf von LocalLend:
 
 1. Nutzer registriert sich.
 2. Nutzer erstellt einen Gegenstand.
-3. Anderer Nutzer durchsucht verfügbare Gegenstände.
+3. Ein anderer Nutzer durchsucht verfügbare Gegenstände.
 4. Nutzer stellt eine Ausleihanfrage.
-5. Anfrage wird angenommen oder abgelehnt.
-
+5. Der Verleiher akzeptiert oder lehnt die Anfrage ab.
+6. Bei Annahme erhält der Request den Status **accepted** und der Gegenstand den Status **borrowed**.
+7. Nach der Rückgabe erhält der Request den Status **returned**.
+8. Der Gegenstand wird wieder auf **available** gesetzt und kann erneut ausgeliehen werden.
 
 ## ER- Diagramm
 
 Das folgende Diagramm zeigt die Beziehungen zwischen den Tabellen `users`, `items` und `requests`.
 
-![ER-Diagramm](./er-diagramm.png)
+![ER-Diagramm](er-diagramm.png)
+

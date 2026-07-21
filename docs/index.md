@@ -172,3 +172,14 @@ Unterstützung beim Brainstorming, Strukturierung der Value Proposition sowie be
 
 **Verantwortung:**  
 Alle Inhalte wurden von uns überprüft und angepasst. Es wurden keine Agentic-AI-Tools verwendet, die eigenständig Code oder Repository-Strukturen erzeugen.
+
+---
+
+## Repository
+
+- [GitHub Repository](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5)
+
+## Dokumentation
+
+- [Product Discovery](https://wendysharonial-sudo.github.io/Locallend-Gruppe-5/evidence/Product-discovery/)
+- [Design Decisions](https://wendysharonial-sudo.github.io/Locallend-Gruppe-5/evidence/design-decisions/)

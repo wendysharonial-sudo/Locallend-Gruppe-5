@@ -77,19 +77,21 @@ Mir ist weiterhin bewusst, dass ich, sofern ich zur Erstellung dieser Arbeit KI-
 ## Contributions
 
 | Contribution | Proof, e.g., git commits | Sources used |
-| :-- | :-- | :-- |
-| Implementierung von Registrierung und Login im Backend | app.py, Commit „Add login and register backend“ | Flask Documentation, Werkzeug Security Documentation |
-| Implementierung von Logout und Session-Verwaltung | app.py, Verwendung von `session["user_id"]`, `session["user_name"]` und `session.clear()` | Flask Documentation |
-| Integration des User-Modells mit dem Backend | app.py, database/models.py | SQLAlchemy Documentation |
-| Implementierung der Profilseite und Profil-Route | app.py, profile.html | Flask Documentation |
-| Implementierung der Add-Item-Funktion | app.py, add_item.html | Flask Documentation, SQLAlchemy Documentation |
-| Verbindung der Browse-Seite mit der Datenbank | app.py, browse.html | SQLAlchemy Documentation |
-| Umstellung auf SQLAlchemy-2.0-Syntax (`db.select`, `db.session.execute`, `db.session.get`) | app.py | SQLAlchemy Documentation |
-| Implementierung der Item-Detailseite und Fehlerbehandlung | app.py, item_detail.html | Flask Documentation |
-| Unterstützung bei der JSON-API-Integration | app.py | Flask Documentation |
-| Integration von Änderungen anderer Teammitglieder | Branch `tuba-backend`, Merge von `yves-frontend` und `wendy-db-integration` | Git Documentation |
-| Lösung von Merge-Konflikten in app.py und .gitignore | Git-Historie, Branch `tuba-backend` | Git Documentation |
-| Dokumentation von Designentscheidungen und individuellem Beitrag | design-decision-login.md, design-decision-passwords.md, individual-contribution-tuba.md | Projektvorlage |
+| --- | --- | --- |
+| Implementierung von Registrierung und Login im Flask-Backend | [Git Commit – Add login and register backend](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/515b72f) | Flask Documentation, Werkzeug Security Documentation |
+| Umsetzung und Dokumentation der Session-basierten Benutzeranmeldung | [Git Commit – Document login session design decision](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/4cb56dc) | Flask Documentation – Sessions |
+| Umsetzung und Dokumentation des sicheren Passwort-Hashings | [Git Commit – Document password hashing decision](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/2b463e6) | Werkzeug Security Documentation |
+| Verbindung der Browse-Seite mit den Gegenständen aus der Datenbank | [Git Commit – Connect browse page with database items](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/d814c40) | Flask-SQLAlchemy Documentation |
+| Fertigstellung der Backend-Integration und der API-Routen | [Git Commit 1 – Finalize backend integration and API routes](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/f430791), [Git Commit 2 – Improve API endpoints and database integration](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/9b9d418) | Flask Documentation, Flask-SQLAlchemy Documentation |
+| Verbindung der Profilseite mit Benutzer-, Gegenstands- und Anfragedaten | [Git Commit 1 – Connect profile page with database data](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/2c2d708), [Git Commit 2 – Fix item ownership and profile data handling](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/ee8e038) | Flask Documentation, SQLAlchemy Documentation |
+| Verbesserung der Registrierung, Browse-Seite und Gegenstandsdetailansicht | [Git Commit – Improve item detail, browse page and register feedback](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/94528c8) | Flask Documentation, Jinja Documentation |
+| Fertigstellung des Anfrage-Workflows mit Nutzerinteraktionen | [Git Commit – Finalize request workflow and user interactions](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/a20cf9c) | Flask Documentation, SQLAlchemy Documentation |
+| Korrektur der eingehenden Besitzeranfragen im Profil | [Git Commit – Fix owner requests in profile](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/2e8e71e) | Flask Documentation, Jinja Documentation |
+| Vervollständigung des Ausleih- und Rückgabeprozesses einschließlich automatischer Statusänderungen | [Git Commit – Complete borrowing and return workflow](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/669b585) | Flask Documentation, SQLAlchemy Documentation |
+| Erweiterung der Gegenstandskategorien und Verbesserung der Browse-Oberfläche | [Git Commit – Improve item categories and browse interface](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/090abe7) | Jinja Documentation |
+| Anpassung der Startseiten-Navigation an den Login-Status | [Git Commit – Improve landing page navigation](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/af78dde) | Flask Documentation – Sessions, Jinja Documentation |
+| Integration der Frontend-, API- und Datenbankänderungen der Teammitglieder | [Frontend-Integration](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/e946f59), [API-Integration](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/f6464d1), [Datenbank-Integration](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/31425c8) | Git Documentation |
+| Dokumentation des individuellen Beitrags und technischer Designentscheidungen | [Git Commit 1 – Add individual contribution documentation](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/cab7e6a), [Git Commit 2 – Improve individual contribution documentation](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5/commit/f2c9918) | Kursvorlage des Dozenten |
 ---
 
 ## AI Directory

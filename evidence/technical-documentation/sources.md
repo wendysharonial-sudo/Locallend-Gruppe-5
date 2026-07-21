@@ -158,3 +158,20 @@ OpenAI. (2025). *ChatGPT*.
 https://chatgpt.com/
 
 Verwendet zur Unterstützung beim Verständnis von Flask, SQLAlchemy, Git-Workflows, Bootstrap, Jinja2 sowie bei der Strukturierung der Projektdokumentation. Alle Vorschläge wurden manuell überprüft und an die tatsächliche Projektumsetzung angepasst.
+
+## Bootstrap & Design
+Bootstrap 5: The most popular HTML, CSS, and JS library in the world. (n.d.). Getbootstrap.com. Retrieved June 14, 2026, from https://getbootstrap.com/docs/5.3/getting-started/introduction/
+
+Bootstrap Icons. (n.d.). Free, high quality, open source icon library. Retrieved June 18, 2026, from https://icons.getbootstrap.com/
+
+Kevin Powell. (2022, June 9). 5 CSS tips you didn't know you needed [Video]. YouTube. Retrieved July 02, 2026, from https://www.youtube.com/watch?v=1PnVor36_40
+
+## Templating (Jinja2)
+Template Designer Documentation — Jinja Documentation (3.1.x). (n.d.). Retrieved June 25, 2026, from https://jinja.palletsprojects.com/
+
+Message Flashing — Flask Documentation (3.1.x). (n.d.). Retrieved July 10, 2026, from https://flask.palletsprojects.com/en/stable/patterns/flashing/
+
+## Generative AI Assistance (Permitted Tools)
+
+Wir haben textbasierte KI-Tools (ChatGPT) ausschließlich zum Brainstorming, für Erklärungen von Konzepten und zur Fehlersuche (Debugging) gemäß der FB1 KI-Regelung verwendet.
+

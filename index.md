@@ -55,10 +55,3 @@ LocalLend ermöglicht es Nutzer:innen, Gegenstände einzustellen, zu durchsuchen
 ## Repository
 
 [GitHub Repository](https://github.com/wendysharonial-sudo/Locallend-Gruppe-5)
-
----
-
-## Dokumentation
-
-- [Product Discovery](./evidence/product-discovery.html)
-- [Design Decisions](./evidence/design-decisions.html)

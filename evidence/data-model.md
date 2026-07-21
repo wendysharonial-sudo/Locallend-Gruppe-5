@@ -204,5 +204,5 @@ Dieses Datenmodell unterstützt den vollständigen Ablauf von LocalLend:
 
 Das folgende Diagramm zeigt die Beziehungen zwischen den Tabellen `users`, `items` und `requests`.
 
-![ER-Diagramm](./ER-diagramm.png)
+![ER-diagramm](./ER-diagramm.png)
 

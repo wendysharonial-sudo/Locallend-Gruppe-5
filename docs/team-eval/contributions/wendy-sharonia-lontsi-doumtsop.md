@@ -25,6 +25,7 @@ Mein Ziel für dieses Modul ist die Note **1,3 oder besser**.
 ### Personal goals
 
 Mein persönliches Ziel in diesem Modul ist es, das Projekt erfolgreich abzuschließen und eine sehr gute Leistung zu erzielen. Gleichzeitig möchte ich meine Kenntnisse in der Webentwicklung und Datenbankmodellierung erweitern sowie den praktischen Umgang mit Flask, SQLAlchemy und Git vertiefen. Außerdem ist mir eine gute und zuverlässige Zusammenarbeit im Team wichtig, damit wir gemeinsam ein erfolgreiches Projektergebnis erreichen und voneinander lernen können.
+
 ---
 
 ## Eidesstattische Erklärung

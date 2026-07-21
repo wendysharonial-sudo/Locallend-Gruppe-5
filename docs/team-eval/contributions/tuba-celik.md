@@ -77,7 +77,7 @@ Mir ist weiterhin bewusst, dass ich, sofern ich zur Erstellung dieser Arbeit KI-
 ## Contributions
 
 | Contribution | Proof, e.g., git commits | Sources used |
-| :-- | :-- | :-- |
+| --- | --- | --- |
 | Implementierung von Registrierung und Login im Backend | app.py, Commit „Add login and register backend“ | Flask Documentation, Werkzeug Security Documentation |
 | Implementierung von Logout und Session-Verwaltung | app.py, Verwendung von `session["user_id"]`, `session["user_name"]` und `session.clear()` | Flask Documentation |
 | Integration des User-Modells mit dem Backend | app.py, database/models.py | SQLAlchemy Documentation |
